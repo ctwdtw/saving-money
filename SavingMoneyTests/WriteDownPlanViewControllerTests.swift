@@ -23,11 +23,17 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene before setting plane name.")
         
-        sut.simulateTypingPlaneName("My awesome saving plan name")
+        sut.simulateSpellingPlanName("ㄘㄨㄣ")
+        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene when spelling plan name.")
+        
+        sut.simulateTypingPlanName("存錢計畫")
         XCTAssertTrue(sut.canGoToSetAmountScene, "user can navigate to set amount scene after setting a plan name.")
         
-        sut.simulateDeletePlaneName()
-        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene when plan name is deleted.")
+        sut.simulateDeletingPlaneName()
+        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene after deleting plan name.")
+        
+        sut.simulateTypingPlanName("超完美存錢計畫")
+        XCTAssertTrue(sut.canGoToSetAmountScene, "user can navigate to set amount scene after setting plan name again.")
     }
     
     private func makeSUT() -> WriteDownPlanViewController {
@@ -61,12 +67,18 @@ extension WriteDownPlanViewController {
         nextPlanBarBtnItem.isEnabled
     }
     
-    func simulateTypingPlaneName(_ name: String) {
+    func simulateTypingPlanName(_ name: String) {
         planTextField.text = name
         planTextField.sendActions(for: .editingChanged)
     }
     
-    func simulateDeletePlaneName() {
+    func simulateSpellingPlanName(_ name: String) {
+        let currentPlanName = planTextField.text ?? ""
+        planTextField.text = currentPlanName + name
+        planTextField.setMarkedText(name, selectedRange: NSRange(location: currentPlanName.count, length: name.count))
+    }
+    
+    func simulateDeletingPlaneName() {
         planTextField.text = ""
         planTextField.sendActions(for: .editingChanged)
     }

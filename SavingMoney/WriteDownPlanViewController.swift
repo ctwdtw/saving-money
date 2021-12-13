@@ -27,8 +27,12 @@ public class WriteDownPlanViewController: UIViewController {
             return
         }
         
-        nextPlanBarBtnItem.isEnabled = true
+        guard sender.markedTextRange == nil else {
+            nextPlanBarBtnItem.isEnabled = false
+            return
+        }
         
+        nextPlanBarBtnItem.isEnabled = true
     }
 }
 
