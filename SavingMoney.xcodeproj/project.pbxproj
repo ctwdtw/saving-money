@@ -11,6 +11,10 @@
 		639F0161276619CD00007110 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F0160276619CD00007110 /* Checkbox.swift */; };
 		639F016327661AD600007110 /* SavingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016227661AD600007110 /* SavingViewController.swift */; };
 		639F016527661D6900007110 /* SavingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016427661D6900007110 /* SavingCell.swift */; };
+		639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016927679E7600007110 /* UITextField+Helpers.swift */; };
+		639F016D27679EB500007110 /* WriteDownPlanUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016C27679EB500007110 /* WriteDownPlanUIComposer.swift */; };
+		639F016F27679EE900007110 /* PlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016E27679EE900007110 /* PlanModel.swift */; };
+		639F017127679F0500007110 /* WriteDownPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F017027679F0500007110 /* WriteDownPlanViewModel.swift */; };
 		63CEF5252765B00C0038E36E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CEF5242765B00C0038E36E /* AppDelegate.swift */; };
 		63CEF5272765B00C0038E36E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CEF5262765B00C0038E36E /* SceneDelegate.swift */; };
 		63CEF5292765B00C0038E36E /* WriteDownPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CEF5282765B00C0038E36E /* WriteDownPlanViewController.swift */; };
@@ -35,6 +39,10 @@
 		639F0160276619CD00007110 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		639F016227661AD600007110 /* SavingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewController.swift; sourceTree = "<group>"; };
 		639F016427661D6900007110 /* SavingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCell.swift; sourceTree = "<group>"; };
+		639F016927679E7600007110 /* UITextField+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Helpers.swift"; sourceTree = "<group>"; };
+		639F016C27679EB500007110 /* WriteDownPlanUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDownPlanUIComposer.swift; sourceTree = "<group>"; };
+		639F016E27679EE900007110 /* PlanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanModel.swift; sourceTree = "<group>"; };
+		639F017027679F0500007110 /* WriteDownPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDownPlanViewModel.swift; sourceTree = "<group>"; };
 		63CEF5212765B00C0038E36E /* SavingMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SavingMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CEF5242765B00C0038E36E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CEF5262765B00C0038E36E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +73,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		639F016B27679E9B00007110 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				639F016927679E7600007110 /* UITextField+Helpers.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		639F017227679F3200007110 /* WritePlan */ = {
+			isa = PBXGroup;
+			children = (
+				639F017327679F6D00007110 /* Model */,
+				639F017427679F7500007110 /* ViewModel */,
+				639F017527679F8000007110 /* ViewController */,
+			);
+			path = WritePlan;
+			sourceTree = "<group>";
+		};
+		639F017327679F6D00007110 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				639F016E27679EE900007110 /* PlanModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		639F017427679F7500007110 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				639F017027679F0500007110 /* WriteDownPlanViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		639F017527679F8000007110 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				63CEF5282765B00C0038E36E /* WriteDownPlanViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		63CEF5182765B00C0038E36E = {
 			isa = PBXGroup;
 			children = (
@@ -88,11 +138,13 @@
 			children = (
 				63CEF5242765B00C0038E36E /* AppDelegate.swift */,
 				63CEF5262765B00C0038E36E /* SceneDelegate.swift */,
-				639F016427661D6900007110 /* SavingCell.swift */,
-				639F0160276619CD00007110 /* Checkbox.swift */,
-				63CEF5282765B00C0038E36E /* WriteDownPlanViewController.swift */,
+				639F016C27679EB500007110 /* WriteDownPlanUIComposer.swift */,
+				639F016B27679E9B00007110 /* Shared */,
+				639F017227679F3200007110 /* WritePlan */,
 				639F015E2765CEB000007110 /* SetAmountViewController.swift */,
 				639F016227661AD600007110 /* SavingViewController.swift */,
+				639F0160276619CD00007110 /* Checkbox.swift */,
+				639F016427661D6900007110 /* SavingCell.swift */,
 				63CEF52A2765B00C0038E36E /* Main.storyboard */,
 				63CEF52D2765B00E0038E36E /* Assets.xcassets */,
 				63CEF52F2765B00E0038E36E /* LaunchScreen.storyboard */,
@@ -210,13 +262,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				639F016F27679EE900007110 /* PlanModel.swift in Sources */,
 				63CEF5292765B00C0038E36E /* WriteDownPlanViewController.swift in Sources */,
+				639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */,
 				63CEF5252765B00C0038E36E /* AppDelegate.swift in Sources */,
 				639F016527661D6900007110 /* SavingCell.swift in Sources */,
 				639F016327661AD600007110 /* SavingViewController.swift in Sources */,
 				63CEF5272765B00C0038E36E /* SceneDelegate.swift in Sources */,
+				639F016D27679EB500007110 /* WriteDownPlanUIComposer.swift in Sources */,
 				639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */,
 				639F0161276619CD00007110 /* Checkbox.swift in Sources */,
+				639F017127679F0500007110 /* WriteDownPlanViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
