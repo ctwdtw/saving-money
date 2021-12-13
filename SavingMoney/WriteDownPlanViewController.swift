@@ -34,13 +34,8 @@ class WriteDownPlanViewModel {
         self.onNext = onNext
     }
     
-    func planeNameChange(_ name: String?, spellingPhase: Bool) {
-        guard let name = name, name.isEmpty == false else {
-            onNextStateChange?(false)
-            return
-        }
-        
-        guard !spellingPhase else {
+    func planeNameChange(_ name: String, spellingPhase: Bool) {
+        guard isValidPlanName(name: name, spellingPhase: spellingPhase) else {
             onNextStateChange?(false)
             return
         }
@@ -48,6 +43,18 @@ class WriteDownPlanViewModel {
         planModel = name
         
         onNextStateChange?(true)
+    }
+    
+    private func isValidPlanName(name: String, spellingPhase: Bool) -> Bool {
+        guard name.isEmpty == false else {
+            return false
+        }
+        
+        guard spellingPhase == false else {
+            return false
+        }
+        
+        return true
     }
     
     func nextStep() {
@@ -99,7 +106,7 @@ public class WriteDownPlanViewController: UIViewController {
     }
     
     @objc private func planTextFieldEditingChanged(_ sender: UITextField) {
-        viewModel?.planeNameChange(sender.text, spellingPhase: sender.isSpelling)
+        viewModel?.planeNameChange(sender.nonNilText, spellingPhase: sender.isSpelling)
     }
     
 }
@@ -107,5 +114,9 @@ public class WriteDownPlanViewController: UIViewController {
 extension UITextField {
     var isSpelling: Bool {
         return !(markedTextRange == nil)
+    }
+    
+    var nonNilText: String {
+        text ?? ""
     }
 }
