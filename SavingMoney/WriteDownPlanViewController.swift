@@ -7,10 +7,10 @@
 
 import UIKit
 
-class WriteDownPlanViewController: UIViewController {
-    @IBOutlet private weak var planTextField: UITextField!
+public class WriteDownPlanViewController: UIViewController {
+    @IBOutlet public private(set) weak var planTextField: UITextField!
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
     }
