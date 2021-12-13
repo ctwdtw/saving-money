@@ -9,6 +9,26 @@ import UIKit
 
 public typealias PlanModel = String
 
+public class WriteDownPlanViewModel {
+    var onNextStateChange: ((Bool) -> Void)?
+    
+    func planeNameChange(_ name: String?, spellingPhase: Bool) {
+        guard let name = name, name.isEmpty == false else {
+            onNextStateChange?(false)
+            return
+        }
+        
+        guard !spellingPhase else {
+            onNextStateChange?(false)
+            return
+        }
+        
+        onNextStateChange?(true)
+    }
+    
+    public init() {}
+}
+
 public class WriteDownPlanViewController: UIViewController {
     @IBOutlet public private(set) weak var nextBarBtnItem: UIBarButtonItem! {
         didSet {
@@ -18,8 +38,13 @@ public class WriteDownPlanViewController: UIViewController {
     
     @IBOutlet public private(set) weak var planTextField: UITextField!
     
-    public init?(coder: NSCoder, onNext: @escaping ((PlanModel) -> Void)) {
+    private var onNext: ((PlanModel) -> Void)?
+    
+    private var viewModel: WriteDownPlanViewModel?
+    
+    public init?(coder: NSCoder, viewModel: WriteDownPlanViewModel, onNext: @escaping ((PlanModel) -> Void)) {
         super.init(coder: coder)
+        self.viewModel = viewModel
         self.onNext = onNext
     }
     
@@ -27,26 +52,42 @@ public class WriteDownPlanViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    private var onNext: ((PlanModel) -> Void)?
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        bind()
+    }
     
-    @IBAction func nextBarBtnItemTapped(_ sender: Any) {
+    private func bind() {
+        bindNextBarBtnItem()
+        bindPlanTextField()
+    }
+    
+    private func bindNextBarBtnItem() {
+        viewModel?.onNextStateChange = { [nextBarBtnItem] readyForNextStep in
+            nextBarBtnItem?.isEnabled = readyForNextStep
+        }
+        
+        nextBarBtnItem.target = self
+        nextBarBtnItem.action = #selector(nextBarBtnItemTapped(_:))
+    }
+    
+    private func bindPlanTextField() {
+        planTextField.addTarget(self, action: #selector(planTextFieldEditingChanged(_:)), for: .editingChanged)
+    }
+    
+    @objc private func nextBarBtnItemTapped(_ sender: Any) {
         let model = planTextField.text ?? ""
         onNext?(model)
     }
     
-    @IBAction func planTextFieldEditingChanged(_ sender: UITextField) {
-        guard let planName = sender.text, planName.isEmpty == false else {
-            nextBarBtnItem.isEnabled = false
-            return
-        }
-        
-        guard sender.markedTextRange == nil else {
-            nextBarBtnItem.isEnabled = false
-            return
-        }
-        
-        nextBarBtnItem.isEnabled = true
+    @objc private func planTextFieldEditingChanged(_ sender: UITextField) {
+        viewModel?.planeNameChange(sender.text, spellingPhase: sender.isSpelling)
     }
     
 }
 
+extension UITextField {
+    var isSpelling: Bool {
+        return !(markedTextRange == nil)
+    }
+}

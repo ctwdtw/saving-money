@@ -66,9 +66,6 @@
                                         <color key="textColor" systemColor="systemBlueColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="planTextFieldEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="abL-fh-szZ"/>
-                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -87,11 +84,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="命名計畫" id="Q8J-Wo-duy">
-                        <barButtonItem key="rightBarButtonItem" title="下一步" id="BCU-Nm-kPg">
-                            <connections>
-                                <action selector="nextBarBtnItemTapped:" destination="BYZ-38-t0r" id="2sk-AO-Jr2"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="下一步" id="BCU-Nm-kPg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="nextBarBtnItem" destination="BCU-Nm-kPg" id="OXZ-wQ-epm"/>

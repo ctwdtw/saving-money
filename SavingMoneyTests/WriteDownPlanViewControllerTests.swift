@@ -51,6 +51,7 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         let sut = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
             WriteDownPlanViewController(
                 coder: coder,
+                viewModel: WriteDownPlanViewModel(),
                 onNext: onNext)
         })
         
