@@ -12,10 +12,10 @@ public typealias PlanModel = String
 public class WriteDownPlanUIComposer {
     public static func compose(onNext: @escaping (PlanModel) -> Void) -> WriteDownPlanViewController {
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
-            WriteDownPlanViewController(
+            return WriteDownPlanViewController(
                 coder: coder,
-                viewModel: WriteDownPlanViewModel(),
-                onNext: onNext)
+                viewModel: WriteDownPlanViewModel(onNext: onNext)
+                )
         })
         
         return vc
@@ -25,7 +25,14 @@ public class WriteDownPlanUIComposer {
 class WriteDownPlanViewModel {
     var onNextStateChange: ((Bool) -> Void)?
     
-    init() {}
+    private var planModel: PlanModel
+    
+    private let onNext: (PlanModel) -> Void
+    
+    init(planModel: PlanModel = "", onNext: @escaping (PlanModel) -> Void) {
+        self.planModel = planModel
+        self.onNext = onNext
+    }
     
     func planeNameChange(_ name: String?, spellingPhase: Bool) {
         guard let name = name, name.isEmpty == false else {
@@ -38,7 +45,13 @@ class WriteDownPlanViewModel {
             return
         }
         
+        planModel = name
+        
         onNextStateChange?(true)
+    }
+    
+    func nextStep() {
+        onNext(planModel)
     }
 }
 
@@ -47,14 +60,11 @@ public class WriteDownPlanViewController: UIViewController {
     
     @IBOutlet public private(set) weak var planTextField: UITextField!
     
-    private var onNext: ((PlanModel) -> Void)?
-    
     private var viewModel: WriteDownPlanViewModel?
     
-    init?(coder: NSCoder, viewModel: WriteDownPlanViewModel, onNext: @escaping ((PlanModel) -> Void)) {
+    init?(coder: NSCoder, viewModel: WriteDownPlanViewModel) {
         super.init(coder: coder)
         self.viewModel = viewModel
-        self.onNext = onNext
     }
     
     required init?(coder: NSCoder) {
@@ -85,8 +95,7 @@ public class WriteDownPlanViewController: UIViewController {
     }
     
     @objc private func nextBarBtnItemTapped(_ sender: Any) {
-        let model = planTextField.text ?? ""
-        onNext?(model)
+        viewModel?.nextStep()
     }
     
     @objc private func planTextFieldEditingChanged(_ sender: UITextField) {
