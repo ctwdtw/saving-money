@@ -30,11 +30,7 @@ public class WriteDownPlanViewModel {
 }
 
 public class WriteDownPlanViewController: UIViewController {
-    @IBOutlet public private(set) weak var nextBarBtnItem: UIBarButtonItem! {
-        didSet {
-            nextBarBtnItem.isEnabled = false
-        }
-    }
+    @IBOutlet public private(set) weak var nextBarBtnItem: UIBarButtonItem!
     
     @IBOutlet public private(set) weak var planTextField: UITextField!
     

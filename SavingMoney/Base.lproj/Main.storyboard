@@ -84,7 +84,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="命名計畫" id="Q8J-Wo-duy">
-                        <barButtonItem key="rightBarButtonItem" title="下一步" id="BCU-Nm-kPg"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="下一步" id="BCU-Nm-kPg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="nextBarBtnItem" destination="BCU-Nm-kPg" id="OXZ-wQ-epm"/>
