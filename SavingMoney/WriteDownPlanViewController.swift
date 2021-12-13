@@ -8,9 +8,9 @@
 import UIKit
 
 public class WriteDownPlanViewController: UIViewController {
-    @IBOutlet public private(set) weak var nextPlanBarBtnItem: UIBarButtonItem! {
+    @IBOutlet public private(set) weak var nextBarBtnItem: UIBarButtonItem! {
         didSet {
-            nextPlanBarBtnItem.isEnabled = false
+            nextBarBtnItem.isEnabled = false
         }
     }
     
@@ -23,16 +23,16 @@ public class WriteDownPlanViewController: UIViewController {
     
     @IBAction func planTextFieldEditingChanged(_ sender: UITextField) {
         guard let planName = sender.text, planName.isEmpty == false else {
-            nextPlanBarBtnItem.isEnabled = false
+            nextBarBtnItem.isEnabled = false
             return
         }
         
         guard sender.markedTextRange == nil else {
-            nextPlanBarBtnItem.isEnabled = false
+            nextBarBtnItem.isEnabled = false
             return
         }
         
-        nextPlanBarBtnItem.isEnabled = true
+        nextBarBtnItem.isEnabled = true
     }
 }
 

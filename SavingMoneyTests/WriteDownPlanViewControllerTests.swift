@@ -17,23 +17,23 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         XCTAssertNilOrEmptyString(sut.planName)
     }
     
-    func test_navigateToSetAmountSceneAction_isEnableWhenSetPlanName() {
+    func test_nextSceneAction_isEnableWhenSetPlanName() {
         let sut = makeSUT()
         
         sut.loadViewIfNeeded()
-        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene before setting plane name.")
+        XCTAssertFalse(sut.canGoToNextScene, "user can not navigate to next scene before setting plane name.")
         
         sut.simulateSpellingPlanName("ㄘㄨㄣ")
-        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene when spelling plan name.")
+        XCTAssertFalse(sut.canGoToNextScene, "user can not navigate to next scene when spelling plan name.")
         
         sut.simulateTypingPlanName("存錢計畫")
-        XCTAssertTrue(sut.canGoToSetAmountScene, "user can navigate to set amount scene after setting a plan name.")
+        XCTAssertTrue(sut.canGoToNextScene, "user can navigate to next scene after setting a plan name.")
         
         sut.simulateDeletingPlaneName()
-        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene after deleting plan name.")
+        XCTAssertFalse(sut.canGoToNextScene, "user can not navigate to next scene after deleting plan name.")
         
         sut.simulateTypingPlanName("超完美存錢計畫")
-        XCTAssertTrue(sut.canGoToSetAmountScene, "user can navigate to set amount scene after setting plan name again.")
+        XCTAssertTrue(sut.canGoToNextScene, "user can navigate to next scene after setting plan name again.")
     }
     
     private func makeSUT() -> WriteDownPlanViewController {
@@ -63,8 +63,8 @@ extension WriteDownPlanViewController {
         planTextField.placeholder
     }
     
-    var canGoToSetAmountScene: Bool {
-        nextPlanBarBtnItem.isEnabled
+    var canGoToNextScene: Bool {
+        nextBarBtnItem.isEnabled
     }
     
     func simulateTypingPlanName(_ name: String) {
