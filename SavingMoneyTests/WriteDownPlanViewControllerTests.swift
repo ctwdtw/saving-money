@@ -25,6 +25,14 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         XCTAssertFalse(sut.canGoToSetAmountScene)
     }
     
+    func test_canGoToSetAmountScene_afterTypingPlanName() {
+        let sut = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateTypingPlaneName("My Awesome Saving Plan")
+        XCTAssertTrue(sut.canGoToSetAmountScene)
+    }
+    
     private func makeSUT() -> WriteDownPlanViewController {
         let sut = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
             WriteDownPlanViewController(coder: coder)
@@ -54,5 +62,10 @@ extension WriteDownPlanViewController {
     
     var canGoToSetAmountScene: Bool {
         nextPlanBarBtnItem.isEnabled
+    }
+    
+    func simulateTypingPlaneName(_ name: String) {
+        planTextField.text = name
+        planTextField.sendActions(for: .editingChanged)
     }
 }
