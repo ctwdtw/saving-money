@@ -34,7 +34,7 @@ class WriteDownPlanViewModel {
         self.onNext = onNext
     }
     
-    func planeNameChange(_ name: String, spellingPhase: Bool) {
+    func planNameChange(_ name: String, spellingPhase: Bool) {
         guard isValidPlanName(name: name, spellingPhase: spellingPhase) else {
             onNextStateChange?(false)
             return
@@ -106,7 +106,7 @@ public class WriteDownPlanViewController: UIViewController {
     }
     
     @objc private func planTextFieldEditingChanged(_ sender: UITextField) {
-        viewModel?.planeNameChange(sender.nonNilText, spellingPhase: sender.isSpelling)
+        viewModel?.planNameChange(sender.nonNilText, spellingPhase: sender.isSpelling)
     }
     
 }
