@@ -17,20 +17,14 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         XCTAssertNilOrEmptyString(sut.planName)
     }
     
-    func test_canNotGoToSetAmountScene_onEmptyPlanName() {
+    func test_navigateToSetAmountSceneAction_isEnableWhenSetPlanName() {
         let sut = makeSUT()
         
         sut.loadViewIfNeeded()
+        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene before setting plane name")
         
-        XCTAssertFalse(sut.canGoToSetAmountScene)
-    }
-    
-    func test_canGoToSetAmountScene_afterTypingPlanName() {
-        let sut = makeSUT()
-        sut.loadViewIfNeeded()
-        
-        sut.simulateTypingPlaneName("My Awesome Saving Plan")
-        XCTAssertTrue(sut.canGoToSetAmountScene)
+        sut.simulateTypingPlaneName("My awesome saving plan name")
+        XCTAssertTrue(sut.canGoToSetAmountScene, "user can navigate to set amount scene after setting a plan name")
     }
     
     private func makeSUT() -> WriteDownPlanViewController {
