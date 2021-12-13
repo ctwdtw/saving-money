@@ -36,9 +36,22 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.canGoToNextScene, "user can navigate to next scene after setting plan name again.")
     }
     
-    private func makeSUT() -> WriteDownPlanViewController {
+    func test_nextSceneAction_notifiesNextStepHandler() {
+        var settedPlan: [PlanModel] = []
+        let sut = makeSUT(onNext: { settedPlan.append($0) })
+        sut.loadViewIfNeeded()
+        
+        sut.simulateTypingPlanName("My awesome plan")
+        sut.simulateTapNext()
+        
+        XCTAssertEqual(settedPlan, ["My awesome plan"])
+    }
+    
+    private func makeSUT(onNext: @escaping ((PlanModel) -> Void) = { _ in }) -> WriteDownPlanViewController {
         let sut = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
-            WriteDownPlanViewController(coder: coder)
+            WriteDownPlanViewController(
+                coder: coder,
+                onNext: onNext)
         })
         
         return sut
@@ -81,5 +94,10 @@ extension WriteDownPlanViewController {
     func simulateDeletingPlaneName() {
         planTextField.text = ""
         planTextField.sendActions(for: .editingChanged)
+    }
+    
+    func simulateTapNext() {
+        guard let action = nextBarBtnItem.action else { return }
+        UIApplication.shared.sendAction(action, to: nextBarBtnItem.target, from: nil, for: nil)
     }
 }
