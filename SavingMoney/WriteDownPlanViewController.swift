@@ -10,6 +10,12 @@ import UIKit
 public class WriteDownPlanViewController: UIViewController {
     @IBOutlet public private(set) weak var planTextField: UITextField!
     
+    @IBOutlet public private(set) weak var nextPlanBarBtnItem: UIBarButtonItem! {
+        didSet {
+            nextPlanBarBtnItem.isEnabled = false
+        }
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         

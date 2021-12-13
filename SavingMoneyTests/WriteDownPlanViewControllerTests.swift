@@ -17,6 +17,14 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         XCTAssertNilOrEmptyString(sut.planName)
     }
     
+    func test_canNotGoToSetAmountScene_onEmptyPlanName() {
+        let sut = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertFalse(sut.canGoToSetAmountScene)
+    }
+    
     private func makeSUT() -> WriteDownPlanViewController {
         let sut = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
             WriteDownPlanViewController(coder: coder)
@@ -42,5 +50,9 @@ extension WriteDownPlanViewController {
     
     var placeHolderPlanName: String? {
         planTextField.placeholder
+    }
+    
+    var canGoToSetAmountScene: Bool {
+        nextPlanBarBtnItem.isEnabled
     }
 }
