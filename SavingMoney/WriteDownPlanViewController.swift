@@ -23,6 +23,7 @@ public class WriteDownPlanViewController: UIViewController {
     
     @IBAction func planTextFieldEditingChanged(_ sender: UITextField) {
         guard let planName = sender.text, planName.isEmpty == false else {
+            nextPlanBarBtnItem.isEnabled = false
             return
         }
         

@@ -21,10 +21,13 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         let sut = makeSUT()
         
         sut.loadViewIfNeeded()
-        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene before setting plane name")
+        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene before setting plane name.")
         
         sut.simulateTypingPlaneName("My awesome saving plan name")
-        XCTAssertTrue(sut.canGoToSetAmountScene, "user can navigate to set amount scene after setting a plan name")
+        XCTAssertTrue(sut.canGoToSetAmountScene, "user can navigate to set amount scene after setting a plan name.")
+        
+        sut.simulateDeletePlaneName()
+        XCTAssertFalse(sut.canGoToSetAmountScene, "user can not navigate to set amount scene when plan name is deleted.")
     }
     
     private func makeSUT() -> WriteDownPlanViewController {
@@ -60,6 +63,11 @@ extension WriteDownPlanViewController {
     
     func simulateTypingPlaneName(_ name: String) {
         planTextField.text = name
+        planTextField.sendActions(for: .editingChanged)
+    }
+    
+    func simulateDeletePlaneName() {
+        planTextField.text = ""
         planTextField.sendActions(for: .editingChanged)
     }
 }
