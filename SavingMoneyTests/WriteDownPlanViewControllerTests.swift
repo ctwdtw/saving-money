@@ -48,14 +48,7 @@ class WriteDownPlanViewControllerTests: XCTestCase {
     }
     
     private func makeSUT(onNext: @escaping ((PlanModel) -> Void) = { _ in }) -> WriteDownPlanViewController {
-        let sut = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
-            WriteDownPlanViewController(
-                coder: coder,
-                viewModel: WriteDownPlanViewModel(),
-                onNext: onNext)
-        })
-        
-        return sut
+        return WriteDownPlanUIComposer.compose(onNext: onNext)
     }
 }
 

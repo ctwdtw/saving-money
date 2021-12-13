@@ -9,8 +9,23 @@ import UIKit
 
 public typealias PlanModel = String
 
-public class WriteDownPlanViewModel {
+public class WriteDownPlanUIComposer {
+    public static func compose(onNext: @escaping (PlanModel) -> Void) -> WriteDownPlanViewController {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
+            WriteDownPlanViewController(
+                coder: coder,
+                viewModel: WriteDownPlanViewModel(),
+                onNext: onNext)
+        })
+        
+        return vc
+    }
+}
+
+class WriteDownPlanViewModel {
     var onNextStateChange: ((Bool) -> Void)?
+    
+    init() {}
     
     func planeNameChange(_ name: String?, spellingPhase: Bool) {
         guard let name = name, name.isEmpty == false else {
@@ -25,8 +40,6 @@ public class WriteDownPlanViewModel {
         
         onNextStateChange?(true)
     }
-    
-    public init() {}
 }
 
 public class WriteDownPlanViewController: UIViewController {
@@ -38,7 +51,7 @@ public class WriteDownPlanViewController: UIViewController {
     
     private var viewModel: WriteDownPlanViewModel?
     
-    public init?(coder: NSCoder, viewModel: WriteDownPlanViewModel, onNext: @escaping ((PlanModel) -> Void)) {
+    init?(coder: NSCoder, viewModel: WriteDownPlanViewModel, onNext: @escaping ((PlanModel) -> Void)) {
         super.init(coder: coder)
         self.viewModel = viewModel
         self.onNext = onNext
