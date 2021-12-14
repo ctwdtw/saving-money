@@ -47,9 +47,35 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         XCTAssertEqual(settedPlan, ["My awesome plan"])
     }
     
+    func test_renderPlanTextField_onKeyboardShown() {
+        let sut = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        let keyboardView = sut.simulateReceiveKeyboardWillShowNotification()
+        assertThat(sut, render: sut.planTextField, onWillShow: keyboardView, spacing: 20.0)
+    }
+    
     private func makeSUT(onNext: @escaping ((PlanModel) -> Void) = { _ in }) -> WriteDownPlanViewController {
         return WriteDownPlanUIComposer.compose(onNext: onNext)
     }
+    
+    private func assertThat(_ sut: WriteDownPlanViewController, render view: UIView, onWillShow keyboardView: UIView, spacing: CGFloat, file: StaticString = #filePath, line: UInt = #line) {
+        sut.view.forceLayout()
+        
+        let container = UIView(frame: sut.view.bounds)
+        container.addSubview(sut.view)
+        container.addSubview(keyboardView)
+    
+        let viewBottom = view.convert(view.bounds.origin, to: container).y + view.bounds.size.height
+        
+        print("log-textFiled-bottom-in-test-case: \(viewBottom)")
+        
+        let keyboardTop = keyboardView.frame.origin.y
+        
+        let diff = keyboardTop - viewBottom
+        XCTAssertTrue( diff >= spacing , "view's bottom should be above keyboard top \(spacing) points, got \(diff) instead.", file: file, line: line)
+    }
+
 }
 
 extension XCTestCase {
@@ -93,5 +119,29 @@ extension WriteDownPlanViewController {
     func simulateTapNext() {
         guard let action = nextBarBtnItem.action else { return }
         UIApplication.shared.sendAction(action, to: nextBarBtnItem.target, from: nil, for: nil)
+    }
+    
+    @discardableResult
+    func simulateReceiveKeyboardWillShowNotification() -> UIView {
+        let extremelyHighKeyboardFrame =
+        CGRect(
+            origin: CGPoint(x: 0, y: view.bounds.height * (1/3)),
+            size: CGSize(width: view.bounds.width, height: view.bounds.height * (2/3))
+        )
+    
+        NotificationCenter.default.post(
+            name: UIControl.keyboardWillShowNotification,
+            object: nil,
+            userInfo: [UIResponder.keyboardFrameEndUserInfoKey : extremelyHighKeyboardFrame]
+        )
+        
+        return UIView(frame: extremelyHighKeyboardFrame)
+    }
+}
+
+extension UIView {
+    func forceLayout() {
+        layoutIfNeeded()
+        RunLoop.main.run(until: Date())
     }
 }

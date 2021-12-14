@@ -26,6 +26,38 @@ public class WriteDownPlanViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIControl.keyboardWillShowNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        
+        let topY = view.frame.origin.y
+        let keyboardTopY = keyboardFrame.origin.y
+        let viewBottomY = planTextField.convert(planTextField.bounds.origin, to: view).y
+        + planTextField.bounds.size.height
+        
+        print("log-textFiled-bottom-in-prod-code: \(viewBottomY)")
+        
+        let spacing: CGFloat = 20.0
+        let diff = viewBottomY - keyboardTopY
+        
+        if diff > 0 {
+            let offset = -(diff+spacing) + topY
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin = CGPoint(x: 0, y: offset)
+            }
+            
+        }
+        
     }
     
     private func bind() {
