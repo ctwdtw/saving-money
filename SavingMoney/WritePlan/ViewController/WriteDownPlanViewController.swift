@@ -26,6 +26,33 @@ public class WriteDownPlanViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIControl.keyboardWillShowNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        
+        let spacing: CGFloat = 20.0
+        let keyboardTop = keyboardFrame.origin.y
+        let targetViewBottom = planTextField.convert(planTextField.bounds.origin, to: view).y
+        + planTextField.bounds.size.height
+        
+        let diff = keyboardTop - targetViewBottom
+        
+        if diff < spacing {
+            let offset = -spacing - abs(diff)
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin = CGPoint(x: 0, y: offset)
+            }
+        }
     }
     
     private func bind() {
