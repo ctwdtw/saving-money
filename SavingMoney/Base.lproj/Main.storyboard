@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9ph-Jz-2PS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G43-ae-gT1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
@@ -11,7 +11,7 @@
         <!--命名計畫-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WriteDownPlanViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WriteDownPlanViewController" id="BYZ-38-t0r" customClass="WriteDownPlanViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -84,14 +84,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="命名計畫" id="Q8J-Wo-duy">
-                        <barButtonItem key="rightBarButtonItem" title="下一步" id="BCU-Nm-kPg">
-                            <connections>
-                                <segue destination="ilb-C4-z6D" kind="show" id="aZf-IL-wzr"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="下一步" id="BCU-Nm-kPg"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="nextBarBtnItem" destination="BCU-Nm-kPg" id="OXZ-wQ-epm"/>
                         <outlet property="planTextField" destination="y7X-QQ-u8s" id="L8F-CB-3xB"/>
+                        <segue destination="ilb-C4-z6D" kind="show" id="t3d-Xn-a3F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
