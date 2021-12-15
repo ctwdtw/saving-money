@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreGraphics
+
 class WriteDownPlanViewModel {
     var onNextStateChange: ((Bool) -> Void)?
     
@@ -29,6 +31,27 @@ class WriteDownPlanViewModel {
         onNextStateChange?(true)
     }
     
+    func nextStep() {
+        onNext(planModel)
+    }
+    
+    var onKeyboardWillShow: ((CGFloat) -> Void)?
+    
+    func keyboardWillShow(keyboardTop: CGFloat, targetViewBottom: CGFloat) {
+        let spacing: CGFloat = 20.0
+        
+        let diff = keyboardTop - targetViewBottom
+        
+        if diff < spacing {
+            let offset = -spacing - abs(diff)
+            onKeyboardWillShow?(offset)
+        }
+        
+    }
+}
+
+//MARK: - validation
+extension WriteDownPlanViewModel {
     private func isValidPlanName(name: String, spellingPhase: Bool) -> Bool {
         guard name.isEmpty == false else {
             return false
@@ -39,9 +62,5 @@ class WriteDownPlanViewModel {
         }
         
         return true
-    }
-    
-    func nextStep() {
-        onNext(planModel)
     }
 }

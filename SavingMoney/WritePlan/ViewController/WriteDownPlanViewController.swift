@@ -26,38 +26,12 @@ public class WriteDownPlanViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow(notification:)),
-            name: UIControl.keyboardWillShowNotification,
-            object: nil
-        )
-    }
-    
-    @objc private func keyboardWillShow(notification: Notification) {
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
-        
-        let spacing: CGFloat = 20.0
-        let keyboardTop = keyboardFrame.origin.y
-        let targetViewBottom = planTextField.convert(planTextField.bounds.origin, to: view).y
-        + planTextField.bounds.size.height
-        
-        let diff = keyboardTop - targetViewBottom
-        
-        if diff < spacing {
-            let offset = -spacing - abs(diff)
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin = CGPoint(x: 0, y: offset)
-            }
-        }
     }
     
     private func bind() {
         bindNextBarBtnItem()
         bindPlanTextField()
+        bindKeyboardEvents()
     }
     
     private func bindNextBarBtnItem() {
@@ -73,6 +47,22 @@ public class WriteDownPlanViewController: UIViewController {
         planTextField.addTarget(self, action: #selector(planTextFieldEditingChanged(_:)), for: .editingChanged)
     }
     
+    private func bindKeyboardEvents() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIControl.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        viewModel?.onKeyboardWillShow = { offset in
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin = CGPoint(x: 0, y: offset)
+            }
+        }
+        
+    }
+    
     @objc private func nextBarBtnItemTapped(_ sender: Any) {
         viewModel?.nextStep()
     }
@@ -80,5 +70,19 @@ public class WriteDownPlanViewController: UIViewController {
     @objc private func planTextFieldEditingChanged(_ sender: UITextField) {
         viewModel?.planNameChange(sender.nonNilText, spellingPhase: sender.isSpelling)
     }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        
+        let keyboardTop = keyboardFrame.origin.y
+        let targetViewBottom = planTextField.convert(planTextField.bounds.origin, to: view).y
+        + planTextField.bounds.size.height
+        
+        viewModel?.keyboardWillShow(keyboardTop: keyboardTop, targetViewBottom: targetViewBottom)
+        
+    }
+
     
 }
