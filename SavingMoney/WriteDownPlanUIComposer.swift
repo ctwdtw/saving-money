@@ -12,8 +12,11 @@ public class WriteDownPlanUIComposer {
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
             return WriteDownPlanViewController(
                 coder: coder,
-                viewModel: WriteDownPlanViewModel(onNext: onNext)
+                viewModel: WriteDownPlanViewModel(
+                    keyboardViewModel: KeyboardEventViewModel(),
+                    onNext: onNext
                 )
+            )
         })
         
         return vc

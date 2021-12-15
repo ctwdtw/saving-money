@@ -55,7 +55,7 @@ public class WriteDownPlanViewController: UIViewController {
             object: nil
         )
         
-        viewModel?.onKeyboardWillShow = { offset in
+        viewModel?.keyboard.onKeyboardWillShow = { offset in
             UIView.animate(withDuration: 0.3) {
                 self.view.frame.origin = CGPoint(x: 0, y: offset)
             }
@@ -68,7 +68,7 @@ public class WriteDownPlanViewController: UIViewController {
             object: nil
         )
         
-        viewModel?.onKeyboardWillHide = {
+        viewModel?.keyboard.onKeyboardWillHide = {
             UIView.animate(withDuration: 0.3) {
                 self.view.frame.origin = CGPoint(x: 0, y: 0)
             }
@@ -92,12 +92,12 @@ public class WriteDownPlanViewController: UIViewController {
         let targetViewBottom = planTextField.convert(planTextField.bounds.origin, to: view).y
         + planTextField.bounds.size.height
         
-        viewModel?.keyboardWillShow(keyboardTop: keyboardTop, targetViewBottom: targetViewBottom)
+        viewModel?.keyboard.keyboardWillShow(keyboardTop: keyboardTop, targetViewBottom: targetViewBottom)
         
     }
     
     @objc private func keyboardWillHide() {
-        viewModel?.keyboardWillHide()
+        viewModel?.keyboard.keyboardWillHide()
     }
 
     

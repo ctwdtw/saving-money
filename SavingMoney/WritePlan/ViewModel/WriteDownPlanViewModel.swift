@@ -8,33 +8,7 @@
 import Foundation
 import CoreGraphics
 
-class WriteDownPlanViewModel {
-    var onNextStateChange: ((Bool) -> Void)?
-    
-    private var planModel: PlanModel
-    
-    private let onNext: (PlanModel) -> Void
-    
-    init(planModel: PlanModel = "", onNext: @escaping (PlanModel) -> Void) {
-        self.planModel = planModel
-        self.onNext = onNext
-    }
-    
-    func planNameChange(_ name: String, spellingPhase: Bool) {
-        guard isValidPlanName(name: name, spellingPhase: spellingPhase) else {
-            onNextStateChange?(false)
-            return
-        }
-        
-        planModel = name
-        
-        onNextStateChange?(true)
-    }
-    
-    func nextStep() {
-        onNext(planModel)
-    }
-    
+class KeyboardEventViewModel {
     var onKeyboardWillShow: ((CGFloat) -> Void)?
     
     func keyboardWillShow(keyboardTop: CGFloat, targetViewBottom: CGFloat) {
@@ -52,6 +26,39 @@ class WriteDownPlanViewModel {
     func keyboardWillHide() {
         onKeyboardWillHide?()
     }
+}
+
+class WriteDownPlanViewModel {
+    var onNextStateChange: ((Bool) -> Void)?
+    
+    private var planModel: PlanModel
+    
+    private let onNext: (PlanModel) -> Void
+    
+    let keyboard: KeyboardEventViewModel
+    
+    init(planModel: PlanModel = "", keyboardViewModel: KeyboardEventViewModel, onNext: @escaping (PlanModel) -> Void) {
+        self.planModel = planModel
+        self.onNext = onNext
+        self.keyboard = keyboardViewModel
+    }
+    
+    func planNameChange(_ name: String, spellingPhase: Bool) {
+        guard isValidPlanName(name: name, spellingPhase: spellingPhase) else {
+            onNextStateChange?(false)
+            return
+        }
+        
+        planModel = name
+        
+        onNextStateChange?(true)
+    }
+    
+    func nextStep() {
+        onNext(planModel)
+    }
+    
+    
 }
 
 //MARK: - validation
