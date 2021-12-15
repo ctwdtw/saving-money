@@ -20,9 +20,6 @@ public class WriteDownPlanUIComposer {
             )
         })
         
-        keyboardController.view = vc.view
-        keyboardController.planTextField = vc.planTextField
-        
         return vc
     }
 }

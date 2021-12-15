@@ -32,22 +32,23 @@ public class WriteDownPlanViewController: UIViewController {
     }
     
     private func bind() {
-        bindNextBarBtnItem()
-        bindPlanTextField()
-        keyboardController?.bindKeyboardEvents()
+        bind(planTextField, nextBarBtnItem)
+        keyboardController?.bind(view, textField: planTextField)
     }
     
-    private func bindNextBarBtnItem() {
-        viewModel?.onNextStateChange = { [nextBarBtnItem] readyForNextStep in
-            nextBarBtnItem?.isEnabled = readyForNextStep
+    private func bind(_ textField: UITextField, _ barBtnItem: UIBarButtonItem) {
+        viewModel?.onNextStateChange = { readyForNextStep in
+            barBtnItem.isEnabled = readyForNextStep
         }
         
-        nextBarBtnItem.target = self
-        nextBarBtnItem.action = #selector(nextBarBtnItemTapped(_:))
-    }
-    
-    private func bindPlanTextField() {
-        planTextField.addTarget(self, action: #selector(planTextFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(
+            self,
+            action: #selector(planTextFieldEditingChanged(_:)),
+            for: .editingChanged
+        )
+        
+        barBtnItem.target = self
+        barBtnItem.action = #selector(nextBarBtnItemTapped(_:))
     }
     
     @objc private func nextBarBtnItemTapped(_ sender: Any) {

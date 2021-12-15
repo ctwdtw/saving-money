@@ -9,17 +9,20 @@ import Foundation
 import UIKit
 
 class KeyboardController: NSObject {
-    weak var view: UIView!
-    
-    weak var planTextField: UITextField!
-    
     private let viewModel: KeyboardEventViewModel
+    
+    private weak var planTextField: UITextField!
+    
+    private weak var view: UIView!
     
     init(viewModel: KeyboardEventViewModel) {
         self.viewModel = viewModel
     }
     
-    func bindKeyboardEvents() {
+    func bind(_ view: UIView, textField: UITextField) {
+        planTextField = textField
+        self.view = view
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow(notification:)),
@@ -29,7 +32,7 @@ class KeyboardController: NSObject {
         
         viewModel.onKeyboardWillShow = { offset in
             UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin = CGPoint(x: 0, y: offset)
+                view.frame.origin = CGPoint(x: 0, y: offset)
             }
         }
         
@@ -42,7 +45,7 @@ class KeyboardController: NSObject {
         
         viewModel.onKeyboardWillHide = {
             UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin = CGPoint(x: 0, y: 0)
+                view.frame.origin = CGPoint(x: 0, y: 0)
             }
         }
     }
