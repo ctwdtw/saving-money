@@ -27,18 +27,9 @@ class SetAmountViewModel {
 public class SetAmountViewController: UIViewController {
     private var viewModel: SetAmountViewModel?
     
-    @IBOutlet public private(set) weak var accumulatedAmountLabel: UILabel! {
-        didSet {
-            accumulatedAmountLabel.text = "$0"
-        }
-    }
+    @IBOutlet public private(set) weak var totalAmountLabel: UILabel!
     
-    @IBOutlet public private (set) weak var initialAmountLabel: UILabel! {
-        didSet {
-            initialAmountLabel.text = "$0"
-        }
-    }
-    
+    @IBOutlet public private (set) weak var initialAmountLabel: UILabel!
     
     init?(coder: NSCoder, viewModel: SetAmountViewModel) {
         super.init(coder: coder)

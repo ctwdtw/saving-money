@@ -298,8 +298,8 @@
                         <barButtonItem key="rightBarButtonItem" title="開始" id="MS2-B8-7yK"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="accumulatedAmountLabel" destination="CS4-yM-7qP" id="Yzf-Hf-4fh"/>
                         <outlet property="initialAmountLabel" destination="Ve0-MZ-mwS" id="w9I-kW-y4T"/>
+                        <outlet property="totalAmountLabel" destination="CS4-yM-7qP" id="Yzf-Hf-4fh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtX-x7-HHG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -9,18 +9,12 @@ import XCTest
 import SavingMoney
 
 class SetAmountViewControllerTests: XCTestCase {
-    func test_init_displayZeroAccumulatedAmount() {
+    func test_init_displayDefaultSavingPlan() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.accumulatedAmount, "$0")
-    }
-    
-    func test_init_displayZeroInitialAmount() {
-        let sut = makeSUT()
-        sut.loadViewIfNeeded()
-        
-        XCTAssertEqual(sut.initialAmount, "$0")
+        XCTAssertEqual(sut.initialAmount, "1", "Expect 1 dollar as default initial saving amount")
+        XCTAssertEqual(sut.totalAmount, "$1,378", "Expect $1,378 dollar as default total amount")
     }
     
     func makeSUT() -> SetAmountViewController {
@@ -30,8 +24,8 @@ class SetAmountViewControllerTests: XCTestCase {
 }
 
 extension SetAmountViewController {
-    var accumulatedAmount: String? {
-        accumulatedAmountLabel.text
+    var totalAmount: String? {
+        totalAmountLabel.text
     }
     
     var initialAmount: String? {
