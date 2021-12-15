@@ -14,6 +14,7 @@
 		635BEA5B2769D38200D300E0 /* SetAmountUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA5A2769D38200D300E0 /* SetAmountUIComposer.swift */; };
 		635BEA5D276A12D200D300E0 /* SetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA5C276A12D200D300E0 /* SetAmountViewModel.swift */; };
 		635BEA5F276A12FF00D300E0 /* PlanAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA5E276A12FF00D300E0 /* PlanAmount.swift */; };
+		635BEA65276A19E100D300E0 /* BinaryInteger+digits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA64276A19E100D300E0 /* BinaryInteger+digits.swift */; };
 		639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F015E2765CEB000007110 /* SetAmountViewController.swift */; };
 		639F0161276619CD00007110 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F0160276619CD00007110 /* Checkbox.swift */; };
 		639F016327661AD600007110 /* SavingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016227661AD600007110 /* SavingViewController.swift */; };
@@ -49,6 +50,7 @@
 		635BEA5A2769D38200D300E0 /* SetAmountUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountUIComposer.swift; sourceTree = "<group>"; };
 		635BEA5C276A12D200D300E0 /* SetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountViewModel.swift; sourceTree = "<group>"; };
 		635BEA5E276A12FF00D300E0 /* PlanAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanAmount.swift; sourceTree = "<group>"; };
+		635BEA64276A19E100D300E0 /* BinaryInteger+digits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+digits.swift"; sourceTree = "<group>"; };
 		639F015E2765CEB000007110 /* SetAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountViewController.swift; sourceTree = "<group>"; };
 		639F0160276619CD00007110 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		639F016227661AD600007110 /* SavingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		635BEA63276A145700D300E0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				635BEA64276A19E100D300E0 /* BinaryInteger+digits.swift */,
 				635BEA5C276A12D200D300E0 /* SetAmountViewModel.swift */,
 			);
 			path = ViewModel;
@@ -320,6 +323,7 @@
 				639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */,
 				63CEF5252765B00C0038E36E /* AppDelegate.swift in Sources */,
 				635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */,
+				635BEA65276A19E100D300E0 /* BinaryInteger+digits.swift in Sources */,
 				639F016527661D6900007110 /* SavingCell.swift in Sources */,
 				639F016327661AD600007110 /* SavingViewController.swift in Sources */,
 				635BEA552769BB8C00D300E0 /* KeyboardEventViewModel.swift in Sources */,

@@ -16,6 +16,8 @@ public class SetAmountViewController: UIViewController {
     
     @IBOutlet public private(set) var digitBtns: [UIButton]!
     
+    @IBOutlet public private(set) weak var clearBtn: UIButton!
+    
     init?(coder: NSCoder, viewModel: SetAmountViewModel) {
         super.init(coder: coder)
         self.viewModel = viewModel
@@ -41,10 +43,7 @@ public class SetAmountViewController: UIViewController {
         viewModel?.appendDigit(sender.tag)
     }
     
-}
-
-extension BinaryInteger {
-    var digits: [Int] {
-        return String(describing: self).compactMap { Int(String($0)) }
+    @IBAction func clearBtnTouchUpInside(_ sender: Any) {
+        viewModel?.clearInitialAmount()
     }
 }
