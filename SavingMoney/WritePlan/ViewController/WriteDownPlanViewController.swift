@@ -61,6 +61,18 @@ public class WriteDownPlanViewController: UIViewController {
             }
         }
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIControl.keyboardWillHideNotification,
+            object: nil
+        )
+        
+        viewModel?.onKeyboardWillHide = {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin = CGPoint(x: 0, y: 0)
+            }
+        }
     }
     
     @objc private func nextBarBtnItemTapped(_ sender: Any) {
@@ -82,6 +94,10 @@ public class WriteDownPlanViewController: UIViewController {
         
         viewModel?.keyboardWillShow(keyboardTop: keyboardTop, targetViewBottom: targetViewBottom)
         
+    }
+    
+    @objc private func keyboardWillHide() {
+        viewModel?.keyboardWillHide()
     }
 
     

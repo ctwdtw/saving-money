@@ -46,7 +46,11 @@ class WriteDownPlanViewModel {
             let offset = -spacing - abs(diff)
             onKeyboardWillShow?(offset)
         }
-        
+    }
+    
+    var onKeyboardWillHide: (() -> Void)?
+    func keyboardWillHide() {
+        onKeyboardWillHide?()
     }
 }
 

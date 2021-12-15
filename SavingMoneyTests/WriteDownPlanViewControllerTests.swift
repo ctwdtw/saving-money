@@ -47,12 +47,15 @@ class WriteDownPlanViewControllerTests: XCTestCase {
         XCTAssertEqual(settedPlan, ["My awesome plan"])
     }
     
-    func test_renderPlanTextField_onKeyboardShown() {
+    func test_adjustViewOffset_onKeyboardShownOrHide() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
         let keyboardView = sut.simulateReceiveKeyboardWillShowNotification()
         assertThat(sut, render: sut.planTextField, onWillShow: keyboardView, spacing: 20.0)
+        
+        sut.simulateReceiveKeyboardWillHideNotification()
+        XCTAssertEqual(sut.view.frame.origin, .zero, "view has zero offset when keyboard hide.")
     }
     
     private func makeSUT(onNext: @escaping ((PlanModel) -> Void) = { _ in }) -> WriteDownPlanViewController {
@@ -135,6 +138,15 @@ extension WriteDownPlanViewController {
         
         return UIView(frame: extremelyHighKeyboardFrame)
     }
+    
+    func simulateReceiveKeyboardWillHideNotification() {
+        NotificationCenter.default.post(
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil,
+            userInfo: nil
+        )
+    }
+    
 }
 
 extension UIView {
