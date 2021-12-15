@@ -33,6 +33,12 @@ public class SetAmountViewController: UIViewController {
         }
     }
     
+    @IBOutlet public private (set) weak var initialAmountLabel: UILabel! {
+        didSet {
+            initialAmountLabel.text = "$0"
+        }
+    }
+    
     
     init?(coder: NSCoder, viewModel: SetAmountViewModel) {
         super.init(coder: coder)

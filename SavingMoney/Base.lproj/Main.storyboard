@@ -299,6 +299,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="accumulatedAmountLabel" destination="CS4-yM-7qP" id="Yzf-Hf-4fh"/>
+                        <outlet property="initialAmountLabel" destination="Ve0-MZ-mwS" id="w9I-kW-y4T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtX-x7-HHG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
