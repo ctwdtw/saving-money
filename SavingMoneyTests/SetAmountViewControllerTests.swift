@@ -32,6 +32,14 @@ class SetAmountViewControllerTests: XCTestCase {
         assertThat(sut, renderInitialAmount: "0", totalAmount: "$0")
     }
     
+    func test_renderNextSceneAction_onAlterSavingPlan() {
+        let sut = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulatePressClearBtn()
+        XCTAssertFalse(sut.canGoToNextScene)
+    }
+    
     func makeSUT() -> SetAmountViewController {
         let sut = SetAmountUIComposer.compose(onNext: { _ in })
         return sut
@@ -60,6 +68,10 @@ extension SetAmountViewController {
     
     func simulatePressClearBtn() {
         clearBtn.sendActions(for: .touchUpInside)
+    }
+    
+    var canGoToNextScene: Bool {
+        nextBarBtnItem.isEnabled
     }
     
 }

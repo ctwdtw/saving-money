@@ -9,10 +9,10 @@ import Foundation
 class SetAmountViewModel {
     private let onNext: (PlanAmount) -> Void
     
-    private var savingAmount: PlanAmount
+    private var planAmount: PlanAmount
     
     init(savingAmount: PlanAmount, onNext: @escaping (PlanAmount) -> Void) {
-        self.savingAmount = savingAmount
+        self.planAmount = savingAmount
         self.digits = savingAmount.initialAmount.digits
         self.onNext = onNext
     }
@@ -28,7 +28,7 @@ class SetAmountViewModel {
     
     private var digits: [Int] {
         didSet {
-            savingAmount.initialAmount = digits.reduce(0) { return $0*10 + $1 }
+            planAmount.initialAmount = digits.reduce(0) { return $0*10 + $1 }
             onAmountsChange?(self)
         }
     }
@@ -36,11 +36,15 @@ class SetAmountViewModel {
     var onAmountsChange: ((SetAmountViewModel) -> Void)?
     
     var totalAmount: String? {
-        currencyFormatter.string(from: NSNumber(value: savingAmount.totalAmount))
+        currencyFormatter.string(from: NSNumber(value: planAmount.totalAmount))
     }
     
     var initialAmount: String {
-        "\(savingAmount.initialAmount)"
+        "\(planAmount.initialAmount)"
+    }
+    
+    var readyForNext: Bool {
+        return planAmount.initialAmount != 0
     }
     
     func appendDigit(_ digit: Int) {
@@ -52,6 +56,6 @@ class SetAmountViewModel {
     }
     
     func nextStep() {
-        onNext(savingAmount)
+        onNext(planAmount)
     }
 }

@@ -18,6 +18,8 @@ public class SetAmountViewController: UIViewController {
     
     @IBOutlet public private(set) weak var clearBtn: UIButton!
     
+    @IBOutlet public private(set) weak var nextBarBtnItem: UIBarButtonItem!
+    
     init?(coder: NSCoder, viewModel: SetAmountViewModel) {
         super.init(coder: coder)
         self.viewModel = viewModel
@@ -33,9 +35,10 @@ public class SetAmountViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel?.onAmountsChange = { [initialAmountLabel, totalAmountLabel] viewModel in
+        viewModel?.onAmountsChange = { [initialAmountLabel, totalAmountLabel, nextBarBtnItem] viewModel in
             initialAmountLabel?.text = viewModel.initialAmount
             totalAmountLabel?.text = viewModel.totalAmount
+            nextBarBtnItem?.isEnabled = viewModel.readyForNext
         }
     }
     
