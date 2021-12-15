@@ -99,7 +99,7 @@
         <!--設定金額-->
         <scene sceneID="f3k-HJ-hVG">
             <objects>
-                <viewController id="ilb-C4-z6D" customClass="SetAmountViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SetAmountViewController" id="ilb-C4-z6D" customClass="SetAmountViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wAK-cc-7QT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -297,6 +297,9 @@
                     <navigationItem key="navigationItem" title="設定金額" id="gak-ck-Wnp">
                         <barButtonItem key="rightBarButtonItem" title="開始" id="MS2-B8-7yK"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="accumulatedAmountLabel" destination="CS4-yM-7qP" id="Yzf-Hf-4fh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtX-x7-HHG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
