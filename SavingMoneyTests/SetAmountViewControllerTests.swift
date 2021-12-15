@@ -15,6 +15,14 @@ class SetAmountViewControllerTests: XCTestCase {
         
         assertThat(sut, renderInitialAmount: "1", totalAmount: "$1,378")
     }
+    
+    func test_pressDigit_alterSavingPlan() {
+        let sut = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulatePressDigit(0)
+        assertThat(sut, renderInitialAmount: "10", totalAmount: "$13,780")
+    }
             
     func makeSUT() -> SetAmountViewController {
         let sut = SetAmountUIComposer.compose(onNext: { _ in })
@@ -36,4 +44,10 @@ extension SetAmountViewController {
     var initialAmount: String? {
         initialAmountLabel.text
     }
+    
+    func simulatePressDigit(_ digit: Int) {
+        let btn = digitBtns.filter { $0.tag == digit }.first
+        btn?.sendActions(for: .touchUpInside)
+    }
+    
 }

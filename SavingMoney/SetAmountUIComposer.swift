@@ -8,13 +8,13 @@
 import UIKit
 
 public class SetAmountUIComposer {
-    public static func compose(onNext: @escaping (AmountModel) -> Void) -> SetAmountViewController {
+    public static func compose(onNext: @escaping (SavingAmount) -> Void) -> SetAmountViewController {
         
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: SetAmountViewController.self)).instantiateViewController(identifier: "SetAmountViewController", creator: { coder in
             return SetAmountViewController(
                 coder: coder,
                 viewModel: SetAmountViewModel(
-                    onNext: onNext
+                    savingAmount: SavingAmount(initialAmount: 1), onNext: onNext
                 )
             )
         })
