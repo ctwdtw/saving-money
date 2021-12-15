@@ -13,14 +13,19 @@ class SetAmountViewControllerTests: XCTestCase {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.initialAmount, "1", "Expect 1 dollar as default initial saving amount")
-        XCTAssertEqual(sut.totalAmount, "$1,378", "Expect $1,378 dollar as default total amount")
+        assertThat(sut, renderInitialAmount: "1", totalAmount: "$1,378")
     }
-    
+            
     func makeSUT() -> SetAmountViewController {
         let sut = SetAmountUIComposer.compose(onNext: { _ in })
         return sut
     }
+    
+    private func assertThat(_ sut: SetAmountViewController, renderInitialAmount initialAmount: String, totalAmount: String, file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertEqual(sut.initialAmount, initialAmount, "Expect \(initialAmount) dollar as default initial saving amount, but got \(String(describing: sut.totalAmount)) instead", file: file, line: line)
+        XCTAssertEqual(sut.totalAmount, totalAmount, "Expect \(totalAmount) dollar as total saving amount, but got \(String(describing: sut.totalAmount)) instead", file: file, line: line)
+    }
+
 }
 
 extension SetAmountViewController {
