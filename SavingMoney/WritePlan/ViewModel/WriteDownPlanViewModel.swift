@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import CoreGraphics
-
 class WriteDownPlanViewModel {
     var onNextStateChange: ((Bool) -> Void)?
     
@@ -35,23 +33,7 @@ class WriteDownPlanViewModel {
         onNext(planModel)
     }
     
-    var onKeyboardWillShow: ((CGFloat) -> Void)?
     
-    func keyboardWillShow(keyboardTop: CGFloat, targetViewBottom: CGFloat) {
-        let spacing: CGFloat = 20.0
-        
-        let diff = keyboardTop - targetViewBottom
-        
-        if diff < spacing {
-            let offset = -spacing - abs(diff)
-            onKeyboardWillShow?(offset)
-        }
-    }
-    
-    var onKeyboardWillHide: (() -> Void)?
-    func keyboardWillHide() {
-        onKeyboardWillHide?()
-    }
 }
 
 //MARK: - validation

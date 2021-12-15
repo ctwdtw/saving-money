@@ -14,9 +14,12 @@ public class WriteDownPlanViewController: UIViewController {
     
     private var viewModel: WriteDownPlanViewModel?
     
-    init?(coder: NSCoder, viewModel: WriteDownPlanViewModel) {
+    private var keyboardController: KeyboardController?
+    
+    init?(coder: NSCoder, viewModel: WriteDownPlanViewModel, keyboardController: KeyboardController) {
         super.init(coder: coder)
         self.viewModel = viewModel
+        self.keyboardController = keyboardController
     }
     
     required init?(coder: NSCoder) {
@@ -29,50 +32,23 @@ public class WriteDownPlanViewController: UIViewController {
     }
     
     private func bind() {
-        bindNextBarBtnItem()
-        bindPlanTextField()
-        bindKeyboardEvents()
+        bind(planTextField, nextBarBtnItem)
+        keyboardController?.bind(view, textField: planTextField)
     }
     
-    private func bindNextBarBtnItem() {
-        viewModel?.onNextStateChange = { [nextBarBtnItem] readyForNextStep in
-            nextBarBtnItem?.isEnabled = readyForNextStep
+    private func bind(_ textField: UITextField, _ barBtnItem: UIBarButtonItem) {
+        viewModel?.onNextStateChange = { readyForNextStep in
+            barBtnItem.isEnabled = readyForNextStep
         }
         
-        nextBarBtnItem.target = self
-        nextBarBtnItem.action = #selector(nextBarBtnItemTapped(_:))
-    }
-    
-    private func bindPlanTextField() {
-        planTextField.addTarget(self, action: #selector(planTextFieldEditingChanged(_:)), for: .editingChanged)
-    }
-    
-    private func bindKeyboardEvents() {
-        NotificationCenter.default.addObserver(
+        textField.addTarget(
             self,
-            selector: #selector(keyboardWillShow(notification:)),
-            name: UIControl.keyboardWillShowNotification,
-            object: nil
+            action: #selector(planTextFieldEditingChanged(_:)),
+            for: .editingChanged
         )
         
-        viewModel?.onKeyboardWillShow = { offset in
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin = CGPoint(x: 0, y: offset)
-            }
-        }
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIControl.keyboardWillHideNotification,
-            object: nil
-        )
-        
-        viewModel?.onKeyboardWillHide = {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin = CGPoint(x: 0, y: 0)
-            }
-        }
+        barBtnItem.target = self
+        barBtnItem.action = #selector(nextBarBtnItemTapped(_:))
     }
     
     @objc private func nextBarBtnItemTapped(_ sender: Any) {
@@ -82,23 +58,5 @@ public class WriteDownPlanViewController: UIViewController {
     @objc private func planTextFieldEditingChanged(_ sender: UITextField) {
         viewModel?.planNameChange(sender.nonNilText, spellingPhase: sender.isSpelling)
     }
-    
-    @objc private func keyboardWillShow(notification: Notification) {
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
-        
-        let keyboardTop = keyboardFrame.origin.y
-        let targetViewBottom = planTextField.convert(planTextField.bounds.origin, to: view).y
-        + planTextField.bounds.size.height
-        
-        viewModel?.keyboardWillShow(keyboardTop: keyboardTop, targetViewBottom: targetViewBottom)
-        
-    }
-    
-    @objc private func keyboardWillHide() {
-        viewModel?.keyboardWillHide()
-    }
-
     
 }
