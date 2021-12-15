@@ -35,12 +35,9 @@ class WriteDownPlanViewModel {
     
     private let onNext: (PlanModel) -> Void
     
-    let keyboard: KeyboardEventViewModel
-    
-    init(planModel: PlanModel = "", keyboardViewModel: KeyboardEventViewModel, onNext: @escaping (PlanModel) -> Void) {
+    init(planModel: PlanModel = "", onNext: @escaping (PlanModel) -> Void) {
         self.planModel = planModel
         self.onNext = onNext
-        self.keyboard = keyboardViewModel
     }
     
     func planNameChange(_ name: String, spellingPhase: Bool) {

@@ -9,15 +9,19 @@ import UIKit
 
 public class WriteDownPlanUIComposer {
     public static func compose(onNext: @escaping (PlanModel) -> Void) -> WriteDownPlanViewController {
+        let keyboardController = KeyboardController(viewModel: KeyboardEventViewModel())
+        
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: WriteDownPlanViewController.self)).instantiateViewController(identifier: "WriteDownPlanViewController", creator: { coder in
             return WriteDownPlanViewController(
                 coder: coder,
                 viewModel: WriteDownPlanViewModel(
-                    keyboardViewModel: KeyboardEventViewModel(),
                     onNext: onNext
-                )
+                ), keyboardController: keyboardController
             )
         })
+        
+        keyboardController.view = vc.view
+        keyboardController.planTextField = vc.planTextField
         
         return vc
     }
