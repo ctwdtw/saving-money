@@ -28,12 +28,18 @@ class SetAmountViewControllerTests: XCTestCase {
         assertThat(sut, renderInitialAmount: "5", totalAmount: "$6,890", "render start 5 saving plane on press digit 5 afterwards.")
     }
     
-    func test_renderNextSceneAction_onAlterSavingPlan() {
+    func test_renderNextSceneAction_onPressNumberPad() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulatePressDeleteBtn()
         XCTAssertFalse(sut.canGoToNextScene)
+        
+        sut.simulatePressDeleteBtn()
+        XCTAssertFalse(sut.canGoToNextScene)
+        
+        sut.simulatePressDigit(9)
+        XCTAssertTrue(sut.canGoToNextScene)
     }
     
     func makeSUT() -> SetAmountViewController {

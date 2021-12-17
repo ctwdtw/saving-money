@@ -52,7 +52,9 @@ class SetAmountViewModel {
     }
     
     func deleteBackward() {
-        digits.removeLast()
+        if !digits.isEmpty {
+            digits.removeLast()
+        }
     }
     
     func nextStep() {
