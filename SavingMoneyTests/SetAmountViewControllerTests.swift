@@ -16,16 +16,22 @@ class SetAmountViewControllerTests: XCTestCase {
         assertThat(sut, renderInitialAmount: "1", totalAmount: "$1,378", "render default saving plan on init.")
         
         sut.simulatePressDigit(0)
-        assertThat(sut, renderInitialAmount: "10", totalAmount: "$13,780", "render start 10 saving plane on press digit 0 afterwards.")
+        assertThat(sut, renderInitialAmount: "10", totalAmount: "$13,780", "render start `10` saving plan on press digit 0 after init saving plan.")
         
         sut.simulatePressDeleteBtn()
-        assertThat(sut, renderInitialAmount: "1", totalAmount: "$1,378", "render start 1 saving plane on press backward delete afterwards.")
+        assertThat(sut, renderInitialAmount: "1", totalAmount: "$1,378", "render start `1` saving plane on press backward delete after `10` saving plan.")
         
         sut.simulatePressDeleteBtn()
-        assertThat(sut, renderInitialAmount: "0", totalAmount: "$0", "render 0 saving plane on press backward delete to the end.")
+        assertThat(sut, renderInitialAmount: "0", totalAmount: "$0", "render `0` saving plane on press backward delete to the end.")
+        
+        sut.simulatePressDigit(0)
+        assertThat(sut, renderInitialAmount: "0", totalAmount: "$0", "render `0` saving plane on press digit 0 after `0` saving plan")
+        
+        sut.simulatePressDigit(0)
+        assertThat(sut, renderInitialAmount: "0", totalAmount: "$0", "render `0` saving plane on press digit 0 again after `0` saving plan")
         
         sut.simulatePressDigit(5)
-        assertThat(sut, renderInitialAmount: "5", totalAmount: "$6,890", "render start 5 saving plane on press digit 5 afterwards.")
+        assertThat(sut, renderInitialAmount: "5", totalAmount: "$6,890", "render start 5 saving plane on press digit 5 after `0` saving plan.")
     }
     
     func test_renderNextSceneAction_onPressNumberPad() {
