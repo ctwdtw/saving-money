@@ -39,13 +39,13 @@ class SetAmountViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         sut.simulatePressDeleteBtn()
-        XCTAssertFalse(sut.canGoToNextScene)
+        XCTAssertFalse(sut.canGoToNextScene, "disable next scene action on press backward delete after init saving plan.")
         
         sut.simulatePressDeleteBtn()
-        XCTAssertFalse(sut.canGoToNextScene)
+        XCTAssertFalse(sut.canGoToNextScene, "does not alter next scene action state on press backward delete again after `0` saving plan.")
         
         sut.simulatePressDigit(9)
-        XCTAssertTrue(sut.canGoToNextScene)
+        XCTAssertTrue(sut.canGoToNextScene, "enable next scene action on press digit 9 after `0` saving plan.")
     }
     
     func makeSUT() -> SetAmountViewController {
