@@ -114,17 +114,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2j-qH-YCg">
-                                        <rect key="frame" x="354" y="88" width="44" height="44"/>
+                                        <rect key="frame" x="352" y="87" width="46" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="7hr-L4-F8r"/>
                                             <constraint firstAttribute="width" secondItem="O2j-qH-YCg" secondAttribute="height" id="hg4-jG-Tj0"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="xmark.circle.fill" catalog="system">
+                                        <buttonConfiguration key="configuration" style="plain" image="delete.backward.fill" catalog="system">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="clearBtnTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="iwg-OD-us0"/>
+                                            <action selector="deleteBtnTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="CVh-sR-Hbt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -329,7 +329,7 @@
                         <barButtonItem key="rightBarButtonItem" title="開始" id="MS2-B8-7yK"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="clearBtn" destination="O2j-qH-YCg" id="UgP-SJ-E6u"/>
+                        <outlet property="deleteBtn" destination="O2j-qH-YCg" id="UgP-SJ-E6u"/>
                         <outlet property="initialAmountLabel" destination="Ve0-MZ-mwS" id="w9I-kW-y4T"/>
                         <outlet property="nextBarBtnItem" destination="MS2-B8-7yK" id="KJh-5X-QDs"/>
                         <outlet property="totalAmountLabel" destination="CS4-yM-7qP" id="Yzf-Hf-4fh"/>
@@ -581,8 +581,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="delete.backward.fill" catalog="system" width="128" height="104"/>
         <image name="saving" width="256" height="256"/>
-        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

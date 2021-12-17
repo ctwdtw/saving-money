@@ -51,7 +51,7 @@ class SetAmountViewModel {
         digits.append(digit)
     }
     
-    func clearInitialAmount() {
+    func deleteBackward() {
         digits.removeAll()
     }
     

@@ -16,7 +16,7 @@ public class SetAmountViewController: UIViewController {
     
     @IBOutlet public private(set) var digitBtns: [UIButton]!
     
-    @IBOutlet public private(set) weak var clearBtn: UIButton!
+    @IBOutlet public private(set) weak var deleteBtn: UIButton!
     
     @IBOutlet public private(set) weak var nextBarBtnItem: UIBarButtonItem!
     
@@ -46,7 +46,7 @@ public class SetAmountViewController: UIViewController {
         viewModel?.appendDigit(sender.tag)
     }
     
-    @IBAction func clearBtnTouchUpInside(_ sender: Any) {
-        viewModel?.clearInitialAmount()
+    @IBAction func deleteBtnTouchUpInside(_ sender: Any) {
+        viewModel?.deleteBackward()
     }
 }

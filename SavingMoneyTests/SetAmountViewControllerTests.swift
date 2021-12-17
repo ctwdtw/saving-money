@@ -24,11 +24,11 @@ class SetAmountViewControllerTests: XCTestCase {
         assertThat(sut, renderInitialAmount: "10", totalAmount: "$13,780")
     }
     
-    func test_pressClearBtn_cleanSavingPlan() {
+    func test_pressDeleteBtn_displaySavingPlan() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
-        sut.simulatePressClearBtn()
+        sut.simulatePressDeleteBtn()
         assertThat(sut, renderInitialAmount: "0", totalAmount: "$0")
     }
     
@@ -36,7 +36,7 @@ class SetAmountViewControllerTests: XCTestCase {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
-        sut.simulatePressClearBtn()
+        sut.simulatePressDeleteBtn()
         XCTAssertFalse(sut.canGoToNextScene)
     }
     
@@ -66,8 +66,8 @@ extension SetAmountViewController {
         btn?.sendActions(for: .touchUpInside)
     }
     
-    func simulatePressClearBtn() {
-        clearBtn.sendActions(for: .touchUpInside)
+    func simulatePressDeleteBtn() {
+        deleteBtn.sendActions(for: .touchUpInside)
     }
     
     var canGoToNextScene: Bool {
