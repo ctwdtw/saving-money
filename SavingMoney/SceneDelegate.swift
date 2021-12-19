@@ -22,6 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func configureRootViewController() {
         let vc = WriteDownPlanUIComposer.compose(onNext: { _ in })
+        
+        //let vc = SetAmountUIComposer.compose(onNext: { _ in })
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
     }

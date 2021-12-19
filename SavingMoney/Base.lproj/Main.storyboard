@@ -99,7 +99,7 @@
         <!--設定金額-->
         <scene sceneID="f3k-HJ-hVG">
             <objects>
-                <viewController id="ilb-C4-z6D" customClass="SetAmountViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SetAmountViewController" id="ilb-C4-z6D" customClass="SetAmountViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wAK-cc-7QT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,15 +114,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2j-qH-YCg">
-                                        <rect key="frame" x="354" y="88" width="44" height="44"/>
+                                        <rect key="frame" x="352" y="87" width="46" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="7hr-L4-F8r"/>
                                             <constraint firstAttribute="width" secondItem="O2j-qH-YCg" secondAttribute="height" id="hg4-jG-Tj0"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="xmark.circle.fill" catalog="system">
+                                        <buttonConfiguration key="configuration" style="plain" image="delete.backward.fill" catalog="system">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="deleteBtnTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="CVh-sR-Hbt"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
@@ -175,78 +178,105 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-qK-TY1">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="98"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exa-bZ-pDT">
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exa-bZ-pDT">
                                                 <rect key="frame" x="0.0" y="0.0" width="127.5" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="7">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="Dnz-5z-Il5"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-6w-eOq">
+                                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-6w-eOq">
                                                 <rect key="frame" x="127.5" y="0.0" width="127" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="8">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="GJD-wF-CDi"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgc-jS-ruP">
+                                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgc-jS-ruP">
                                                 <rect key="frame" x="254.5" y="0.0" width="127.5" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="9">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="Jua-gx-qG3"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="F0v-uP-LX5">
                                         <rect key="frame" x="0.0" y="145" width="382" height="98"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-aw-wY7">
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-aw-wY7">
                                                 <rect key="frame" x="0.0" y="0.0" width="127.5" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="4">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="cbW-aD-5qg"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Huy-JH-1iM">
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Huy-JH-1iM">
                                                 <rect key="frame" x="127.5" y="0.0" width="127" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="5">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="L9K-XH-aoK"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVT-73-FCD">
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVT-73-FCD">
                                                 <rect key="frame" x="254.5" y="0.0" width="127.5" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="6">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="1iW-bY-kqb"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="R53-Km-ihW">
                                         <rect key="frame" x="0.0" y="290" width="382" height="98"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tun-ge-wjc">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tun-ge-wjc">
                                                 <rect key="frame" x="0.0" y="0.0" width="127.5" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="1">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="Ths-U0-9jd"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esN-SI-uG8">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esN-SI-uG8">
                                                 <rect key="frame" x="127.5" y="0.0" width="127" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="2">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="xbh-2v-stq"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oED-0G-DUo">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oED-0G-DUo">
                                                 <rect key="frame" x="254.5" y="0.0" width="127.5" height="98"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="3">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="4dM-82-qVI"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -264,13 +294,14 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="0">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="digitTouchUpInside:" destination="ilb-C4-z6D" eventType="touchUpInside" id="3IG-Hh-9e8"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAH-DY-VUF">
                                                 <rect key="frame" x="254.5" y="0.0" width="127.5" height="15"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title=".">
-                                                    <fontDescription key="titleFontDescription" type="system" pointSize="70"/>
-                                                </buttonConfiguration>
+                                                <buttonConfiguration key="configuration" style="plain"/>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -297,6 +328,22 @@
                     <navigationItem key="navigationItem" title="設定金額" id="gak-ck-Wnp">
                         <barButtonItem key="rightBarButtonItem" title="開始" id="MS2-B8-7yK"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="deleteBtn" destination="O2j-qH-YCg" id="UgP-SJ-E6u"/>
+                        <outlet property="initialAmountLabel" destination="Ve0-MZ-mwS" id="w9I-kW-y4T"/>
+                        <outlet property="nextBarBtnItem" destination="MS2-B8-7yK" id="KJh-5X-QDs"/>
+                        <outlet property="totalAmountLabel" destination="CS4-yM-7qP" id="Yzf-Hf-4fh"/>
+                        <outletCollection property="digitBtns" destination="rDq-fB-Moj" collectionClass="NSMutableArray" id="vVM-qB-ORV"/>
+                        <outletCollection property="digitBtns" destination="tun-ge-wjc" collectionClass="NSMutableArray" id="iAN-Eo-VWu"/>
+                        <outletCollection property="digitBtns" destination="esN-SI-uG8" collectionClass="NSMutableArray" id="Y5i-1W-goF"/>
+                        <outletCollection property="digitBtns" destination="oED-0G-DUo" collectionClass="NSMutableArray" id="0oP-os-3is"/>
+                        <outletCollection property="digitBtns" destination="1uu-aw-wY7" collectionClass="NSMutableArray" id="kEY-rV-oxa"/>
+                        <outletCollection property="digitBtns" destination="Huy-JH-1iM" collectionClass="NSMutableArray" id="qqN-Qw-VGV"/>
+                        <outletCollection property="digitBtns" destination="XVT-73-FCD" collectionClass="NSMutableArray" id="FM9-d7-0RA"/>
+                        <outletCollection property="digitBtns" destination="exa-bZ-pDT" collectionClass="NSMutableArray" id="hOg-dT-RDP"/>
+                        <outletCollection property="digitBtns" destination="EvA-6w-eOq" collectionClass="NSMutableArray" id="vDc-H8-cTB"/>
+                        <outletCollection property="digitBtns" destination="Tgc-jS-ruP" collectionClass="NSMutableArray" id="Pfc-tM-6DX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtX-x7-HHG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -534,8 +581,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="delete.backward.fill" catalog="system" width="128" height="104"/>
         <image name="saving" width="256" height="256"/>
-        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
