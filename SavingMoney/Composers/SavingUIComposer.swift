@@ -11,6 +11,9 @@ public struct SavingPlan {
     public let name: String
     public let startDate: Date
     public let initialAmount: Int
+    public var totalAmount: Int {
+        initialAmount*(52)*(52+1)/2
+    }
     public var accumulatedAmount: Int
 
     public init(name: String, startDate: Date = Date(), initialAmount: Int, accumulatedAmount: Int) {

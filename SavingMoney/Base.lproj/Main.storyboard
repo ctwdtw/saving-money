@@ -554,6 +554,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressionLabel" destination="08N-uR-F76" id="rKo-DC-cKR"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
                     </connections>
                 </viewController>

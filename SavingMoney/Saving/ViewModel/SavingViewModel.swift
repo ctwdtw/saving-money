@@ -17,6 +17,21 @@ class SavingViewModel {
         self.model = model
     }
     
+    private lazy var currencyFormatter: NumberFormatter = {
+        let f = NumberFormatter()
+        f.numberStyle = .currency
+        f.locale = Locale(identifier: "zh_Hant_TW")
+        f.usesGroupingSeparator = true
+        f.maximumFractionDigits = 0
+        f.currencySymbol = ""
+        return f
+    }()
+    
+    func progressionText() -> String {
+        let totalAmount = currencyFormatter.string(from: NSNumber(value: model.totalAmount)) ?? ""
+        return "$\(model.accumulatedAmount)/\(totalAmount)"
+    }
+    
     func weekText(at idx: Int) -> String {
         return "\(idx + 1)"
     }

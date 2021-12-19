@@ -10,6 +10,8 @@ import UIKit
 public class SavingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet public weak var tableView: UITableView!
     
+    @IBOutlet public private(set) weak var progressionLabel: UILabel!
+    
     private var viewModel: SavingViewModel!
     
     init?(coder: NSCoder, viewModel: SavingViewModel) {
@@ -23,12 +25,13 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.planName
-        
         tableView.dataSource = self
         tableView.delegate = self
-        // Do any additional setup after loading the view.
+        title = viewModel.planName
+        progressionLabel.text = viewModel.progressionText()
     }
+    
+    
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

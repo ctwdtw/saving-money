@@ -26,6 +26,15 @@ class SavingMoneyViewControllerTests: XCTestCase {
         assertThat(sut, renders: plan)
     }
     
+    func test_renderSavingProgression_onViewDidLoad() {
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1, accumulatedAmount: 0)
+        
+        let sut = makeSUT(model: plan)
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.progressionLabel.text, "$0/1,378")
+    }
+    
     private func assertThat(_ sut: SavingViewController, renders model: SavingPlan, file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertEqual(sut.numberOfRenderedWeeklyPlanView, 52, "should have 52 weeks plan" , file: file, line: line)
         
