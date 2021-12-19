@@ -8,6 +8,9 @@
 import UIKit
 
 public class SavingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet public private(set) weak var titleNavigationItem: UINavigationItem!
+    
     @IBOutlet public weak var tableView: UITableView!
     
     @IBOutlet public private(set) weak var progressionLabel: UILabel!
@@ -27,7 +30,7 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        title = viewModel.planName
+        titleNavigationItem.title = viewModel.planName
         progressionLabel.text = viewModel.progressionText()
         viewModel.onProgressionTextChanged = { [unowned self] text in
             self.progressionLabel.text = text

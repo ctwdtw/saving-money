@@ -136,8 +136,8 @@ class SavingMoneyViewControllerTests: XCTestCase {
 }
 
 extension SavingViewController {
-    var planName: String {
-        return title ?? ""
+    var planName: String? {
+        return titleNavigationItem.title
     }
     
     var savingProgressionText: String? {

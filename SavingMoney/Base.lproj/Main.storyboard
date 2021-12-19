@@ -557,6 +557,7 @@
                     <connections>
                         <outlet property="progressionLabel" destination="08N-uR-F76" id="rKo-DC-cKR"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
+                        <outlet property="titleNavigationItem" destination="dlk-M9-jLP" id="4gz-Gv-lYt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHh-D2-v82" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
