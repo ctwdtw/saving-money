@@ -24,6 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let vc = WriteDownPlanUIComposer.compose(onNext: { _ in })
         
         //let vc = SetAmountUIComposer.compose(onNext: { _ in })
+        
+        //let vc = SavingUIComposer.compose(model: SavingPlan(name: "Hello", initialAmount: 1))
+        
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
     }

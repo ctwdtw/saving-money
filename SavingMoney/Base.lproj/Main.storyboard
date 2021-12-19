@@ -472,6 +472,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accumulatedAmountLabel" destination="SSn-EL-Bah" id="UYl-Tz-x9Y"/>
+                                            <outlet property="checkbox" destination="0zx-92-hdD" id="Mz6-T3-abX"/>
                                             <outlet property="dateLabel" destination="b18-34-F27" id="4lz-bX-7J0"/>
                                             <outlet property="targetAmountLabel" destination="IXU-Pw-4Z7" id="RxM-sf-90m"/>
                                             <outlet property="weekLabel" destination="Bd5-WQ-tLl" id="R8a-MM-l5p"/>

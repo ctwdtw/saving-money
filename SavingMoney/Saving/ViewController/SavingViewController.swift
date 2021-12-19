@@ -29,10 +29,11 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         tableView.delegate = self
         title = viewModel.planName
         progressionLabel.text = viewModel.progressionText()
+        viewModel.onProgressionTextChanged = { [unowned self] text in
+            self.progressionLabel.text = text
+        }
     }
     
-    
-
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavingCell", for: indexPath) as! SavingCell
@@ -41,6 +42,12 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         cell.dateLabel.text = viewModel.dateText(at: indexPath.row)
         cell.targetAmountLabel.text = viewModel.targetAmountText(at: indexPath.row)
         cell.accumulatedAmountLabel.text = viewModel.accumulatedAmountLabel(at: indexPath.row)
+         
+        cell.onCheck = { [unowned self] isChecked in
+            let weekNumber = indexPath.row + 1
+            viewModel.checkProgression(weekNumber, isChecked: isChecked)
+        }
+        
         return cell
     }
 

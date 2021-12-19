@@ -10,7 +10,7 @@ import SavingMoney
 
 class SavingMoneyViewControllerTests: XCTestCase {
     func test_viewDidLoad_displayPlanName() {
-        let plan = SavingPlan(name: "Awesome Saving Plan", initialAmount: 1, accumulatedAmount: 0)
+        let plan = SavingPlan(name: "Awesome Saving Plan", initialAmount: 1)
         let sut = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
@@ -18,7 +18,7 @@ class SavingMoneyViewControllerTests: XCTestCase {
     }
     
     func test_viewDidLoad_renderSavingPlan() {
-        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1, accumulatedAmount: 0)
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
         
         let sut = makeSUT(model: plan)
         
@@ -26,24 +26,38 @@ class SavingMoneyViewControllerTests: XCTestCase {
         assertThat(sut, renders: plan)
     }
     
-    func test_renderSavingProgression_onViewDidLoad() {
-        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1, accumulatedAmount: 0)
+    func test_renderSavingProgression_onPressCheckBox() {
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
         
         let sut = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.progressionLabel.text, "$0/1,378")
+        
+        sut.simulatePressCheckBox(at: 0)
+        XCTAssertEqual(sut.progressionLabel.text, "$1/1,378")
+        
+        let cell = sut.simulatePressCheckBox(at: 1)
+        XCTAssertEqual(sut.progressionLabel.text, "$3/1,378")
+        
+        sut.simulatePressCheckBox(at: 2)
+        XCTAssertEqual(sut.progressionLabel.text, "$6/1,378")
+        
+        sut.simulatePressCheckBox(at: 5)
+        XCTAssertEqual(sut.progressionLabel.text, "$12/1,378")
+        
+        cell?.simulatePressCheckBox()
+        XCTAssertEqual(sut.progressionLabel.text, "$10/1,378")
     }
     
     private func assertThat(_ sut: SavingViewController, renders model: SavingPlan, file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertEqual(sut.numberOfRenderedWeeklyPlanView, 52, "should have 52 weeks plan" , file: file, line: line)
         
         for weekNumber in (1...52) {
-            guard let cell = sut.savingPlanView(at: weekNumber-1) as? SavingCell else {
-                XCTFail("Expect `SavingCell` at index: \(weekNumber-1)", file: file, line: line)
-                break
+            guard let cell = sut.savingPlanView(at: weekNumber-1) else {
+                XCTFail("nil at index: \(weekNumber-1)", file: file, line: line)
+                return
             }
-            
             assertRender(cell, for: model, on: weekNumber, file: file, line: line)
         }
     }
@@ -136,8 +150,33 @@ extension SavingViewController {
         tableView.numberOfRows(inSection: savingSection)
     }
     
-    func savingPlanView(at row: Int) -> UITableViewCell? {
-        return tableView.dataSource?.tableView(tableView, cellForRowAt: IndexPath(row: row, section: savingSection))
+    func cell(for row: Int, at section: Int) -> UITableViewCell? {
+        tableView.dataSource?.tableView(tableView, cellForRowAt: IndexPath(row: row, section: section))
+    }
+    
+    func savingPlanView(at row: Int, file: StaticString = #filePath, line: UInt = #line) -> SavingCell? {
+        guard let savingCell = cell(for: row, at: savingSection) as? SavingCell else {
+            XCTFail("Expect `SavingCell` at index: \(row)", file: file, line: line)
+            return nil
+        }
+        return savingCell
+    }
+    
+    @discardableResult
+    func simulatePressCheckBox(at idx: Int, file: StaticString = #filePath, line: UInt = #line) -> SavingCell? {
+        guard let cell = savingPlanView(at: idx) else {
+            XCTFail("nil at index: \(idx)", file: file, line: line)
+            return nil
+        }
+        cell.simulatePressCheckBox()
+        return cell
+    }
+}
+
+private extension SavingCell {
+    func simulatePressCheckBox() {
+        checkbox.isChecked = !checkbox.isChecked
+        checkbox.sendActions(for: .valueChanged)
     }
 }
 
