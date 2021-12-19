@@ -31,15 +31,20 @@ class SavingMoneyViewControllerTests: XCTestCase {
         
         for weekNumber in (1...52) {
             guard let cell = sut.savingPlanView(at: weekNumber-1) as? SavingCell else {
-                XCTFail("Expect `SavingCell` at index: \(weekNumber-1)")
+                XCTFail("Expect `SavingCell` at index: \(weekNumber-1)", file: file, line: line)
                 break
             }
             
-            XCTAssertEqual(cell.weekLabel.text, "\(weekNumber)", "week", file: file, line: line)
-            XCTAssertEqual(cell.dateLabel.text, dateText(for: weekNumber), "displayed date", file: file, line: line)
-            XCTAssertEqual(cell.targetAmountLabel.text, "\(model.initialAmount * weekNumber)", "accumulated amount", file: file, line: line)
-            XCTAssertEqual(cell.accumulatedAmountLabel.text, "\(model.initialAmount*(weekNumber*(weekNumber+1)/2))", "target amount for week \(weekNumber)", file: file, line: line)
+            assertRender(cell, for: model, on: weekNumber, file: file, line: line)
         }
+    }
+    
+    private func assertRender(_ cell: SavingCell, for model: SavingPlan, on weekNumber: Int, file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertEqual(cell.weekLabel.text, "\(weekNumber)", "week", file: file, line: line)
+        XCTAssertEqual(cell.dateLabel.text, dateText(for: weekNumber), "displayed date", file: file, line: line)
+        XCTAssertEqual(cell.targetAmountLabel.text, "\(model.initialAmount * weekNumber)", "accumulated amount", file: file, line: line)
+        XCTAssertEqual(cell.accumulatedAmountLabel.text, "\(model.initialAmount*(weekNumber*(weekNumber+1)/2))", "target amount for week \(weekNumber)", file: file, line: line)
+        
     }
     
     private func dateText(`for` weekNumber: Int) -> String {
