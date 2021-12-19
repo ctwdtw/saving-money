@@ -8,7 +8,7 @@
 import UIKit
 
 public class SavingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet public weak var tableView: UITableView!
     
     private var viewModel: SavingViewModel!
     
@@ -32,7 +32,12 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SavingCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SavingCell", for: indexPath) as! SavingCell
+        
+        cell.weekLabel.text = viewModel.weekText(at: indexPath.row)
+        cell.dateLabel.text = viewModel.dateText(at: indexPath.row)
+        cell.targetAmountLabel.text = viewModel.targetAmountText(at: indexPath.row)
+        cell.accumulatedAmountLabel.text = viewModel.accumulatedAmountLabel(at: indexPath.row)
         return cell
     }
 

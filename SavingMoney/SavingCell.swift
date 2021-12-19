@@ -7,14 +7,14 @@
 
 import UIKit
 
-class SavingCell: UITableViewCell {
-    @IBOutlet weak var weekLabel: UILabel!
+public class SavingCell: UITableViewCell {
+    @IBOutlet public weak var weekLabel: UILabel!
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet public weak var dateLabel: UILabel!
     
-    @IBOutlet weak var targetAmountLabel: UILabel!
+    @IBOutlet public weak var targetAmountLabel: UILabel!
     
-    @IBOutlet weak var accumulatedAmountLabel: UILabel!
+    @IBOutlet public weak var accumulatedAmountLabel: UILabel!
     
     @IBAction func didCheck(_ sender: Any) {
         

@@ -9,11 +9,13 @@ import UIKit
 
 public struct SavingPlan {
     public let name: String
+    public let startDate: Date
     public let initialAmount: Int
     public var accumulatedAmount: Int
-    
-    public init(name: String, initialAmount: Int, accumulatedAmount: Int) {
+
+    public init(name: String, startDate: Date = Date(), initialAmount: Int, accumulatedAmount: Int) {
         self.name = name
+        self.startDate = startDate
         self.initialAmount = initialAmount
         self.accumulatedAmount = accumulatedAmount
     }
