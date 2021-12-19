@@ -19,7 +19,6 @@ class SavingMoneyViewControllerTests: XCTestCase {
     
     func test_viewDidLoad_renderSavingPlan() {
         let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
-        
         let sut = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
@@ -28,26 +27,25 @@ class SavingMoneyViewControllerTests: XCTestCase {
     
     func test_renderSavingProgression_onPressCheckBox() {
         let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
-        
         let sut = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.progressionLabel.text, "$0/1,378")
         
         sut.simulatePressCheckBox(at: 0)
-        XCTAssertEqual(sut.progressionLabel.text, "$1/1,378")
+        XCTAssertEqual(sut.savingProgressionText, "$1/1,378")
         
         let cell = sut.simulatePressCheckBox(at: 1)
-        XCTAssertEqual(sut.progressionLabel.text, "$3/1,378")
+        XCTAssertEqual(sut.savingProgressionText, "$3/1,378")
         
         sut.simulatePressCheckBox(at: 2)
-        XCTAssertEqual(sut.progressionLabel.text, "$6/1,378")
+        XCTAssertEqual(sut.savingProgressionText, "$6/1,378")
         
         sut.simulatePressCheckBox(at: 5)
-        XCTAssertEqual(sut.progressionLabel.text, "$12/1,378")
+        XCTAssertEqual(sut.savingProgressionText, "$12/1,378")
         
         cell?.simulatePressCheckBox()
-        XCTAssertEqual(sut.progressionLabel.text, "$10/1,378")
+        XCTAssertEqual(sut.savingProgressionText, "$10/1,378")
     }
     
     private func assertThat(_ sut: SavingViewController, renders model: SavingPlan, file: StaticString = #filePath, line: UInt = #line) {
@@ -140,6 +138,10 @@ class SavingMoneyViewControllerTests: XCTestCase {
 extension SavingViewController {
     var planName: String {
         return title ?? ""
+    }
+    
+    var savingProgressionText: String? {
+        progressionLabel.text
     }
     
     var savingSection: Int {
