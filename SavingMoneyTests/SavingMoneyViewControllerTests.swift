@@ -30,22 +30,28 @@ class SavingMoneyViewControllerTests: XCTestCase {
         let sut = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(sut.progressionLabel.text, "$0/1,378", "render `0` when no checkbox checked.")
-        
+        XCTAssertEqual(sut.savingProgressionText, "$0/1,378", "render `0` when no checkbox checked.")
+        XCTAssertEqual(sut.progressionCountText, "0/52", "zero progression count when zero checkbox checked.")
+
         sut.simulatePressCheckBox(at: 0)
         XCTAssertEqual(sut.savingProgressionText, "$1/1,378", "render `1` when first week checkbox checked.")
+        XCTAssertEqual(sut.progressionCountText, "1/52", "one progression count when one checkbox checked.")
         
         let cell = sut.simulatePressCheckBox(at: 1)
         XCTAssertEqual(sut.savingProgressionText, "$3/1,378", "render `3` when second week checkbox checked after first week checkbox.")
+        XCTAssertEqual(sut.progressionCountText, "2/52", "two progression count when two checkboxes checked.")
         
         sut.simulatePressCheckBox(at: 2)
         XCTAssertEqual(sut.savingProgressionText, "$6/1,378", "render `6` when third week checkbox checked after previous checkboxes.")
+        XCTAssertEqual(sut.progressionCountText, "3/52", "three progression count when three checkboxes checked.")
         
         sut.simulatePressCheckBox(at: 5)
         XCTAssertEqual(sut.savingProgressionText, "$12/1,378", "render `12` when sixth week checkbox checked after after previous checkboxes.")
+        XCTAssertEqual(sut.progressionCountText, "4/52", "four progression count when four checkboxes checked.")
         
         cell?.simulatePressCheckBox()
         XCTAssertEqual(sut.savingProgressionText, "$10/1,378", "render `10` when second week checkbox is un-checked after previous checkboxes.")
+        XCTAssertEqual(sut.progressionCountText, "3/52", "three progression count when one checkbox un-checked, three checkboxes still checked.")
     }
     
     private func assertThat(_ sut: SavingViewController, renders model: SavingPlan, file: StaticString = #filePath, line: UInt = #line) {
@@ -142,6 +148,10 @@ extension SavingViewController {
     
     var savingProgressionText: String? {
         progressionLabel.text
+    }
+    
+    var progressionCountText: String? {
+        progressionCountLabel.text
     }
     
     var savingSection: Int {

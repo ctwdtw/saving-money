@@ -555,6 +555,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressionCountLabel" destination="7UZ-Wh-OaH" id="of8-Sn-N6G"/>
                         <outlet property="progressionLabel" destination="08N-uR-F76" id="rKo-DC-cKR"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
                         <outlet property="titleNavigationItem" destination="dlk-M9-jLP" id="4gz-Gv-lYt"/>

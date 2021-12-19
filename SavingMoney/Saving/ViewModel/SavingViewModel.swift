@@ -9,8 +9,8 @@ import Foundation
 class SavingViewModel {
     private var model: SavingPlan {
         didSet {
-            let text = progressionText()
-            onProgressionTextChanged?(text)
+            onProgressionTextChanged?(progressionText())
+            onProgressionCountTextChanged?(progressionCountText())
         }
     }
     
@@ -34,9 +34,16 @@ class SavingViewModel {
     
     var onProgressionTextChanged: ((String) -> Void)?
     
+    var onProgressionCountTextChanged: ((String) -> Void)?
+    
     func progressionText() -> String {
         let totalAmount = currencyFormatter.string(from: NSNumber(value: model.totalAmount)) ?? ""
         return "$\(model.accumulatedAmount)/\(totalAmount)"
+    }
+    
+    func progressionCountText() -> String {
+        let count = model.progressions.filter ({ $0.value == true }).count
+        return "\(count)/52"
     }
     
     func checkProgression(_ weekNumber: Int, isChecked: Bool) {

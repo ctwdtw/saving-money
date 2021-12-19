@@ -15,6 +15,8 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet public private(set) weak var progressionLabel: UILabel!
     
+    @IBOutlet public private(set) weak var progressionCountLabel: UILabel!
+    
     private var viewModel: SavingViewModel!
     
     init?(coder: NSCoder, viewModel: SavingViewModel) {
@@ -34,6 +36,11 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         progressionLabel.text = viewModel.progressionText()
         viewModel.onProgressionTextChanged = { [unowned self] text in
             self.progressionLabel.text = text
+        }
+        
+        progressionCountLabel.text = viewModel.progressionCountText()
+        viewModel.onProgressionCountTextChanged = { [unowned self] text in
+            self.progressionCountLabel.text = text
         }
     }
     
