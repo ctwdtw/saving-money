@@ -352,7 +352,7 @@
         <!--Saving View Controller-->
         <scene sceneID="6V3-L6-qb0">
             <objects>
-                <viewController id="9ph-Jz-2PS" customClass="SavingViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SavingViewController" id="9ph-Jz-2PS" customClass="SavingViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZrB-bd-1BG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

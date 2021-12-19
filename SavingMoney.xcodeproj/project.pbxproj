@@ -15,6 +15,9 @@
 		635BEA5D276A12D200D300E0 /* SetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA5C276A12D200D300E0 /* SetAmountViewModel.swift */; };
 		635BEA5F276A12FF00D300E0 /* PlanAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA5E276A12FF00D300E0 /* PlanAmount.swift */; };
 		635BEA65276A19E100D300E0 /* BinaryInteger+digits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA64276A19E100D300E0 /* BinaryInteger+digits.swift */; };
+		638B80AE276CC43200FE618A /* SavingMoneyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */; };
+		638B80B0276CC63F00FE618A /* SavingUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80AF276CC63F00FE618A /* SavingUIComposer.swift */; };
+		638B80B3276DDD7F00FE618A /* SavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80B2276DDD7F00FE618A /* SavingViewModel.swift */; };
 		639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F015E2765CEB000007110 /* SetAmountViewController.swift */; };
 		639F0161276619CD00007110 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F0160276619CD00007110 /* Checkbox.swift */; };
 		639F016327661AD600007110 /* SavingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016227661AD600007110 /* SavingViewController.swift */; };
@@ -51,6 +54,9 @@
 		635BEA5C276A12D200D300E0 /* SetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountViewModel.swift; sourceTree = "<group>"; };
 		635BEA5E276A12FF00D300E0 /* PlanAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanAmount.swift; sourceTree = "<group>"; };
 		635BEA64276A19E100D300E0 /* BinaryInteger+digits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+digits.swift"; sourceTree = "<group>"; };
+		638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingMoneyViewControllerTests.swift; sourceTree = "<group>"; };
+		638B80AF276CC63F00FE618A /* SavingUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingUIComposer.swift; sourceTree = "<group>"; };
+		638B80B2276DDD7F00FE618A /* SavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewModel.swift; sourceTree = "<group>"; };
 		639F015E2765CEB000007110 /* SetAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountViewController.swift; sourceTree = "<group>"; };
 		639F0160276619CD00007110 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		639F016227661AD600007110 /* SavingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +130,41 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		638B80B1276CC64B00FE618A /* Composers */ = {
+			isa = PBXGroup;
+			children = (
+				639F016C27679EB500007110 /* WriteDownPlanUIComposer.swift */,
+				635BEA5A2769D38200D300E0 /* SetAmountUIComposer.swift */,
+				638B80AF276CC63F00FE618A /* SavingUIComposer.swift */,
+			);
+			path = Composers;
+			sourceTree = "<group>";
+		};
+		638B80B4276DDD8500FE618A /* Saving */ = {
+			isa = PBXGroup;
+			children = (
+				638B80B5276DDDA700FE618A /* ViewModel */,
+				638B80B6276DDDB900FE618A /* ViewController */,
+			);
+			path = Saving;
+			sourceTree = "<group>";
+		};
+		638B80B5276DDDA700FE618A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				638B80B2276DDD7F00FE618A /* SavingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		638B80B6276DDDB900FE618A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				639F016227661AD600007110 /* SavingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		639F016B27679E9B00007110 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,12 +232,11 @@
 			children = (
 				63CEF5242765B00C0038E36E /* AppDelegate.swift */,
 				63CEF5262765B00C0038E36E /* SceneDelegate.swift */,
-				639F016C27679EB500007110 /* WriteDownPlanUIComposer.swift */,
-				635BEA5A2769D38200D300E0 /* SetAmountUIComposer.swift */,
+				638B80B1276CC64B00FE618A /* Composers */,
 				639F016B27679E9B00007110 /* Shared */,
 				639F017227679F3200007110 /* WritePlan */,
 				635BEA60276A142A00D300E0 /* SetAmount */,
-				639F016227661AD600007110 /* SavingViewController.swift */,
+				638B80B4276DDD8500FE618A /* Saving */,
 				639F0160276619CD00007110 /* Checkbox.swift */,
 				639F016427661D6900007110 /* SavingCell.swift */,
 				63CEF52A2765B00C0038E36E /* Main.storyboard */,
@@ -213,6 +253,7 @@
 				635BEA562769C88A00D300E0 /* SceneDelegateTests.swift */,
 				63CEF53E2765B07C0038E36E /* WriteDownPlanViewControllerTests.swift */,
 				635BEA582769D15900D300E0 /* SetAmountViewControllerTests.swift */,
+				638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */,
 			);
 			path = SavingMoneyTests;
 			sourceTree = "<group>";
@@ -323,6 +364,7 @@
 				639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */,
 				63CEF5252765B00C0038E36E /* AppDelegate.swift in Sources */,
 				635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */,
+				638B80B3276DDD7F00FE618A /* SavingViewModel.swift in Sources */,
 				635BEA65276A19E100D300E0 /* BinaryInteger+digits.swift in Sources */,
 				639F016527661D6900007110 /* SavingCell.swift in Sources */,
 				639F016327661AD600007110 /* SavingViewController.swift in Sources */,
@@ -334,6 +376,7 @@
 				639F0161276619CD00007110 /* Checkbox.swift in Sources */,
 				635BEA5B2769D38200D300E0 /* SetAmountUIComposer.swift in Sources */,
 				635BEA5D276A12D200D300E0 /* SetAmountViewModel.swift in Sources */,
+				638B80B0276CC63F00FE618A /* SavingUIComposer.swift in Sources */,
 				639F017127679F0500007110 /* WriteDownPlanViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CEF53F2765B07C0038E36E /* WriteDownPlanViewControllerTests.swift in Sources */,
+				638B80AE276CC43200FE618A /* SavingMoneyViewControllerTests.swift in Sources */,
 				635BEA572769C88A00D300E0 /* SceneDelegateTests.swift in Sources */,
 				635BEA592769D15900D300E0 /* SetAmountViewControllerTests.swift in Sources */,
 			);

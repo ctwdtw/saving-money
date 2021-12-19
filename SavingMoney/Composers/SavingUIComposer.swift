@@ -1,0 +1,33 @@
+//
+//  SavingUIComposer.swift
+//  SavingMoney
+//
+//  Created by Paul Lee on 2021/12/17.
+//
+
+import UIKit
+
+public struct SavingPlan {
+    public let name: String
+    public let initialAmount: Int
+    public var accumulatedAmount: Int
+    
+    public init(name: String, initialAmount: Int, accumulatedAmount: Int) {
+        self.name = name
+        self.initialAmount = initialAmount
+        self.accumulatedAmount = accumulatedAmount
+    }
+}
+
+public class SavingUIComposer {
+    public static func compose(model: SavingPlan) -> SavingViewController {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle(for: SavingViewController.self)).instantiateViewController(identifier: "SavingViewController", creator: { coder in
+            return SavingViewController(
+                coder: coder,
+                viewModel: SavingViewModel(model: model)
+            )
+        })
+        
+        return vc
+    }
+}
