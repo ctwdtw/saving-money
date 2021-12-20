@@ -153,15 +153,15 @@ class SavingMoneyViewControllerTests: XCTestCase {
 
 extension SavingViewController {
     var planName: String? {
-        return titleNavigationItem.title
+        return titleItem.title
     }
     
     var savingProgressionText: String? {
-        progressionViewController.progressionLabel.text
+        progressionController.progressionLabel.text
     }
     
     var progressionCountText: String? {
-        progressionViewController.progressionCountLabel.text
+        progressionController.progressionCountLabel.text
     }
     
     var savingSection: Int {

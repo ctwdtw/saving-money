@@ -36,7 +36,7 @@ public class SavingUIComposer {
             )
         })
         
-        vc.progressionViewController.viewModel = vm
+        vc.progressionController.viewModel = vm
         
         return vc
     }

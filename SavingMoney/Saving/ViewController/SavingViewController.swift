@@ -9,13 +9,13 @@ import UIKit
 
 public class SavingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet public private(set) weak var titleNavigationItem: UINavigationItem!
-    
-    @IBOutlet public weak var tableView: UITableView!
+    @IBOutlet public private(set) weak var titleItem: UINavigationItem!
     
     @IBOutlet public private(set) weak var restartBarBtnItem: UIBarButtonItem!
     
-    @IBOutlet public private(set) weak var progressionViewController: ProgressionViewController!
+    @IBOutlet public weak var tableView: UITableView!
+    
+    @IBOutlet public private(set) weak var progressionController: ProgressionController!
     
     private var viewModel: SavingViewModel!
     
@@ -39,11 +39,11 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         tableView.dataSource = self
         tableView.delegate = self
         bindTitleNavigationItem()
-        progressionViewController.bind()
+        progressionController.bind()
     }
     
     private func bindTitleNavigationItem() {
-        titleNavigationItem.title = viewModel.planName
+        titleItem.title = viewModel.planName
     }
         
     @IBAction func restartPlanBarBtnPressed(_ sender: Any) {

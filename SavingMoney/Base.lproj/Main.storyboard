@@ -559,14 +559,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="progressionViewController" destination="9yc-H5-REm" id="1fq-sv-FX0"/>
+                        <outlet property="progressionController" destination="9yc-H5-REm" id="1fq-sv-FX0"/>
                         <outlet property="restartBarBtnItem" destination="I19-eL-coq" id="c5f-9M-GUr"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
-                        <outlet property="titleNavigationItem" destination="dlk-M9-jLP" id="4gz-Gv-lYt"/>
+                        <outlet property="titleItem" destination="dlk-M9-jLP" id="4gz-Gv-lYt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHh-D2-v82" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <customObject id="9yc-H5-REm" customClass="ProgressionViewController" customModule="SavingMoney" customModuleProvider="target">
+                <customObject id="9yc-H5-REm" customClass="ProgressionController" customModule="SavingMoney" customModuleProvider="target">
                     <connections>
                         <outlet property="progressionCountLabel" destination="7UZ-Wh-OaH" id="jIj-zS-iMd"/>
                         <outlet property="progressionLabel" destination="08N-uR-F76" id="RCT-fS-ElU"/>
