@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window?.rootViewController = UINavigationController(rootViewController: vc)
         
-        //let vc = SavingUIComposer.compose(model: SavingPlan(name: "Hello", initialAmount: 1))
+        //let vc = SavingUIComposer.compose(model: SavingPlan(name: "Hello", initialAmount: 1), onNext: { })
         //window?.rootViewController = vc
         window?.makeKeyAndVisible()
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G43-ae-gT1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G43-ae-gT1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -114,7 +114,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2j-qH-YCg">
-                                        <rect key="frame" x="352" y="87" width="46" height="46"/>
+                                        <rect key="frame" x="350.5" y="86.5" width="47.5" height="47.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="7hr-L4-F8r"/>
                                             <constraint firstAttribute="width" secondItem="O2j-qH-YCg" secondAttribute="height" id="hg4-jG-Tj0"/>
@@ -559,14 +559,19 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="progressionCountLabel" destination="7UZ-Wh-OaH" id="of8-Sn-N6G"/>
-                        <outlet property="progressionLabel" destination="08N-uR-F76" id="rKo-DC-cKR"/>
+                        <outlet property="progressionViewController" destination="9yc-H5-REm" id="1fq-sv-FX0"/>
                         <outlet property="restartBarBtnItem" destination="I19-eL-coq" id="c5f-9M-GUr"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
                         <outlet property="titleNavigationItem" destination="dlk-M9-jLP" id="4gz-Gv-lYt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHh-D2-v82" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="9yc-H5-REm" customClass="ProgressionViewController" customModule="SavingMoney" customModuleProvider="target">
+                    <connections>
+                        <outlet property="progressionCountLabel" destination="7UZ-Wh-OaH" id="jIj-zS-iMd"/>
+                        <outlet property="progressionLabel" destination="08N-uR-F76" id="RCT-fS-ElU"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2742.0289855072465" y="137.94642857142856"/>
         </scene>

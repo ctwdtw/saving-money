@@ -157,11 +157,11 @@ extension SavingViewController {
     }
     
     var savingProgressionText: String? {
-        progressionLabel.text
+        progressionViewController.progressionLabel.text
     }
     
     var progressionCountText: String? {
-        progressionCountLabel.text
+        progressionViewController.progressionCountLabel.text
     }
     
     var savingSection: Int {

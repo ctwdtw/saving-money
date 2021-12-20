@@ -12,7 +12,7 @@ public class SavingUIComposer {
         let vm = SavingViewModel(model: model, onNext: onNext)
         
         let cellControllers: [SavingCellController] = (1...52).map { weekNumber in
-            let vc = SavingCellController(
+            let cellController = SavingCellController(
                 viewModel: SavingCellViewModel(
                     weekNumber: weekNumber,
                     initialAmount: model.initialAmount,
@@ -20,11 +20,11 @@ public class SavingUIComposer {
                 )
             )
             
-            vc.onCheck = { isChecked in
+            cellController.onCheck = { isChecked in
                 vm.checkProgression(weekNumber, isChecked: isChecked)
             }
             
-            return vc
+            return cellController
         }
         
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: SavingViewController.self)).instantiateViewController(identifier: "SavingViewController", creator: { coder in
@@ -34,6 +34,8 @@ public class SavingUIComposer {
                 cellControllers: cellControllers
             )
         })
+        
+        vc.progressionViewController.viewModel = vm
         
         return vc
     }

@@ -7,17 +7,36 @@
 
 import UIKit
 
+public class ProgressionViewController: NSObject {
+    @IBOutlet public private(set) weak var progressionLabel: UILabel!
+    
+    @IBOutlet public private(set) weak var progressionCountLabel: UILabel!
+    
+    var viewModel: SavingViewModel!
+    
+    func bind() {
+        progressionLabel.text = viewModel.progressionText()
+        viewModel.onProgressionTextChanged = { [unowned self] text in
+            self.progressionLabel.text = text
+        }
+        
+        progressionCountLabel.text = viewModel.progressionCountText()
+        viewModel.onProgressionCountTextChanged = { [unowned self] text in
+            self.progressionCountLabel.text = text
+        }
+    }
+    
+}
+
 public class SavingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet public private(set) weak var titleNavigationItem: UINavigationItem!
     
     @IBOutlet public weak var tableView: UITableView!
     
-    @IBOutlet public private(set) weak var progressionLabel: UILabel!
-    
-    @IBOutlet public private(set) weak var progressionCountLabel: UILabel!
-    
     @IBOutlet public private(set) weak var restartBarBtnItem: UIBarButtonItem!
+    
+    @IBOutlet public private(set) weak var progressionViewController: ProgressionViewController!
     
     private var viewModel: SavingViewModel!
     
@@ -38,25 +57,13 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         tableView.dataSource = self
         tableView.delegate = self
         bindTitleNavigationItem()
-        bindProgressionView()
+        progressionViewController.bind()
     }
     
     private func bindTitleNavigationItem() {
         titleNavigationItem.title = viewModel.planName
     }
-    
-    private func bindProgressionView() {
-        progressionLabel.text = viewModel.progressionText()
-        viewModel.onProgressionTextChanged = { [unowned self] text in
-            self.progressionLabel.text = text
-        }
         
-        progressionCountLabel.text = viewModel.progressionCountText()
-        viewModel.onProgressionCountTextChanged = { [unowned self] text in
-            self.progressionCountLabel.text = text
-        }
-    }
-    
     @IBAction func restartPlanBarBtnPressed(_ sender: Any) {
         viewModel.restart()
     }
