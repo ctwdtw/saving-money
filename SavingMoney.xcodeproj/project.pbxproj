@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6325D4D327707D1F00D5038C /* SavingPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6325D4D227707D1F00D5038C /* SavingPlan.swift */; };
 		635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA522769BB6700D300E0 /* KeyboardController.swift */; };
 		635BEA552769BB8C00D300E0 /* KeyboardEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */; };
 		635BEA572769C88A00D300E0 /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA562769C88A00D300E0 /* SceneDelegateTests.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6325D4D227707D1F00D5038C /* SavingPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlan.swift; sourceTree = "<group>"; };
 		635BEA522769BB6700D300E0 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventViewModel.swift; sourceTree = "<group>"; };
 		635BEA562769C88A00D300E0 /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		638B80B4276DDD8500FE618A /* Saving */ = {
 			isa = PBXGroup;
 			children = (
+				6325D4D227707D1F00D5038C /* SavingPlan.swift */,
 				638B80B5276DDDA700FE618A /* ViewModel */,
 				638B80B6276DDDB900FE618A /* ViewController */,
 			);
@@ -361,6 +364,7 @@
 			files = (
 				639F016F27679EE900007110 /* PlanModel.swift in Sources */,
 				63CEF5292765B00C0038E36E /* WriteDownPlanViewController.swift in Sources */,
+				6325D4D327707D1F00D5038C /* SavingPlan.swift in Sources */,
 				639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */,
 				63CEF5252765B00C0038E36E /* AppDelegate.swift in Sources */,
 				635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */,

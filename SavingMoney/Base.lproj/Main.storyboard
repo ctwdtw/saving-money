@@ -363,7 +363,7 @@
                                     <navigationItem title="第一桶金" id="dlk-M9-jLP">
                                         <barButtonItem key="rightBarButtonItem" title="重新開始" id="I19-eL-coq">
                                             <connections>
-                                                <action selector="reStartPlanBarBtnPressed:" destination="9ph-Jz-2PS" id="aes-oh-ugz"/>
+                                                <action selector="restartPlanBarBtnPressed:" destination="9ph-Jz-2PS" id="dda-Ix-TYL"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
