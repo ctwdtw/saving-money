@@ -17,6 +17,8 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet public private(set) weak var progressionCountLabel: UILabel!
     
+    @IBOutlet public private(set) weak var restartBarBtnItem: UIBarButtonItem!
+    
     private var viewModel: SavingViewModel!
     
     init?(coder: NSCoder, viewModel: SavingViewModel) {
@@ -42,6 +44,10 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         viewModel.onProgressionCountTextChanged = { [unowned self] text in
             self.progressionCountLabel.text = text
         }
+    }
+    
+    @IBAction func reStartPlanBarBtnPressed(_ sender: Any) {
+        viewModel.restart()
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

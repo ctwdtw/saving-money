@@ -48,6 +48,17 @@ class SavingMoneyViewControllerTests: XCTestCase {
         assertThat(sut, renderProgressionText: "$10/1,378", progressionCountText: "3/52")
     }
     
+    func test_restartAction_notifyHandler() {
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
+        
+        var callCount = 0
+        let sut = makeSUT(model: plan, onNext: { callCount += 1 })
+        sut.loadViewIfNeeded()
+        
+        sut.simulatePressReStart()
+        XCTAssertEqual(callCount, 1)
+    }
+    
     private func assertThat(_ sut: SavingViewController, renderProgressionText progressionText: String, progressionCountText: String, file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertEqual(sut.savingProgressionText, progressionText, "progression text.")
         XCTAssertEqual(sut.progressionCountText, progressionCountText, "progression count text.")
@@ -135,8 +146,8 @@ class SavingMoneyViewControllerTests: XCTestCase {
         return "\(initialAmount * week)"
     }
     
-    func makeSUT(model: SavingPlan, file: StaticString = #filePath, line: UInt = #line) -> SavingViewController {
-        return SavingUIComposer.compose(model: model)
+    func makeSUT(model: SavingPlan, onNext: @escaping () -> Void = { }, file: StaticString = #filePath, line: UInt = #line) -> SavingViewController {
+        return SavingUIComposer.compose(model: model, onNext: onNext)
     }
 }
 
@@ -181,6 +192,11 @@ extension SavingViewController {
         }
         cell.simulatePressCheckBox()
         return cell
+    }
+    
+    func simulatePressReStart() {
+        guard let action = restartBarBtnItem.action else { return }
+        UIApplication.shared.sendAction(action, to: restartBarBtnItem.target, from: nil, for: nil)
     }
 }
 

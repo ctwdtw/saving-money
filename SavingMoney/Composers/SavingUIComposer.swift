@@ -35,11 +35,14 @@ public struct SavingPlan {
 }
 
 public class SavingUIComposer {
-    public static func compose(model: SavingPlan) -> SavingViewController {
+    public static func compose(model: SavingPlan, onNext: @escaping () -> Void) -> SavingViewController {
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: SavingViewController.self)).instantiateViewController(identifier: "SavingViewController", creator: { coder in
             return SavingViewController(
                 coder: coder,
-                viewModel: SavingViewModel(model: model)
+                viewModel: SavingViewModel(
+                    model: model,
+                    onNext: onNext
+                )
             )
         })
         

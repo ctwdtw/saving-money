@@ -361,7 +361,11 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="第一桶金" id="dlk-M9-jLP">
-                                        <barButtonItem key="rightBarButtonItem" title="重新開始" id="I19-eL-coq"/>
+                                        <barButtonItem key="rightBarButtonItem" title="重新開始" id="I19-eL-coq">
+                                            <connections>
+                                                <action selector="reStartPlanBarBtnPressed:" destination="9ph-Jz-2PS" id="aes-oh-ugz"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -557,6 +561,7 @@
                     <connections>
                         <outlet property="progressionCountLabel" destination="7UZ-Wh-OaH" id="of8-Sn-N6G"/>
                         <outlet property="progressionLabel" destination="08N-uR-F76" id="rKo-DC-cKR"/>
+                        <outlet property="restartBarBtnItem" destination="I19-eL-coq" id="c5f-9M-GUr"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
                         <outlet property="titleNavigationItem" destination="dlk-M9-jLP" id="4gz-Gv-lYt"/>
                     </connections>

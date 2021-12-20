@@ -18,8 +18,11 @@ class SavingViewModel {
         model.name
     }
     
-    init(model: SavingPlan) {
+    private let onNext: () -> Void
+    
+    init(model: SavingPlan, onNext: @escaping () -> Void) {
         self.model = model
+        self.onNext = onNext
     }
     
     private lazy var currencyFormatter: NumberFormatter = {
@@ -73,6 +76,10 @@ class SavingViewModel {
     func accumulatedAmountLabel(at idx: Int) -> String {
         let weekNumber = idx + 1
         return "\(model.initialAmount*weekNumber*(weekNumber+1)/2)"
+    }
+    
+    func restart() {
+        onNext()
     }
     
 }
