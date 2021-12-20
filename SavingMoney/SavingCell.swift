@@ -7,17 +7,21 @@
 
 import UIKit
 
-class SavingCell: UITableViewCell {
-    @IBOutlet weak var weekLabel: UILabel!
+public class SavingCell: UITableViewCell {
+    @IBOutlet public private(set) weak var weekLabel: UILabel!
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet public private(set) weak var dateLabel: UILabel!
     
-    @IBOutlet weak var targetAmountLabel: UILabel!
+    @IBOutlet public private(set) weak var targetAmountLabel: UILabel!
     
-    @IBOutlet weak var accumulatedAmountLabel: UILabel!
+    @IBOutlet public private(set) weak var accumulatedAmountLabel: UILabel!
+    
+    @IBOutlet public private(set) weak var checkbox: Checkbox!
+    
+    public var onCheck: ((Bool) -> Void)?
     
     @IBAction func didCheck(_ sender: Any) {
-        
+        onCheck?(checkbox.isChecked)
     }
 
 }

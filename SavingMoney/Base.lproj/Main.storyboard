@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G43-ae-gT1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G43-ae-gT1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -114,7 +114,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2j-qH-YCg">
-                                        <rect key="frame" x="352" y="87" width="46" height="46"/>
+                                        <rect key="frame" x="350.5" y="86.5" width="47.5" height="47.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="7hr-L4-F8r"/>
                                             <constraint firstAttribute="width" secondItem="O2j-qH-YCg" secondAttribute="height" id="hg4-jG-Tj0"/>
@@ -352,7 +352,7 @@
         <!--Saving View Controller-->
         <scene sceneID="6V3-L6-qb0">
             <objects>
-                <viewController id="9ph-Jz-2PS" customClass="SavingViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SavingViewController" id="9ph-Jz-2PS" customClass="SavingViewController" customModule="SavingMoney" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZrB-bd-1BG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -361,7 +361,11 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="第一桶金" id="dlk-M9-jLP">
-                                        <barButtonItem key="rightBarButtonItem" title="重新開始" id="I19-eL-coq"/>
+                                        <barButtonItem key="rightBarButtonItem" title="重新開始" id="I19-eL-coq">
+                                            <connections>
+                                                <action selector="restartPlanBarBtnPressed:" destination="76v-Xt-obe" id="pap-Qx-fng"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -472,6 +476,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accumulatedAmountLabel" destination="SSn-EL-Bah" id="UYl-Tz-x9Y"/>
+                                            <outlet property="checkbox" destination="0zx-92-hdD" id="Mz6-T3-abX"/>
                                             <outlet property="dateLabel" destination="b18-34-F27" id="4lz-bX-7J0"/>
                                             <outlet property="targetAmountLabel" destination="IXU-Pw-4Z7" id="RxM-sf-90m"/>
                                             <outlet property="weekLabel" destination="Bd5-WQ-tLl" id="R8a-MM-l5p"/>
@@ -554,10 +559,24 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressionController" destination="9yc-H5-REm" id="1fq-sv-FX0"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
+                        <outlet property="titleBarController" destination="76v-Xt-obe" id="R9I-Ce-X5M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHh-D2-v82" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="76v-Xt-obe" customClass="TitleBarController" customModule="SavingMoney" customModuleProvider="target">
+                    <connections>
+                        <outlet property="restartBarBtnItem" destination="I19-eL-coq" id="9FN-Ov-xd3"/>
+                        <outlet property="titleItem" destination="dlk-M9-jLP" id="0Sz-AB-cDj"/>
+                    </connections>
+                </customObject>
+                <customObject id="9yc-H5-REm" customClass="ProgressionController" customModule="SavingMoney" customModuleProvider="target">
+                    <connections>
+                        <outlet property="progressionCountLabel" destination="7UZ-Wh-OaH" id="jIj-zS-iMd"/>
+                        <outlet property="progressionLabel" destination="08N-uR-F76" id="RCT-fS-ElU"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2742.0289855072465" y="137.94642857142856"/>
         </scene>
