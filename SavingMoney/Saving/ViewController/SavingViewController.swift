@@ -21,9 +21,12 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     
     private var viewModel: SavingViewModel!
     
-    init?(coder: NSCoder, viewModel: SavingViewModel) {
+    private var cellControllers: [SavingCellController]!
+    
+    init?(coder: NSCoder, viewModel: SavingViewModel, cellControllers: [SavingCellController]) {
         super.init(coder: coder)
         self.viewModel = viewModel
+        self.cellControllers = cellControllers
     }
     
     required init?(coder: NSCoder) {
@@ -59,24 +62,11 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SavingCell", for: indexPath) as! SavingCell
-        
-        cell.weekLabel.text = viewModel.weekText(at: indexPath.row)
-        cell.dateLabel.text = viewModel.dateText(at: indexPath.row)
-        cell.targetAmountLabel.text = viewModel.targetAmountText(at: indexPath.row)
-        cell.accumulatedAmountLabel.text = viewModel.accumulatedAmountLabel(at: indexPath.row)
-         
-        cell.onCheck = { [unowned self] isChecked in
-            let weekNumber = indexPath.row + 1
-            viewModel.checkProgression(weekNumber, isChecked: isChecked)
-        }
-        
-        return cell
+        cellControllers[indexPath.row].view(for: tableView, at: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 52
+        return cellControllers.count
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -19,6 +19,8 @@
 		638B80AE276CC43200FE618A /* SavingMoneyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */; };
 		638B80B0276CC63F00FE618A /* SavingUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80AF276CC63F00FE618A /* SavingUIComposer.swift */; };
 		638B80B3276DDD7F00FE618A /* SavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80B2276DDD7F00FE618A /* SavingViewModel.swift */; };
+		638B9EB527709BFD004AC952 /* SavingCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB427709BFD004AC952 /* SavingCellController.swift */; };
+		638B9EB727709C2E004AC952 /* SavingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */; };
 		639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F015E2765CEB000007110 /* SetAmountViewController.swift */; };
 		639F0161276619CD00007110 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F0160276619CD00007110 /* Checkbox.swift */; };
 		639F016327661AD600007110 /* SavingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016227661AD600007110 /* SavingViewController.swift */; };
@@ -59,6 +61,8 @@
 		638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingMoneyViewControllerTests.swift; sourceTree = "<group>"; };
 		638B80AF276CC63F00FE618A /* SavingUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingUIComposer.swift; sourceTree = "<group>"; };
 		638B80B2276DDD7F00FE618A /* SavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewModel.swift; sourceTree = "<group>"; };
+		638B9EB427709BFD004AC952 /* SavingCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellController.swift; sourceTree = "<group>"; };
+		638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellViewModel.swift; sourceTree = "<group>"; };
 		639F015E2765CEB000007110 /* SetAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountViewController.swift; sourceTree = "<group>"; };
 		639F0160276619CD00007110 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		639F016227661AD600007110 /* SavingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				638B80B2276DDD7F00FE618A /* SavingViewModel.swift */,
+				638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				639F016227661AD600007110 /* SavingViewController.swift */,
+				638B9EB427709BFD004AC952 /* SavingCellController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -363,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				639F016F27679EE900007110 /* PlanModel.swift in Sources */,
+				638B9EB527709BFD004AC952 /* SavingCellController.swift in Sources */,
 				63CEF5292765B00C0038E36E /* WriteDownPlanViewController.swift in Sources */,
 				6325D4D327707D1F00D5038C /* SavingPlan.swift in Sources */,
 				639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */,
@@ -373,6 +380,7 @@
 				639F016527661D6900007110 /* SavingCell.swift in Sources */,
 				639F016327661AD600007110 /* SavingViewController.swift in Sources */,
 				635BEA552769BB8C00D300E0 /* KeyboardEventViewModel.swift in Sources */,
+				638B9EB727709C2E004AC952 /* SavingCellViewModel.swift in Sources */,
 				63CEF5272765B00C0038E36E /* SceneDelegate.swift in Sources */,
 				635BEA5F276A12FF00D300E0 /* PlanAmount.swift in Sources */,
 				639F016D27679EB500007110 /* WriteDownPlanUIComposer.swift in Sources */,
