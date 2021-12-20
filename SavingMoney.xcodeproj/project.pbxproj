@@ -21,6 +21,7 @@
 		638B80B3276DDD7F00FE618A /* SavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80B2276DDD7F00FE618A /* SavingViewModel.swift */; };
 		638B9EB527709BFD004AC952 /* SavingCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB427709BFD004AC952 /* SavingCellController.swift */; };
 		638B9EB727709C2E004AC952 /* SavingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */; };
+		638B9EB92770AA5C004AC952 /* ProgressionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB82770AA5C004AC952 /* ProgressionViewController.swift */; };
 		639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F015E2765CEB000007110 /* SetAmountViewController.swift */; };
 		639F0161276619CD00007110 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F0160276619CD00007110 /* Checkbox.swift */; };
 		639F016327661AD600007110 /* SavingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016227661AD600007110 /* SavingViewController.swift */; };
@@ -63,6 +64,7 @@
 		638B80B2276DDD7F00FE618A /* SavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewModel.swift; sourceTree = "<group>"; };
 		638B9EB427709BFD004AC952 /* SavingCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellController.swift; sourceTree = "<group>"; };
 		638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellViewModel.swift; sourceTree = "<group>"; };
+		638B9EB82770AA5C004AC952 /* ProgressionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressionViewController.swift; sourceTree = "<group>"; };
 		639F015E2765CEB000007110 /* SetAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountViewController.swift; sourceTree = "<group>"; };
 		639F0160276619CD00007110 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		639F016227661AD600007110 /* SavingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				639F016227661AD600007110 /* SavingViewController.swift */,
 				638B9EB427709BFD004AC952 /* SavingCellController.swift */,
+				638B9EB82770AA5C004AC952 /* ProgressionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				639F0161276619CD00007110 /* Checkbox.swift in Sources */,
 				635BEA5B2769D38200D300E0 /* SetAmountUIComposer.swift in Sources */,
 				635BEA5D276A12D200D300E0 /* SetAmountViewModel.swift in Sources */,
+				638B9EB92770AA5C004AC952 /* ProgressionViewController.swift in Sources */,
 				638B80B0276CC63F00FE618A /* SavingUIComposer.swift in Sources */,
 				639F017127679F0500007110 /* WriteDownPlanViewModel.swift in Sources */,
 			);

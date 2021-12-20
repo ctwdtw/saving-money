@@ -7,27 +7,6 @@
 
 import UIKit
 
-public class ProgressionViewController: NSObject {
-    @IBOutlet public private(set) weak var progressionLabel: UILabel!
-    
-    @IBOutlet public private(set) weak var progressionCountLabel: UILabel!
-    
-    var viewModel: SavingViewModel!
-    
-    func bind() {
-        progressionLabel.text = viewModel.progressionText()
-        viewModel.onProgressionTextChanged = { [unowned self] text in
-            self.progressionLabel.text = text
-        }
-        
-        progressionCountLabel.text = viewModel.progressionCountText()
-        viewModel.onProgressionCountTextChanged = { [unowned self] text in
-            self.progressionCountLabel.text = text
-        }
-    }
-    
-}
-
 public class SavingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet public private(set) weak var titleNavigationItem: UINavigationItem!
