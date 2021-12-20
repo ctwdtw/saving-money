@@ -34,7 +34,15 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        bindTitleNavigationItem()
+        bindProgressionView()
+    }
+    
+    private func bindTitleNavigationItem() {
         titleNavigationItem.title = viewModel.planName
+    }
+    
+    private func bindProgressionView() {
         progressionLabel.text = viewModel.progressionText()
         viewModel.onProgressionTextChanged = { [unowned self] text in
             self.progressionLabel.text = text
@@ -66,7 +74,7 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         
         return cell
     }
-
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 52
     }
