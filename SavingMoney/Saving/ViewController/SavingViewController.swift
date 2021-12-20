@@ -46,7 +46,7 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    @IBAction func reStartPlanBarBtnPressed(_ sender: Any) {
+    @IBAction func restartPlanBarBtnPressed(_ sender: Any) {
         viewModel.restart()
     }
     
