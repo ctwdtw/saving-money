@@ -18,11 +18,8 @@ class SavingViewModel {
         model.name
     }
     
-    private let onNext: () -> Void
-    
-    init(model: SavingPlan, onNext: @escaping () -> Void) {
+    init(model: SavingPlan) {
         self.model = model
-        self.onNext = onNext
     }
     
     //MARK: - progression
@@ -53,10 +50,4 @@ class SavingViewModel {
     func checkProgression(_ weekNumber: Int, isChecked: Bool) {
         model.progressions[weekNumber] = isChecked
     }
-    
-    //MARK: - navigation
-    func restart() {
-        onNext()
-    }
-    
 }

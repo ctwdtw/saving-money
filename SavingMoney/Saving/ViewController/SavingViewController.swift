@@ -21,10 +21,13 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     
     private var cellControllers: [SavingCellController]!
     
-    init?(coder: NSCoder, viewModel: SavingViewModel, cellControllers: [SavingCellController]) {
+    private var onNext: (() -> Void)!
+    
+    init?(coder: NSCoder, viewModel: SavingViewModel, cellControllers: [SavingCellController], onNext: @escaping () -> Void) {
         super.init(coder: coder)
         self.viewModel = viewModel
         self.cellControllers = cellControllers
+        self.onNext = onNext
     }
     
     required init?(coder: NSCoder) {
@@ -44,7 +47,7 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     }
         
     @IBAction func restartPlanBarBtnPressed(_ sender: Any) {
-        viewModel.restart()
+        onNext()
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

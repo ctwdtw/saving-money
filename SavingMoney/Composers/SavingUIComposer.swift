@@ -9,7 +9,7 @@ import UIKit
 
 public class SavingUIComposer {
     public static func compose(model: SavingPlan, onNext: @escaping () -> Void) -> SavingViewController {
-        let vm = SavingViewModel(model: model, onNext: onNext)
+        let vm = SavingViewModel(model: model)
         
         let cellControllers: [SavingCellController] = (1...52).map { weekNumber in
             let cellController = SavingCellController(
@@ -31,7 +31,8 @@ public class SavingUIComposer {
             return SavingViewController(
                 coder: coder,
                 viewModel: vm,
-                cellControllers: cellControllers
+                cellControllers: cellControllers,
+                onNext: onNext
             )
         })
         
