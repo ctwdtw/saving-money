@@ -13,7 +13,7 @@ public class ProgressionController: NSObject {
     
     @IBOutlet public private(set) weak var progressionCountLabel: UILabel!
     
-    var viewModel: SavingViewModel!
+    var viewModel: ProgressionViewModel!
     
     func bind() {
         progressionLabel.text = viewModel.progressionText()

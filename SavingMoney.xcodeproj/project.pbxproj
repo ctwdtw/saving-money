@@ -18,7 +18,7 @@
 		635BEA65276A19E100D300E0 /* BinaryInteger+digits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA64276A19E100D300E0 /* BinaryInteger+digits.swift */; };
 		638B80AE276CC43200FE618A /* SavingMoneyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */; };
 		638B80B0276CC63F00FE618A /* SavingUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80AF276CC63F00FE618A /* SavingUIComposer.swift */; };
-		638B80B3276DDD7F00FE618A /* SavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80B2276DDD7F00FE618A /* SavingViewModel.swift */; };
+		638B80B3276DDD7F00FE618A /* ProgressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B80B2276DDD7F00FE618A /* ProgressionViewModel.swift */; };
 		638B9EB527709BFD004AC952 /* SavingCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB427709BFD004AC952 /* SavingCellController.swift */; };
 		638B9EB727709C2E004AC952 /* SavingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */; };
 		638B9EB92770AA5C004AC952 /* ProgressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB82770AA5C004AC952 /* ProgressionController.swift */; };
@@ -63,7 +63,7 @@
 		635BEA64276A19E100D300E0 /* BinaryInteger+digits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+digits.swift"; sourceTree = "<group>"; };
 		638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingMoneyViewControllerTests.swift; sourceTree = "<group>"; };
 		638B80AF276CC63F00FE618A /* SavingUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingUIComposer.swift; sourceTree = "<group>"; };
-		638B80B2276DDD7F00FE618A /* SavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewModel.swift; sourceTree = "<group>"; };
+		638B80B2276DDD7F00FE618A /* ProgressionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressionViewModel.swift; sourceTree = "<group>"; };
 		638B9EB427709BFD004AC952 /* SavingCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellController.swift; sourceTree = "<group>"; };
 		638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellViewModel.swift; sourceTree = "<group>"; };
 		638B9EB82770AA5C004AC952 /* ProgressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressionController.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		638B80B5276DDDA700FE618A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				638B80B2276DDD7F00FE618A /* SavingViewModel.swift */,
+				638B80B2276DDD7F00FE618A /* ProgressionViewModel.swift */,
 				638B9EBC2770B6F9004AC952 /* TitleBarViewModel.swift */,
 				638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */,
 			);
@@ -384,7 +384,7 @@
 				639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */,
 				63CEF5252765B00C0038E36E /* AppDelegate.swift in Sources */,
 				635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */,
-				638B80B3276DDD7F00FE618A /* SavingViewModel.swift in Sources */,
+				638B80B3276DDD7F00FE618A /* ProgressionViewModel.swift in Sources */,
 				635BEA65276A19E100D300E0 /* BinaryInteger+digits.swift in Sources */,
 				639F016527661D6900007110 /* SavingCell.swift in Sources */,
 				639F016327661AD600007110 /* SavingViewController.swift in Sources */,

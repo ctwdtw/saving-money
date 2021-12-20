@@ -9,7 +9,7 @@ import UIKit
 
 public class SavingUIComposer {
     public static func compose(model: SavingPlan, onNext: @escaping () -> Void) -> SavingViewController {
-        let vm = SavingViewModel(model: model)
+        let vm = ProgressionViewModel(model: model)
         
         let cellControllers: [SavingCellController] = (1...52).map { weekNumber in
             let cellController = SavingCellController(

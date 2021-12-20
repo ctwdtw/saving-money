@@ -1,12 +1,12 @@
 //
-//  SavingViewModel.swift
+//  ProgressionViewModel.swift
 //  SavingMoney
 //
 //  Created by Paul Lee on 2021/12/18.
 //
 
 import Foundation
-class SavingViewModel {
+class ProgressionViewModel {
     private var model: SavingPlan {
         didSet {
             onProgressionTextChanged?(progressionText())
