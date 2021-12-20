@@ -153,7 +153,7 @@ class SavingMoneyViewControllerTests: XCTestCase {
 
 extension SavingViewController {
     var planName: String? {
-        return titleItem.title
+        return titleBarController.titleItem.title
     }
     
     var savingProgressionText: String? {
@@ -195,8 +195,8 @@ extension SavingViewController {
     }
     
     func simulatePressReStart() {
-        guard let action = restartBarBtnItem.action else { return }
-        UIApplication.shared.sendAction(action, to: restartBarBtnItem.target, from: nil, for: nil)
+        guard let action = titleBarController.restartBarBtnItem.action else { return }
+        UIApplication.shared.sendAction(action, to: titleBarController.restartBarBtnItem.target, from: nil, for: nil)
     }
 }
 

@@ -22,6 +22,8 @@
 		638B9EB527709BFD004AC952 /* SavingCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB427709BFD004AC952 /* SavingCellController.swift */; };
 		638B9EB727709C2E004AC952 /* SavingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */; };
 		638B9EB92770AA5C004AC952 /* ProgressionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EB82770AA5C004AC952 /* ProgressionController.swift */; };
+		638B9EBB2770B6C5004AC952 /* TitleBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EBA2770B6C5004AC952 /* TitleBarController.swift */; };
+		638B9EBD2770B6F9004AC952 /* TitleBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B9EBC2770B6F9004AC952 /* TitleBarViewModel.swift */; };
 		639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F015E2765CEB000007110 /* SetAmountViewController.swift */; };
 		639F0161276619CD00007110 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F0160276619CD00007110 /* Checkbox.swift */; };
 		639F016327661AD600007110 /* SavingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F016227661AD600007110 /* SavingViewController.swift */; };
@@ -65,6 +67,8 @@
 		638B9EB427709BFD004AC952 /* SavingCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellController.swift; sourceTree = "<group>"; };
 		638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCellViewModel.swift; sourceTree = "<group>"; };
 		638B9EB82770AA5C004AC952 /* ProgressionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressionController.swift; sourceTree = "<group>"; };
+		638B9EBA2770B6C5004AC952 /* TitleBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBarController.swift; sourceTree = "<group>"; };
+		638B9EBC2770B6F9004AC952 /* TitleBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBarViewModel.swift; sourceTree = "<group>"; };
 		639F015E2765CEB000007110 /* SetAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmountViewController.swift; sourceTree = "<group>"; };
 		639F0160276619CD00007110 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		639F016227661AD600007110 /* SavingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				638B80B2276DDD7F00FE618A /* SavingViewModel.swift */,
+				638B9EBC2770B6F9004AC952 /* TitleBarViewModel.swift */,
 				638B9EB627709C2E004AC952 /* SavingCellViewModel.swift */,
 			);
 			path = ViewModel;
@@ -173,6 +178,7 @@
 				639F016227661AD600007110 /* SavingViewController.swift */,
 				638B9EB427709BFD004AC952 /* SavingCellController.swift */,
 				638B9EB82770AA5C004AC952 /* ProgressionController.swift */,
+				638B9EBA2770B6C5004AC952 /* TitleBarController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -384,7 +390,9 @@
 				639F016327661AD600007110 /* SavingViewController.swift in Sources */,
 				635BEA552769BB8C00D300E0 /* KeyboardEventViewModel.swift in Sources */,
 				638B9EB727709C2E004AC952 /* SavingCellViewModel.swift in Sources */,
+				638B9EBD2770B6F9004AC952 /* TitleBarViewModel.swift in Sources */,
 				63CEF5272765B00C0038E36E /* SceneDelegate.swift in Sources */,
+				638B9EBB2770B6C5004AC952 /* TitleBarController.swift in Sources */,
 				635BEA5F276A12FF00D300E0 /* PlanAmount.swift in Sources */,
 				639F016D27679EB500007110 /* WriteDownPlanUIComposer.swift in Sources */,
 				639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */,

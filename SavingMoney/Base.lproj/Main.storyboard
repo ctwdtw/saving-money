@@ -363,7 +363,7 @@
                                     <navigationItem title="第一桶金" id="dlk-M9-jLP">
                                         <barButtonItem key="rightBarButtonItem" title="重新開始" id="I19-eL-coq">
                                             <connections>
-                                                <action selector="restartPlanBarBtnPressed:" destination="9ph-Jz-2PS" id="dda-Ix-TYL"/>
+                                                <action selector="restartPlanBarBtnPressed:" destination="76v-Xt-obe" id="pap-Qx-fng"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -560,12 +560,17 @@
                     </view>
                     <connections>
                         <outlet property="progressionController" destination="9yc-H5-REm" id="1fq-sv-FX0"/>
-                        <outlet property="restartBarBtnItem" destination="I19-eL-coq" id="c5f-9M-GUr"/>
                         <outlet property="tableView" destination="6jv-SP-cuS" id="aqB-13-K7D"/>
-                        <outlet property="titleItem" destination="dlk-M9-jLP" id="4gz-Gv-lYt"/>
+                        <outlet property="titleBarController" destination="76v-Xt-obe" id="R9I-Ce-X5M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHh-D2-v82" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="76v-Xt-obe" customClass="TitleBarController" customModule="SavingMoney" customModuleProvider="target">
+                    <connections>
+                        <outlet property="restartBarBtnItem" destination="I19-eL-coq" id="9FN-Ov-xd3"/>
+                        <outlet property="titleItem" destination="dlk-M9-jLP" id="0Sz-AB-cDj"/>
+                    </connections>
+                </customObject>
                 <customObject id="9yc-H5-REm" customClass="ProgressionController" customModule="SavingMoney" customModuleProvider="target">
                     <connections>
                         <outlet property="progressionCountLabel" destination="7UZ-Wh-OaH" id="jIj-zS-iMd"/>

@@ -14,10 +14,6 @@ class SavingViewModel {
         }
     }
     
-    var planName: String {
-        model.name
-    }
-    
     init(model: SavingPlan) {
         self.model = model
     }

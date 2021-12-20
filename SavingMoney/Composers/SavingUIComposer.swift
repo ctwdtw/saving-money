@@ -30,13 +30,14 @@ public class SavingUIComposer {
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: SavingViewController.self)).instantiateViewController(identifier: "SavingViewController", creator: { coder in
             return SavingViewController(
                 coder: coder,
-                viewModel: vm,
                 cellControllers: cellControllers,
                 onNext: onNext
             )
         })
         
         vc.progressionController.viewModel = vm
+        vc.titleBarController.viewModel = TitleBarViewModel(planName: model.name)
+        vc.titleBarController.onNext = onNext
         
         return vc
     }

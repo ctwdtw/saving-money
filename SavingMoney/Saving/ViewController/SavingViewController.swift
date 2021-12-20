@@ -8,26 +8,17 @@
 import UIKit
 
 public class SavingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    @IBOutlet public private(set) weak var titleItem: UINavigationItem!
-    
-    @IBOutlet public private(set) weak var restartBarBtnItem: UIBarButtonItem!
-    
-    @IBOutlet public weak var tableView: UITableView!
+    @IBOutlet public private(set) weak var titleBarController: TitleBarController!
     
     @IBOutlet public private(set) weak var progressionController: ProgressionController!
     
-    private var viewModel: SavingViewModel!
+    @IBOutlet public weak var tableView: UITableView!
     
     private var cellControllers: [SavingCellController]!
     
-    private var onNext: (() -> Void)!
-    
-    init?(coder: NSCoder, viewModel: SavingViewModel, cellControllers: [SavingCellController], onNext: @escaping () -> Void) {
+    init?(coder: NSCoder, cellControllers: [SavingCellController], onNext: @escaping () -> Void) {
         super.init(coder: coder)
-        self.viewModel = viewModel
         self.cellControllers = cellControllers
-        self.onNext = onNext
     }
     
     required init?(coder: NSCoder) {
@@ -36,18 +27,14 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        bindTitleNavigationItem()
+        configure(tableView)
+        titleBarController.bind()
         progressionController.bind()
     }
     
-    private func bindTitleNavigationItem() {
-        titleItem.title = viewModel.planName
-    }
-        
-    @IBAction func restartPlanBarBtnPressed(_ sender: Any) {
-        onNext()
+    private func configure(_ tableView: UITableView) {
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
