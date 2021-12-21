@@ -11,7 +11,8 @@ import XCTest
 class SceneDelegateTests: XCTestCase {
 
     func test_sceneWillConnectToSession_configureRootViewController() {
-        let (sut, _) = makeSUT()
+        let sut = SceneDelegate()
+        sut.window = UIWindow()
         
         sut.configureRootViewController()
         
@@ -24,7 +25,7 @@ class SceneDelegateTests: XCTestCase {
     
     func test_sceneWillConnectToSession_messageAppCoordinatorStart() {
         let (sut, coordinator) = makeSUT()
-        
+        sut.window = UIWindow()
         sut.configureRootViewController()
         
         XCTAssertEqual(coordinator.startCallCount, 1)
@@ -33,7 +34,6 @@ class SceneDelegateTests: XCTestCase {
     private func makeSUT() -> (SceneDelegate, CoordinatorSpy) {
         let coordinator = CoordinatorSpy()
         let sut = SceneDelegate(coordinator: coordinator)
-        sut.window = UIWindow()
         return (sut, coordinator)
     }
 

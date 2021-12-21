@@ -12,8 +12,14 @@ protocol Coordinator {
 }
 
 class AppCoordinator: Coordinator {
+    let rootViewController: UINavigationController
+    init(rootViewController: UINavigationController) {
+        self.rootViewController = rootViewController
+    }
+    
     func start() {
-        
+        let vc = WriteDownPlanUIComposer.compose(onNext: { _ in })
+        rootViewController.setViewControllers([vc], animated: false)
     }
 }
 
@@ -21,13 +27,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    private var coordinator: Coordinator?
+    private lazy var coordinator: Coordinator = {
+        let navc = UINavigationController()
+        return AppCoordinator(rootViewController: navc)
+    }()
     
     convenience init(coordinator: Coordinator) {
         self.init()
         self.coordinator = coordinator
     }
-    
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -39,18 +47,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func configureRootViewController() {
-        coordinator?.start()
-        
-        
-        let vc = WriteDownPlanUIComposer.compose(onNext: { _ in })
-        
-        //let vc = SetAmountUIComposer.compose(onNext: { _ in })
-        
-
-        window?.rootViewController = UINavigationController(rootViewController: vc)
-        
-        //let vc = SavingUIComposer.compose(model: SavingPlan(name: "Hello", initialAmount: 1), onNext: { })
-        //window?.rootViewController = vc
+        coordinator.start()
+        let root = (coordinator as? AppCoordinator)?.rootViewController
+        window?.rootViewController = root
         window?.makeKeyAndVisible()
     }
 

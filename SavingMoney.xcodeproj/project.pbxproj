@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631E1A762771BD79000C2DD1 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A752771BD79000C2DD1 /* AppCoordinatorTests.swift */; };
 		6325D4D327707D1F00D5038C /* SavingPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6325D4D227707D1F00D5038C /* SavingPlan.swift */; };
 		635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA522769BB6700D300E0 /* KeyboardController.swift */; };
 		635BEA552769BB8C00D300E0 /* KeyboardEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		631E1A752771BD79000C2DD1 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		6325D4D227707D1F00D5038C /* SavingPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlan.swift; sourceTree = "<group>"; };
 		635BEA522769BB6700D300E0 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventViewModel.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				63CEF53E2765B07C0038E36E /* WriteDownPlanViewControllerTests.swift */,
 				635BEA582769D15900D300E0 /* SetAmountViewControllerTests.swift */,
 				638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */,
+				631E1A752771BD79000C2DD1 /* AppCoordinatorTests.swift */,
 			);
 			path = SavingMoneyTests;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631E1A762771BD79000C2DD1 /* AppCoordinatorTests.swift in Sources */,
 				63CEF53F2765B07C0038E36E /* WriteDownPlanViewControllerTests.swift in Sources */,
 				638B80AE276CC43200FE618A /* SavingMoneyViewControllerTests.swift in Sources */,
 				635BEA572769C88A00D300E0 /* SceneDelegateTests.swift in Sources */,
