@@ -9,27 +9,27 @@ import XCTest
 @testable import SavingMoney
 
 class AppCoordinatorTests: XCTestCase {
-    func test_start_setWriteDownPlanSceneOnNavigationStackRoot() {
-        let (sut, router) = makeSUT()
-        
-        sut.start()
-        
-        XCTAssertTrue(router.viewControllers.first is WriteDownPlanViewController)
-    }
-    
-    func test_pushSetAmountSceneOnTop_onWriteDownPlanNext() {
+    func test_navigation() {
         let (sut, router) = makeSUT()
         
         sut.start()
         let writeDownPlan = router.topViewController as? WriteDownPlanViewController
         writeDownPlan?.loadViewIfNeeded()
-        XCTAssertNotNil(writeDownPlan)
+        XCTAssertNotNil(writeDownPlan, "First Scene is WriteDownPlan Scene")
         
         writeDownPlan?.simulateTapNext()
         router.view.forceLayout()
         
         let setAmount = router.topViewController as? SetAmountViewController
-        XCTAssertNotNil(setAmount)
+        setAmount?.loadViewIfNeeded()
+        XCTAssertNotNil(setAmount, "Tap next route to SetAmount Scene")
+        
+        setAmount?.simulateTapNext()
+        router.view.forceLayout()
+        
+        let saving = router.topViewController as? SavingViewController
+        saving?.loadViewIfNeeded()
+        XCTAssertNotNil(saving, "Tap next again route to Saving Scene")
     }
     
     private func makeSUT() -> (AppCoordinator, RouterSpy) {

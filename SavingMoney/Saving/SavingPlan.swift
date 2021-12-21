@@ -7,11 +7,11 @@
 
 import Foundation
 public struct SavingPlan {
-    public let name: String
+    public var name: String
     
     public let startDate: Date
     
-    public let initialAmount: Int
+    public var initialAmount: Int
     
     public var totalAmount: Int {
         initialAmount*(52)*(52+1)/2

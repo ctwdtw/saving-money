@@ -49,4 +49,10 @@ public class SetAmountViewController: UIViewController {
     @IBAction func deleteBtnTouchUpInside(_ sender: Any) {
         viewModel?.deleteBackward()
     }
+    
+    @IBAction func nextBarBtnTapped(_ sender: Any) {
+        viewModel?.nextStep()
+    }
+    
+    
 }

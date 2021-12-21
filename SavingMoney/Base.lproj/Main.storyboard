@@ -326,7 +326,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="設定金額" id="gak-ck-Wnp">
-                        <barButtonItem key="rightBarButtonItem" title="開始" id="MS2-B8-7yK"/>
+                        <barButtonItem key="rightBarButtonItem" title="開始" id="MS2-B8-7yK">
+                            <connections>
+                                <action selector="nextBarBtnTapped:" destination="ilb-C4-z6D" id="p21-zV-TWO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="deleteBtn" destination="O2j-qH-YCg" id="UgP-SJ-E6u"/>

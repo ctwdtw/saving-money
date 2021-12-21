@@ -23,9 +23,12 @@ class AppCoordinator: Coordinator {
         self.navc = router
     }
     
+    private var savingPlan = SavingPlan(name: "", initialAmount: 0)
+    
     func start() {
         let vc = WriteDownPlanUIComposer
             .compose(onNext: { [unowned self] planName in
+                savingPlan.name = planName
                 pushToSetAmountScene()
             })
         
@@ -33,7 +36,21 @@ class AppCoordinator: Coordinator {
     }
     
     private func pushToSetAmountScene() {
-        let vc = SetAmountUIComposer.compose(onNext: { _ in })
+        let vc = SetAmountUIComposer
+            .compose(onNext: { [unowned self] planAmount in
+                savingPlan.initialAmount = planAmount.initialAmount
+                pushToSavingScene()
+            })
+        
+        navc.pushViewController(vc, animated: true)
+    }
+    
+    private func pushToSavingScene() {
+        let vc = SavingUIComposer
+            .compose(model: savingPlan, onNext: {
+                
+            })
+        
         navc.pushViewController(vc, animated: true)
     }
 }
