@@ -13,23 +13,26 @@ class AppCoordinatorTests: XCTestCase {
         let (sut, router) = makeSUT()
         
         sut.start()
-        let writeDownPlan = router.topViewController as? WriteDownPlanViewController
-        writeDownPlan?.loadViewIfNeeded()
-        XCTAssertNotNil(writeDownPlan, "First Scene is WriteDownPlan Scene")
+        let writeDownPlan = assertTop(is: WriteDownPlanViewController.self, on: router)
         
         writeDownPlan?.simulateTapNext()
-        router.view.forceLayout()
-        
-        let setAmount = router.topViewController as? SetAmountViewController
-        setAmount?.loadViewIfNeeded()
-        XCTAssertNotNil(setAmount, "Tap next route to SetAmount Scene")
-        
+        let setAmount = assertTop(is: SetAmountViewController.self, on: router)
+    
         setAmount?.simulateTapNext()
-        router.view.forceLayout()
-        
-        let saving = router.topViewController as? SavingViewController
-        saving?.loadViewIfNeeded()
-        XCTAssertNotNil(saving, "Tap next again route to Saving Scene")
+        assertTop(is: SavingViewController.self, on: router)
+    }
+    
+    @discardableResult
+    private func assertTop<ViewController: UIViewController>(
+        is type: ViewController.Type,
+        on router: UINavigationController,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> ViewController? {
+        let top = router.topViewController as? ViewController
+        top?.loadViewIfNeeded()
+        XCTAssertNotNil(top, file: file, line: line)
+        return top
     }
     
     private func makeSUT() -> (AppCoordinator, RouterSpy) {
@@ -40,6 +43,4 @@ class AppCoordinatorTests: XCTestCase {
     }
 }
 
-private class RouterSpy: UINavigationController {
-    
-}
+private class RouterSpy: UINavigationController {}
