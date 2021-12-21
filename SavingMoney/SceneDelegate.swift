@@ -24,8 +24,17 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = WriteDownPlanUIComposer.compose(onNext: { _ in })
+        let vc = WriteDownPlanUIComposer
+            .compose(onNext: { [unowned self] planName in
+                pushToSetAmountScene()
+            })
+        
         navc.setViewControllers([vc], animated: false)
+    }
+    
+    private func pushToSetAmountScene() {
+        let vc = SetAmountUIComposer.compose(onNext: { _ in })
+        navc.pushViewController(vc, animated: true)
     }
 }
 
