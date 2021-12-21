@@ -8,18 +8,24 @@
 import UIKit
 
 protocol Coordinator {
+    var router: UIViewController { get }
     func start()
 }
 
 class AppCoordinator: Coordinator {
-    let rootViewController: UINavigationController
-    init(rootViewController: UINavigationController) {
-        self.rootViewController = rootViewController
+    var router: UIViewController {
+        return navc
+    }
+    
+    private let navc: UINavigationController
+    
+    init(router: UINavigationController) {
+        self.navc = router
     }
     
     func start() {
         let vc = WriteDownPlanUIComposer.compose(onNext: { _ in })
-        rootViewController.setViewControllers([vc], animated: false)
+        navc.setViewControllers([vc], animated: false)
     }
 }
 
@@ -29,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private lazy var coordinator: Coordinator = {
         let navc = UINavigationController()
-        return AppCoordinator(rootViewController: navc)
+        return AppCoordinator(router: navc)
     }()
     
     convenience init(coordinator: Coordinator) {
@@ -48,8 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func configureRootViewController() {
         coordinator.start()
-        let root = (coordinator as? AppCoordinator)?.rootViewController
-        window?.rootViewController = root
+        window?.rootViewController = coordinator.router
         window?.makeKeyAndVisible()
     }
 

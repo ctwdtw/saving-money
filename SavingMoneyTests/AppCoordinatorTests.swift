@@ -19,7 +19,7 @@ class AppCoordinatorTests: XCTestCase {
     
     private func makeSUT() -> (AppCoordinator, NavigationSpy) {
         let navcSpy = NavigationSpy()
-        let sut = AppCoordinator(rootViewController: navcSpy)
+        let sut = AppCoordinator(router: navcSpy)
         return (sut, navcSpy)
         
     }

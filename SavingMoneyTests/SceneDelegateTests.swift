@@ -40,6 +40,8 @@ class SceneDelegateTests: XCTestCase {
 }
 
 private class CoordinatorSpy: Coordinator {
+    var router: UIViewController = UIViewController()
+    
     var startCallCount = 0
     func start() {
         startCallCount += 1
