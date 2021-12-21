@@ -118,9 +118,9 @@ extension WriteDownPlanViewController {
     }
     
     func simulateTapNext() {
+        loadViewIfNeeded()
         guard let action = nextBarBtnItem.action else { return }
         UIApplication.shared.sendAction(action, to: nextBarBtnItem.target, from: nil, for: nil)
-        navigationController?.view.forceLayout()
     }
     
     @discardableResult

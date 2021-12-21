@@ -9,29 +9,40 @@ import XCTest
 @testable import SavingMoney
 
 class AppCoordinatorTests: XCTestCase {
-    func test_navigation() {
+    func test_routing() {
         let (sut, router) = makeSUT()
         
         sut.start()
-        let writeDownPlan = assertTop(is: WriteDownPlanViewController.self, on: router)
+        let writeDownPlan = assertPushedTop(is: WriteDownPlanViewController.self, on: router)
         
         writeDownPlan?.simulateTapNext()
-        let setAmount = assertTop(is: SetAmountViewController.self, on: router)
+        let setAmount = assertPushedTop(is: SetAmountViewController.self, on: router)
     
         setAmount?.simulateTapNext()
-        assertTop(is: SavingViewController.self, on: router)
+        assertPresentedTop(is: SavingViewController.self, on: router)
     }
     
     @discardableResult
-    private func assertTop<ViewController: UIViewController>(
+    private func assertPushedTop<ViewController: UIViewController>(
         is type: ViewController.Type,
-        on router: UINavigationController,
+        on router: RouterSpy,
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> ViewController? {
-        let top = router.topViewController as? ViewController
-        top?.loadViewIfNeeded()
-        XCTAssertNotNil(top, file: file, line: line)
+        let top = router.pushedViewControllers.last as? ViewController
+        XCTAssertNotNil(top, "expect an instance of \(type) but got \(String(describing: router.pushedViewControllers.last))", file: file, line: line)
+        return top
+    }
+    
+    @discardableResult
+    private func assertPresentedTop<ViewController: UIViewController>(
+        is type: ViewController.Type,
+        on router: RouterSpy,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> ViewController? {
+        let top = router.presentedViewControllers.last as? ViewController
+        XCTAssertNotNil(top, "expect an instance of \(type) but got \(String(describing: router.pushedViewControllers.last))", file: file, line: line)
         return top
     }
     
@@ -39,8 +50,24 @@ class AppCoordinatorTests: XCTestCase {
         let routerSpy = RouterSpy()
         let sut = AppCoordinator(router: routerSpy)
         return (sut, routerSpy)
-        
     }
 }
 
-private class RouterSpy: UINavigationController {}
+private class RouterSpy: UINavigationController {
+    var pushedViewControllers: [UIViewController] = []
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        super.pushViewController(viewController, animated: animated)
+        pushedViewControllers.append(viewController)
+    }
+    
+    override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
+        //super.setViewControllers(viewControllers, animated: animated)
+        guard let first = viewControllers.first else { return }
+        pushedViewControllers.append(first)
+    }
+    
+    var presentedViewControllers: [UIViewController] = []
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        presentedViewControllers.append(viewControllerToPresent)
+    }
+}

@@ -51,7 +51,7 @@ class AppCoordinator: Coordinator {
                 
             })
         
-        navc.pushViewController(vc, animated: true)
+        navc.present(vc, animated: true, completion: nil)
     }
 }
 
