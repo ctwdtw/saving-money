@@ -10,21 +10,21 @@ import XCTest
 
 class AppCoordinatorTests: XCTestCase {
     func test_start_setWriteDownPlanSceneOnNavigationStackRoot() {
-        let (sut, navigationController) = makeSUT()
+        let (sut, router) = makeSUT()
         
         sut.start()
         
-        XCTAssertTrue(navigationController.viewControllers.first is WriteDownPlanViewController)
+        XCTAssertTrue(router.viewControllers.first is WriteDownPlanViewController)
     }
     
-    private func makeSUT() -> (AppCoordinator, NavigationSpy) {
-        let navcSpy = NavigationSpy()
-        let sut = AppCoordinator(router: navcSpy)
-        return (sut, navcSpy)
+    private func makeSUT() -> (AppCoordinator, RouterSpy) {
+        let routerSpy = RouterSpy()
+        let sut = AppCoordinator(router: routerSpy)
+        return (sut, routerSpy)
         
     }
 }
 
-private class NavigationSpy: UINavigationController {
+private class RouterSpy: UINavigationController {
     
 }
