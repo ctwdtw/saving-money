@@ -19,7 +19,10 @@ class AppCoordinatorTests: XCTestCase {
         let setAmount = assertPushedTop(is: SetAmountViewController.self, on: router)
     
         setAmount?.simulateTapNext()
-        assertPresentedTop(is: SavingViewController.self, on: router)
+        let saving = assertPresentedTop(is: SavingViewController.self, on: router)
+        
+        saving?.simulatePressReStart()
+        assertPushedTop(is: WriteDownPlanViewController.self, on: router)
     }
     
     @discardableResult
@@ -64,13 +67,23 @@ private class RouterSpy: UINavigationController {
     }
     
     override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
-        //super.setViewControllers(viewControllers, animated: animated)
         guard let first = viewControllers.first else { return }
         pushedViewControllers.append(first)
+        super.setViewControllers(viewControllers, animated: animated)
     }
     
     var presentedViewControllers: [UIViewController] = []
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         presentedViewControllers.append(viewControllerToPresent)
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        presentedViewControllers.removeLast()
+        super.dismiss(animated: flag, completion: completion)
+    }
+    
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        pushedViewControllers.removeLast(pushedViewControllers.count - 1)
+        return super.popToRootViewController(animated: animated)
     }
 }

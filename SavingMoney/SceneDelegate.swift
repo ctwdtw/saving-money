@@ -47,12 +47,18 @@ class AppCoordinator: Coordinator {
     
     private func pushToSavingScene() {
         let vc = SavingUIComposer
-            .compose(model: savingPlan, onNext: {
-                
+            .compose(model: savingPlan, onNext: { [unowned self] in
+                backToWriteDownPlanScene()
             })
         
         vc.modalPresentationStyle = .fullScreen
         navc.present(vc, animated: true, completion: nil)
+    }
+    
+    private func backToWriteDownPlanScene() {
+        navc.dismiss(animated: true) { [navc] in
+            navc.popToRootViewController(animated: true)
+        }
     }
 }
 
