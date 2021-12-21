@@ -11,8 +11,7 @@ import XCTest
 class SceneDelegateTests: XCTestCase {
 
     func test_sceneWillConnectToSession_configureRootViewController() {
-        let sut = SceneDelegate()
-        sut.window = UIWindow()
+        let (sut, _) = makeSUT()
         
         sut.configureRootViewController()
         
@@ -22,5 +21,27 @@ class SceneDelegateTests: XCTestCase {
         let top = root?.topViewController as? WriteDownPlanViewController
         XCTAssertNotNil(top, "Expected `WriteDownPlanViewController` as root of `UINavigationController`, got \(String(describing: top)) instead")
     }
+    
+    func test_sceneWillConnectToSession_messageAppCoordinatorStart() {
+        let (sut, coordinator) = makeSUT()
+        
+        sut.configureRootViewController()
+        
+        XCTAssertEqual(coordinator.startCallCount, 1)
+    }
+    
+    private func makeSUT() -> (SceneDelegate, CoordinatorSpy) {
+        let coordinator = CoordinatorSpy()
+        let sut = SceneDelegate(coordinator: coordinator)
+        sut.window = UIWindow()
+        return (sut, coordinator)
+    }
 
+}
+
+private class CoordinatorSpy: Coordinator {
+    var startCallCount = 0
+    func start() {
+        startCallCount += 1
+    }
 }
