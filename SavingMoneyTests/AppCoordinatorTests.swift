@@ -38,11 +38,14 @@ class AppCoordinatorTests: XCTestCase {
     private func assertPresentedTop<ViewController: UIViewController>(
         is type: ViewController.Type,
         on router: RouterSpy,
+        with style: UIModalPresentationStyle = .fullScreen,
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> ViewController? {
         let top = router.presentedViewControllers.last as? ViewController
         XCTAssertNotNil(top, "expect an instance of \(type) but got \(String(describing: router.pushedViewControllers.last))", file: file, line: line)
+        
+        XCTAssertTrue(top?.modalPresentationStyle == style, "expect modal presentation style: \(style), but got \(String(describing: top?.modalPresentationStyle)) instead", file: file, line: line)
         return top
     }
     

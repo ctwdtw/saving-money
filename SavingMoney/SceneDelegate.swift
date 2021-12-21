@@ -51,6 +51,7 @@ class AppCoordinator: Coordinator {
                 
             })
         
+        vc.modalPresentationStyle = .fullScreen
         navc.present(vc, animated: true, completion: nil)
     }
 }
