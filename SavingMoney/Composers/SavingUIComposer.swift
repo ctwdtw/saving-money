@@ -30,8 +30,7 @@ public class SavingUIComposer {
         let vc = UIStoryboard(name: "Main", bundle: Bundle(for: SavingViewController.self)).instantiateViewController(identifier: "SavingViewController", creator: { coder in
             return SavingViewController(
                 coder: coder,
-                cellControllers: cellControllers,
-                onNext: onNext
+                cellControllers: cellControllers
             )
         })
         
