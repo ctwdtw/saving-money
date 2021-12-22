@@ -59,7 +59,8 @@ class WriteDownPlanViewControllerTests: XCTestCase {
     }
     
     private func makeSUT(onNext: @escaping ((PlanModel) -> Void) = { _ in }) -> WriteDownPlanViewController {
-        return WriteDownPlanUIComposer.compose(onNext: onNext)
+        return WriteDownPlanUIComposer
+            .compose(viewModel: WriteDownPlanViewModel(onNext: onNext))
     }
     
     private func assertThat(_ sut: WriteDownPlanViewController, render view: UIView, onWillShow keyboardView: UIView, spacing: CGFloat, file: StaticString = #filePath, line: UInt = #line) {
@@ -102,6 +103,7 @@ extension WriteDownPlanViewController {
     }
     
     func simulateTypingPlanName(_ name: String) {
+        loadViewIfNeeded()
         planTextField.text = name
         planTextField.sendActions(for: .editingChanged)
     }
@@ -118,6 +120,7 @@ extension WriteDownPlanViewController {
     }
     
     func simulateTapNext() {
+        loadViewIfNeeded()
         guard let action = nextBarBtnItem.action else { return }
         UIApplication.shared.sendAction(action, to: nextBarBtnItem.target, from: nil, for: nil)
     }

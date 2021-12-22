@@ -195,6 +195,7 @@ extension SavingViewController {
     }
     
     func simulatePressReStart() {
+        loadViewIfNeeded()
         guard let action = titleBarController.restartBarBtnItem.action else { return }
         UIApplication.shared.sendAction(action, to: titleBarController.restartBarBtnItem.target, from: nil, for: nil)
     }

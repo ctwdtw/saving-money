@@ -22,5 +22,28 @@ class SceneDelegateTests: XCTestCase {
         let top = root?.topViewController as? WriteDownPlanViewController
         XCTAssertNotNil(top, "Expected `WriteDownPlanViewController` as root of `UINavigationController`, got \(String(describing: top)) instead")
     }
+    
+    func test_sceneWillConnectToSession_messageAppCoordinatorStart() {
+        let (sut, coordinator) = makeSUT()
+        sut.window = UIWindow()
+        sut.configureRootViewController()
+        
+        XCTAssertEqual(coordinator.startCallCount, 1)
+    }
+    
+    private func makeSUT() -> (SceneDelegate, CoordinatorSpy) {
+        let coordinator = CoordinatorSpy()
+        let sut = SceneDelegate(coordinator: coordinator)
+        return (sut, coordinator)
+    }
 
+}
+
+private class CoordinatorSpy: Coordinator {
+    var router: UIViewController = UIViewController()
+    
+    var startCallCount = 0
+    func start() {
+        startCallCount += 1
+    }
 }

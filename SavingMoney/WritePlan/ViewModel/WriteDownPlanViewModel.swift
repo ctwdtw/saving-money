@@ -6,14 +6,17 @@
 //
 
 import Foundation
-class WriteDownPlanViewModel {
+public class WriteDownPlanViewModel {
     var onNextStateChange: ((Bool) -> Void)?
+    
+    
+    var onPlanModelChanged: ((PlanModel) -> Void)?
     
     private var planModel: PlanModel
     
     private let onNext: (PlanModel) -> Void
     
-    init(planModel: PlanModel = "", onNext: @escaping (PlanModel) -> Void) {
+    public init(planModel: PlanModel = "", onNext: @escaping (PlanModel) -> Void) {
         self.planModel = planModel
         self.onNext = onNext
     }
@@ -31,6 +34,12 @@ class WriteDownPlanViewModel {
     
     func nextStep() {
         onNext(planModel)
+    }
+    
+    func reset() {
+        planModel = ""
+        onPlanModelChanged?(planModel)
+        onNextStateChange?(false)
     }
     
     
