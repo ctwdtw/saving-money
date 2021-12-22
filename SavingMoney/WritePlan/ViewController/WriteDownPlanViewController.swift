@@ -47,6 +47,11 @@ public class WriteDownPlanViewController: UIViewController {
             for: .editingChanged
         )
         
+        viewModel?.onPlanModelChanged = { planModel in
+            textField.text = planModel
+            
+        }
+        
         barBtnItem.target = self
         barBtnItem.action = #selector(nextBarBtnItemTapped(_:))
     }

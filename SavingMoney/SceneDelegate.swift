@@ -25,13 +25,18 @@ class AppCoordinator: Coordinator {
     
     private var savingPlan = SavingPlan(name: "", initialAmount: 0)
     
+    private lazy var writeDownPlanViewModel: WriteDownPlanViewModel =
+    WriteDownPlanViewModel(
+        onNext: { [unowned self] planName in
+            savingPlan.name = planName
+            pushToSetAmountScene()
+        }
+    )
+    
     func start() {
         let vc = WriteDownPlanUIComposer
-            .compose(onNext: { [unowned self] planName in
-                savingPlan.name = planName
-                pushToSetAmountScene()
-            })
-        
+            .compose(viewModel: writeDownPlanViewModel)
+
         navc.setViewControllers([vc], animated: false)
     }
     
@@ -56,6 +61,7 @@ class AppCoordinator: Coordinator {
     }
     
     private func backToWriteDownPlanScene() {
+        writeDownPlanViewModel.reset()
         navc.dismiss(animated: true) { [navc] in
             navc.popToRootViewController(animated: true)
         }

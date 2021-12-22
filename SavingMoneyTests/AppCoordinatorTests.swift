@@ -15,6 +15,7 @@ class AppCoordinatorTests: XCTestCase {
         sut.start()
         let writeDownPlan = assertPushedTop(is: WriteDownPlanViewController.self, on: router)
         
+        writeDownPlan?.simulateTypingPlanName("My Awesome Saving Plan")
         writeDownPlan?.simulateTapNext()
         let setAmount = assertPushedTop(is: SetAmountViewController.self, on: router)
     
@@ -23,6 +24,7 @@ class AppCoordinatorTests: XCTestCase {
         
         saving?.simulatePressReStart()
         assertPushedTop(is: WriteDownPlanViewController.self, on: router)
+        XCTAssertNilOrEmptyString(writeDownPlan?.planName, "should have no plan name when pop to write down plan scene")
     }
     
     @discardableResult
