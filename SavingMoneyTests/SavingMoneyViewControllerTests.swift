@@ -18,7 +18,7 @@ class SavingMoneyViewControllerTests: XCTestCase {
     }
     
     func test_viewDidLoad_renderSavingPlan() {
-        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
         let sut = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
@@ -26,7 +26,7 @@ class SavingMoneyViewControllerTests: XCTestCase {
     }
     
     func test_renderSavingProgression_onPressCheckBox() {
-        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
         let sut = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
@@ -49,7 +49,7 @@ class SavingMoneyViewControllerTests: XCTestCase {
     }
     
     func test_restartAction_notifyHandler() {
-        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.jan3rd2022, initialAmount: 1)
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
         
         var callCount = 0
         let sut = makeSUT(model: plan, onNext: { callCount += 1 })
@@ -208,8 +208,9 @@ private extension SavingCell {
     }
 }
 
-private extension Date {
-    static var jan3rd2022: Date {
+extension Date {
+    // jan3rd2022
+    static var fixedDate: Date {
         return Date(timeIntervalSince1970: 1641139200)
     }
 }

@@ -31,14 +31,27 @@ class SavingPlanLoader {
             .urls(for: .cachesDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("savingPlan.cache")
     }
+    
+    private struct CodablePlan: Codable {
+        let name: String
+        let startDate: Date
+        let initialAmount: Int
+    }
         
-    func load() throws {
-        guard let _ = fileManager.contents(atPath: planURL.path) else {
+    func load() throws -> SavingPlan {
+        guard let data = fileManager.contents(atPath: planURL.path) else {
             throw Error.dataNotFound
         }
         
-        throw Error.invalidData
-        
+        do {
+            let codablePlan = try JSONDecoder().decode(CodablePlan.self, from: data)
+            return SavingPlan(name: codablePlan.name, startDate: codablePlan.startDate, initialAmount: codablePlan.initialAmount)
+            
+        } catch {
+            throw Error.invalidData
+            
+        }
+
     }
 }
 
@@ -47,7 +60,7 @@ class SavingPlanLoaderTests: XCTestCase {
     func test_load_messageStore() {
         let (sut, fileManager) = makeSUT()
         
-        try? sut.load()
+        _ = try? sut.load()
         XCTAssertEqual(fileManager.messages, [.requestContent(path: sut.planURL.path)])
     }
     
@@ -69,6 +82,33 @@ class SavingPlanLoaderTests: XCTestCase {
         }
     }
     
+    func test_load_deliversSavingPlanOnValidData() {
+        let (sut, store) = makeSUT()
+        let (model, data) = makePlan(name: "awesome-saving-plan", initialAmount: 1)
+        store.stub(data: data, for: sut.planURL)
+        
+        do {
+            let plan = try sut.load()
+            XCTAssertEqual(plan, model)
+            
+        } catch {
+            XCTFail("Expect not throw")
+        }
+    
+    }
+    
+    private struct TestPlan: Encodable {
+        let name: String
+        let startDate: Date
+        let initialAmount: Int
+    }
+    
+    private func makePlan(name: String, startDate: Date = Date.fixedDate, initialAmount: Int) -> (model: SavingPlan, data: Data) {
+        let model = SavingPlan(name: name, startDate: startDate, initialAmount: initialAmount)
+        let data = try! JSONEncoder().encode(TestPlan(name: name, startDate: startDate, initialAmount: initialAmount))
+        return (model, data)
+    }
+    
     private func makeSUT() -> (SavingPlanLoader, FileManagerSpy) {
         let fileManager = FileManagerSpy()
         let sut = SavingPlanLoader(fileManager: fileManager)
@@ -81,7 +121,7 @@ class SavingPlanLoaderTests: XCTestCase {
     
 }
 
-class FileManagerSpy: FileManageable {
+private class FileManagerSpy: FileManageable {
     enum Message: Equatable {
         case requestContent(path: String)
     }
