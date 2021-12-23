@@ -17,6 +17,7 @@ extension FileManager: FileManageable {}
 class SavingPlanLoader {
     enum Error: Swift.Error {
         case dataNotFound
+        case invalidData
     }
     
     private var fileManager: FileManageable
@@ -30,11 +31,14 @@ class SavingPlanLoader {
             .urls(for: .cachesDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("savingPlan.cache")
     }
-    
+        
     func load() throws {
         guard let _ = fileManager.contents(atPath: planURL.path) else {
             throw Error.dataNotFound
         }
+        
+        throw Error.invalidData
+        
     }
 }
 
@@ -53,6 +57,15 @@ class SavingPlanLoaderTests: XCTestCase {
 
         XCTAssertThrowsError(try sut.load()) { error in
             XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.dataNotFound as NSError?)
+        }
+    }
+    
+    func test_load_throwsInvalidDataErrorOnEmptyData() {
+        let (sut, store) = makeSUT()
+        store.stub(data: Data(), for: sut.planURL)
+        
+        XCTAssertThrowsError(try sut.load()) { error in
+            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.invalidData as NSError?)
         }
     }
     
@@ -77,7 +90,7 @@ class FileManagerSpy: FileManageable {
     
     func contents(atPath path: String) -> Data? {
         messages.append(.requestContent(path: path))
-        return nil
+        return stubbedData
     }
     
     private var stubbedData: Data?
