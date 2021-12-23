@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class ProgressionViewModel {
     private var model: SavingPlan {
         didSet {

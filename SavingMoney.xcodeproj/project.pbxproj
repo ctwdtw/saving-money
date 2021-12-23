@@ -10,6 +10,7 @@
 		631E1A762771BD79000C2DD1 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A752771BD79000C2DD1 /* AppCoordinatorTests.swift */; };
 		631E1A7827731015000C2DD1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A7727731015000C2DD1 /* AppCoordinator.swift */; };
 		631E1A7A2773105E000C2DD1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A792773105E000C2DD1 /* Coordinator.swift */; };
+		631E1A7C27743233000C2DD1 /* SavingPlanLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A7B27743233000C2DD1 /* SavingPlanLoaderTests.swift */; };
 		6325D4D327707D1F00D5038C /* SavingPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6325D4D227707D1F00D5038C /* SavingPlan.swift */; };
 		635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA522769BB6700D300E0 /* KeyboardController.swift */; };
 		635BEA552769BB8C00D300E0 /* KeyboardEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */; };
@@ -58,6 +59,7 @@
 		631E1A752771BD79000C2DD1 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		631E1A7727731015000C2DD1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		631E1A792773105E000C2DD1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		631E1A7B27743233000C2DD1 /* SavingPlanLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlanLoaderTests.swift; sourceTree = "<group>"; };
 		6325D4D227707D1F00D5038C /* SavingPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlan.swift; sourceTree = "<group>"; };
 		635BEA522769BB6700D300E0 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventViewModel.swift; sourceTree = "<group>"; };
@@ -277,10 +279,11 @@
 			isa = PBXGroup;
 			children = (
 				635BEA562769C88A00D300E0 /* SceneDelegateTests.swift */,
+				631E1A752771BD79000C2DD1 /* AppCoordinatorTests.swift */,
 				63CEF53E2765B07C0038E36E /* WriteDownPlanViewControllerTests.swift */,
 				635BEA582769D15900D300E0 /* SetAmountViewControllerTests.swift */,
 				638B80AD276CC43200FE618A /* SavingMoneyViewControllerTests.swift */,
-				631E1A752771BD79000C2DD1 /* AppCoordinatorTests.swift */,
+				631E1A7B27743233000C2DD1 /* SavingPlanLoaderTests.swift */,
 			);
 			path = SavingMoneyTests;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				631E1A762771BD79000C2DD1 /* AppCoordinatorTests.swift in Sources */,
+				631E1A7C27743233000C2DD1 /* SavingPlanLoaderTests.swift in Sources */,
 				63CEF53F2765B07C0038E36E /* WriteDownPlanViewControllerTests.swift in Sources */,
 				638B80AE276CC43200FE618A /* SavingMoneyViewControllerTests.swift in Sources */,
 				635BEA572769C88A00D300E0 /* SceneDelegateTests.swift in Sources */,
