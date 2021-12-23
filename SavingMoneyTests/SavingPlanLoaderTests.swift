@@ -8,49 +8,58 @@
 import XCTest
 import SavingMoney
 
+protocol FileManageable {
+    func contents(atPath path: String) -> Data?
+}
+
+extension FileManager: FileManageable {}
+
 class SavingPlanLoader {
     enum Error: Swift.Error {
-        case storeFailure
+        case dataNotFound
     }
     
-    private var store: SavingPlanStoreSpy
+    private var fileManager: FileManageable
     
-    init(store: SavingPlanStoreSpy) {
-        self.store = store
+    init(fileManager: FileManageable) {
+        self.fileManager = fileManager
+    }
+    
+    var planURL: URL {
+        return FileManager.default
+            .urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("savingPlan.cache")
     }
     
     func load() throws {
-        do {
-            try store.load()
-            
-        } catch {
-            throw Error.storeFailure
+        guard let _ = fileManager.contents(atPath: planURL.path) else {
+            throw Error.dataNotFound
         }
-        
     }
 }
 
+
 class SavingPlanLoaderTests: XCTestCase {
     func test_load_messageStore() {
-        let (sut, store) = makeSUT()
+        let (sut, fileManager) = makeSUT()
         
         try? sut.load()
-        XCTAssertEqual(store.messages, [.load])
+        XCTAssertEqual(fileManager.messages, [.requestContent(path: sut.planURL.path)])
     }
     
-    func test_load_throwsStoreFailedOnStoreError() {
+    func test_load_throwsDataNotFoundErrorOnNilData() {
         let (sut, store) = makeSUT()
-        store.stub(.failure(anyNSError()))
-        
+        store.stub(data: nil, for: sut.planURL)
+
         XCTAssertThrowsError(try sut.load()) { error in
-            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.storeFailure as NSError?)
+            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.dataNotFound as NSError?)
         }
     }
     
-    private func makeSUT() -> (SavingPlanLoader, SavingPlanStoreSpy) {
-        let store = SavingPlanStoreSpy()
-        let sut = SavingPlanLoader(store: store)
-        return (sut, store)
+    private func makeSUT() -> (SavingPlanLoader, FileManagerSpy) {
+        let fileManager = FileManagerSpy()
+        let sut = SavingPlanLoader(fileManager: fileManager)
+        return (sut, fileManager)
     }
     
     private func anyNSError() -> Error {
@@ -59,30 +68,22 @@ class SavingPlanLoaderTests: XCTestCase {
     
 }
 
-class SavingPlanStoreSpy {
+class FileManagerSpy: FileManageable {
     enum Message: Equatable {
-        case load
+        case requestContent(path: String)
     }
-    
-    typealias SavingPlanResult = Result<Data, Error>
     
     private(set) var messages: [Message] = []
     
-    var stubbedResult: SavingPlanResult?
-    func stub(_ result: SavingPlanResult)  {
-        stubbedResult = result
+    func contents(atPath path: String) -> Data? {
+        messages.append(.requestContent(path: path))
+        return nil
     }
     
-    func load() throws {
-        messages.append(.load)
-        switch stubbedResult {
-        case .success(let data):
-            break
-        case .failure(let error):
-            throw error
-        default:
-            break
-        }
+    private var stubbedData: Data?
+    
+    func stub(data: Data?, for url: URL)  {
+        stubbedData = data
     }
-
+    
 }
