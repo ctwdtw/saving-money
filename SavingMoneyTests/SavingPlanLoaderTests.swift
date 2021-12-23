@@ -73,9 +73,9 @@ class SavingPlanLoaderTests: XCTestCase {
         }
     }
     
-    func test_load_throwsInvalidDataErrorOnEmptyData() {
+    func test_load_throwsInvalidDataErrorOnInvalidData() {
         let (sut, store) = makeSUT()
-        store.stub(data: Data(), for: sut.planURL)
+        store.stub(data: "invalidData".data(using: .utf8)!, for: sut.planURL)
         
         XCTAssertThrowsError(try sut.load()) { error in
             XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.invalidData as NSError?)
