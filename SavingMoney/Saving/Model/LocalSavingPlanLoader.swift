@@ -1,12 +1,13 @@
 //
-//  SavingPlanLoader.swift
+//  LocalSavingPlanLoader.swift
 //  SavingMoney
 //
 //  Created by Paul Lee on 2021/12/24.
 //
 
 import Foundation
-public class SavingPlanLoader {
+
+public class LocalSavingPlanLoader: SavingPlanLoader {
     public enum Error: Swift.Error {
         case emptySavingPlan
         case invalidData

@@ -11,8 +11,10 @@
 		631E1A7827731015000C2DD1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A7727731015000C2DD1 /* AppCoordinator.swift */; };
 		631E1A7A2773105E000C2DD1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A792773105E000C2DD1 /* Coordinator.swift */; };
 		631E1A7C27743233000C2DD1 /* SavingPlanLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A7B27743233000C2DD1 /* SavingPlanLoaderTests.swift */; };
-		631E1A7E27759E5B000C2DD1 /* SavingPlanLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A7D27759E5B000C2DD1 /* SavingPlanLoader.swift */; };
+		631E1A7E27759E5B000C2DD1 /* LocalSavingPlanLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A7D27759E5B000C2DD1 /* LocalSavingPlanLoader.swift */; };
 		631E1A8027759E7C000C2DD1 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A7F27759E7C000C2DD1 /* DataStore.swift */; };
+		631E1A832775C8F2000C2DD1 /* FileManager+DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A822775C8F2000C2DD1 /* FileManager+DataStore.swift */; };
+		631E1A852775C97B000C2DD1 /* SavingPlanLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E1A842775C97B000C2DD1 /* SavingPlanLoader.swift */; };
 		6325D4D327707D1F00D5038C /* SavingPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6325D4D227707D1F00D5038C /* SavingPlan.swift */; };
 		635BEA532769BB6700D300E0 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA522769BB6700D300E0 /* KeyboardController.swift */; };
 		635BEA552769BB8C00D300E0 /* KeyboardEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */; };
@@ -62,8 +64,10 @@
 		631E1A7727731015000C2DD1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		631E1A792773105E000C2DD1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		631E1A7B27743233000C2DD1 /* SavingPlanLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlanLoaderTests.swift; sourceTree = "<group>"; };
-		631E1A7D27759E5B000C2DD1 /* SavingPlanLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlanLoader.swift; sourceTree = "<group>"; };
+		631E1A7D27759E5B000C2DD1 /* LocalSavingPlanLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSavingPlanLoader.swift; sourceTree = "<group>"; };
 		631E1A7F27759E7C000C2DD1 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		631E1A822775C8F2000C2DD1 /* FileManager+DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DataStore.swift"; sourceTree = "<group>"; };
+		631E1A842775C97B000C2DD1 /* SavingPlanLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlanLoader.swift; sourceTree = "<group>"; };
 		6325D4D227707D1F00D5038C /* SavingPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingPlan.swift; sourceTree = "<group>"; };
 		635BEA522769BB6700D300E0 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		635BEA542769BB8C00D300E0 /* KeyboardEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventViewModel.swift; sourceTree = "<group>"; };
@@ -122,16 +126,50 @@
 		631E1A8127759F49000C2DD1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6325D4D227707D1F00D5038C /* SavingPlan.swift */,
+				631E1A872775CA38000C2DD1 /* Infra */,
 				631E1A7F27759E7C000C2DD1 /* DataStore.swift */,
-				631E1A7D27759E5B000C2DD1 /* SavingPlanLoader.swift */,
+				631E1A7D27759E5B000C2DD1 /* LocalSavingPlanLoader.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		631E1A862775CA1D000C2DD1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6325D4D227707D1F00D5038C /* SavingPlan.swift */,
+				631E1A842775C97B000C2DD1 /* SavingPlanLoader.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		631E1A872775CA38000C2DD1 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				631E1A822775C8F2000C2DD1 /* FileManager+DataStore.swift */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		631E1A882775CB19000C2DD1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				635BEA5E276A12FF00D300E0 /* PlanAmount.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		631E1A892775CB35000C2DD1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				639F016E27679EE900007110 /* PlanModel.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		635BEA60276A142A00D300E0 /* SetAmount */ = {
 			isa = PBXGroup;
 			children = (
+				631E1A882775CB19000C2DD1 /* Core */,
 				635BEA62276A144E00D300E0 /* Model */,
 				635BEA63276A145700D300E0 /* ViewModel */,
 				635BEA61276A144500D300E0 /* ViewController */,
@@ -150,7 +188,6 @@
 		635BEA62276A144E00D300E0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				635BEA5E276A12FF00D300E0 /* PlanAmount.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +214,7 @@
 		638B80B4276DDD8500FE618A /* Saving */ = {
 			isa = PBXGroup;
 			children = (
+				631E1A862775CA1D000C2DD1 /* Core */,
 				631E1A8127759F49000C2DD1 /* Model */,
 				638B80B5276DDDA700FE618A /* ViewModel */,
 				638B80B6276DDDB900FE618A /* ViewController */,
@@ -216,6 +254,7 @@
 		639F017227679F3200007110 /* WritePlan */ = {
 			isa = PBXGroup;
 			children = (
+				631E1A892775CB35000C2DD1 /* Core */,
 				639F017327679F6D00007110 /* Model */,
 				639F017427679F7500007110 /* ViewModel */,
 				639F017527679F8000007110 /* ViewController */,
@@ -226,7 +265,6 @@
 		639F017327679F6D00007110 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				639F016E27679EE900007110 /* PlanModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,9 +444,10 @@
 				639F016F27679EE900007110 /* PlanModel.swift in Sources */,
 				638B9EB527709BFD004AC952 /* SavingCellController.swift in Sources */,
 				631E1A7827731015000C2DD1 /* AppCoordinator.swift in Sources */,
-				631E1A7E27759E5B000C2DD1 /* SavingPlanLoader.swift in Sources */,
+				631E1A7E27759E5B000C2DD1 /* LocalSavingPlanLoader.swift in Sources */,
 				63CEF5292765B00C0038E36E /* WriteDownPlanViewController.swift in Sources */,
 				6325D4D327707D1F00D5038C /* SavingPlan.swift in Sources */,
+				631E1A852775C97B000C2DD1 /* SavingPlanLoader.swift in Sources */,
 				631E1A8027759E7C000C2DD1 /* DataStore.swift in Sources */,
 				639F016A27679E7600007110 /* UITextField+Helpers.swift in Sources */,
 				63CEF5252765B00C0038E36E /* AppDelegate.swift in Sources */,
@@ -424,6 +463,7 @@
 				63CEF5272765B00C0038E36E /* SceneDelegate.swift in Sources */,
 				638B9EBB2770B6C5004AC952 /* TitleBarController.swift in Sources */,
 				635BEA5F276A12FF00D300E0 /* PlanAmount.swift in Sources */,
+				631E1A832775C8F2000C2DD1 /* FileManager+DataStore.swift in Sources */,
 				639F016D27679EB500007110 /* WriteDownPlanUIComposer.swift in Sources */,
 				639F015F2765CEB000007110 /* SetAmountViewController.swift in Sources */,
 				639F0161276619CD00007110 /* Checkbox.swift in Sources */,

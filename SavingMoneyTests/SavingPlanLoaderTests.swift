@@ -21,7 +21,7 @@ class SavingPlanLoaderTests: XCTestCase {
         store.stub(data: nil)
 
         XCTAssertThrowsError(try sut.load()) { error in
-            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.emptySavingPlan as NSError?)
+            XCTAssertEqual(error as NSError?, LocalSavingPlanLoader.Error.emptySavingPlan as NSError?)
         }
     }
     
@@ -30,7 +30,7 @@ class SavingPlanLoaderTests: XCTestCase {
         store.stub(data: "invalidData".data(using: .utf8)!)
         
         XCTAssertThrowsError(try sut.load()) { error in
-            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.invalidData as NSError?)
+            XCTAssertEqual(error as NSError?, LocalSavingPlanLoader.Error.invalidData as NSError?)
         }
     }
     
@@ -64,7 +64,7 @@ class SavingPlanLoaderTests: XCTestCase {
         let (model, _) = makePlan(name: "awesome-saving-plan", initialAmount: 1)
         
         XCTAssertThrowsError(try sut.save(model)) { error in
-            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.saveFailure as NSError?)
+            XCTAssertEqual(error as NSError?, LocalSavingPlanLoader.Error.saveFailure as NSError?)
         }
     }
     
@@ -80,9 +80,9 @@ class SavingPlanLoaderTests: XCTestCase {
         return (model, data)
     }
     
-    private func makeSUT() -> (SavingPlanLoader, DataStoreSpy) {
+    private func makeSUT() -> (LocalSavingPlanLoader, DataStoreSpy) {
         let fileManager = DataStoreSpy()
-        let sut = SavingPlanLoader(dataStore: fileManager)
+        let sut = LocalSavingPlanLoader(dataStore: fileManager)
         return (sut, fileManager)
     }
     
