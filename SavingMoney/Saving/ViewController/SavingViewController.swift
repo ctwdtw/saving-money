@@ -16,7 +16,7 @@ public class SavingViewController: UIViewController, UITableViewDataSource, UITa
     
     private var cellControllers: [SavingCellController]!
     
-    init?(coder: NSCoder, cellControllers: [SavingCellController], onNext: @escaping () -> Void) {
+    init?(coder: NSCoder, cellControllers: [SavingCellController]) {
         super.init(coder: coder)
         self.cellControllers = cellControllers
     }

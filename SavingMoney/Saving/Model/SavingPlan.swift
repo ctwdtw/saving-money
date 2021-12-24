@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct SavingPlan {
+public struct SavingPlan: Equatable {
     public var name: String
     
     public let startDate: Date
