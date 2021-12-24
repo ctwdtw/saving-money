@@ -9,15 +9,16 @@ import XCTest
 import SavingMoney
 
 protocol FileManageable {
-    func contents(atPath path: String) -> Data?
+    func readData(at url: URL) -> Data?
 }
 
-extension FileManager: FileManageable {}
+//extension FileManager: FileManageable {}
 
 class SavingPlanLoader {
     enum Error: Swift.Error {
         case dataNotFound
         case invalidData
+        case saveFailure
     }
     
     private var fileManager: FileManageable
@@ -39,7 +40,7 @@ class SavingPlanLoader {
     }
         
     func load() throws -> SavingPlan {
-        guard let data = fileManager.contents(atPath: planURL.path) else {
+        guard let data = fileManager.readData(at: planURL) else {
             throw Error.dataNotFound
         }
         
@@ -53,6 +54,10 @@ class SavingPlanLoader {
         }
 
     }
+    
+    func save(_ savingPlan: SavingPlan) throws {
+        
+    }
 }
 
 
@@ -61,7 +66,7 @@ class SavingPlanLoaderTests: XCTestCase {
         let (sut, fileManager) = makeSUT()
         
         _ = try? sut.load()
-        XCTAssertEqual(fileManager.messages, [.requestContent(path: sut.planURL.path)])
+        XCTAssertEqual(fileManager.messages, [.readData(url: sut.planURL)])
     }
     
     func test_load_throwsDataNotFoundErrorOnNilData() {
@@ -122,21 +127,21 @@ class SavingPlanLoaderTests: XCTestCase {
 }
 
 private class FileManagerSpy: FileManageable {
-    enum Message: Equatable {
-        case requestContent(path: String)
-    }
-    
-    private(set) var messages: [Message] = []
-    
-    func contents(atPath path: String) -> Data? {
-        messages.append(.requestContent(path: path))
-        return stubbedData
-    }
-    
     private var stubbedData: Data?
     
     func stub(data: Data?, for url: URL)  {
         stubbedData = data
+    }
+    
+    enum Message: Equatable {
+        case readData(url: URL)
+    }
+    
+    private(set) var messages: [Message] = []
+    
+    func readData(at url: URL) -> Data? {
+        messages.append(.readData(url: url))
+        return stubbedData
     }
     
 }
