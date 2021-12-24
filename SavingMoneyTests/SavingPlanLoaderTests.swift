@@ -10,9 +10,18 @@ import SavingMoney
 
 protocol DataStore {
     func readData(at url: URL) -> Data?
+    func writeData(_ data: Data, at url: URL) throws
 }
 
-//extension FileManager: DataStore {}
+extension FileManager: DataStore {
+    func readData(at url: URL) -> Data? {
+        contents(atPath: url.path)
+    }
+    
+    func writeData(_ data: Data, at url: URL) throws {
+        try data.write(to: url)
+    }
+}
 
 class SavingPlanLoader {
     enum Error: Swift.Error {
@@ -56,7 +65,15 @@ class SavingPlanLoader {
     }
     
     func save(_ savingPlan: SavingPlan) throws {
-        
+        do {
+            let codablePlan = CodablePlan(name: savingPlan.name, startDate: savingPlan.startDate, initialAmount: savingPlan.initialAmount)
+            let data = try JSONEncoder().encode(codablePlan)
+            try dataStore.writeData(data, at: planURL)
+            
+        } catch {
+            throw Error.saveFailure
+            
+        }
     }
 }
 
@@ -71,7 +88,7 @@ class SavingPlanLoaderTests: XCTestCase {
     
     func test_load_throwsEmptySavingPlanErrorOnNilData() {
         let (sut, store) = makeSUT()
-        store.stub(data: nil, for: sut.planURL)
+        store.stub(data: nil)
 
         XCTAssertThrowsError(try sut.load()) { error in
             XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.emptySavingPlan as NSError?)
@@ -80,7 +97,7 @@ class SavingPlanLoaderTests: XCTestCase {
     
     func test_load_throwsInvalidDataErrorOnInvalidData() {
         let (sut, store) = makeSUT()
-        store.stub(data: "invalidData".data(using: .utf8)!, for: sut.planURL)
+        store.stub(data: "invalidData".data(using: .utf8)!)
         
         XCTAssertThrowsError(try sut.load()) { error in
             XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.invalidData as NSError?)
@@ -90,7 +107,7 @@ class SavingPlanLoaderTests: XCTestCase {
     func test_load_deliversSavingPlanOnValidData() {
         let (sut, store) = makeSUT()
         let (model, data) = makePlan(name: "awesome-saving-plan", initialAmount: 1)
-        store.stub(data: data, for: sut.planURL)
+        store.stub(data: data)
         
         do {
             let plan = try sut.load()
@@ -100,6 +117,25 @@ class SavingPlanLoaderTests: XCTestCase {
             XCTFail("Expect not throw")
         }
     
+    }
+    
+    func test_save_messageStore() {
+        let (sut, store) = makeSUT()
+        let (model, data) = makePlan(name: "awesome-saving-plan", initialAmount: 1)
+        
+        try? sut.save(model)
+        
+        XCTAssertEqual(store.messages, [.writeData(data, url: sut.planURL)])
+    }
+    
+    func test_save_deliversSaveFailureErrorOnWritingDataFailure() {
+        let (sut, store) = makeSUT()
+        store.stub(error: anyNSError())
+        let (model, _) = makePlan(name: "awesome-saving-plan", initialAmount: 1)
+        
+        XCTAssertThrowsError(try sut.save(model)) { error in
+            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.saveFailure as NSError?)
+        }
     }
     
     private struct TestPlan: Encodable {
@@ -129,12 +165,13 @@ class SavingPlanLoaderTests: XCTestCase {
 private class DataStoreSpy: DataStore {
     private var stubbedData: Data?
     
-    func stub(data: Data?, for url: URL)  {
+    func stub(data: Data?)  {
         stubbedData = data
     }
     
     enum Message: Equatable {
         case readData(url: URL)
+        case writeData(Data, url: URL)
     }
     
     private(set) var messages: [Message] = []
@@ -142,6 +179,20 @@ private class DataStoreSpy: DataStore {
     func readData(at url: URL) -> Data? {
         messages.append(.readData(url: url))
         return stubbedData
+    }
+    
+    private var stubbedError: Error?
+    
+    func stub(error: Error) {
+        stubbedError = error
+    }
+    
+    func writeData(_ data: Data, at url: URL) throws {
+        messages.append(.writeData(data, url: url))
+        
+        if let error = stubbedError {
+            throw error
+        }
     }
     
 }
