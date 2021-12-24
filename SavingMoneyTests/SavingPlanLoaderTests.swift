@@ -8,11 +8,11 @@
 import XCTest
 import SavingMoney
 
-protocol FileManageable {
+protocol DataStore {
     func readData(at url: URL) -> Data?
 }
 
-//extension FileManager: FileManageable {}
+//extension FileManager: DataStore {}
 
 class SavingPlanLoader {
     enum Error: Swift.Error {
@@ -21,10 +21,10 @@ class SavingPlanLoader {
         case saveFailure
     }
     
-    private var fileManager: FileManageable
+    private var dataStore: DataStore
     
-    init(fileManager: FileManageable) {
-        self.fileManager = fileManager
+    init(dataStore: DataStore) {
+        self.dataStore = dataStore
     }
     
     var planURL: URL {
@@ -40,7 +40,7 @@ class SavingPlanLoader {
     }
         
     func load() throws -> SavingPlan {
-        guard let data = fileManager.readData(at: planURL) else {
+        guard let data = dataStore.readData(at: planURL) else {
             throw Error.dataNotFound
         }
         
@@ -63,10 +63,10 @@ class SavingPlanLoader {
 
 class SavingPlanLoaderTests: XCTestCase {
     func test_load_messageStore() {
-        let (sut, fileManager) = makeSUT()
+        let (sut, store) = makeSUT()
         
         _ = try? sut.load()
-        XCTAssertEqual(fileManager.messages, [.readData(url: sut.planURL)])
+        XCTAssertEqual(store.messages, [.readData(url: sut.planURL)])
     }
     
     func test_load_throwsDataNotFoundErrorOnNilData() {
@@ -114,9 +114,9 @@ class SavingPlanLoaderTests: XCTestCase {
         return (model, data)
     }
     
-    private func makeSUT() -> (SavingPlanLoader, FileManagerSpy) {
-        let fileManager = FileManagerSpy()
-        let sut = SavingPlanLoader(fileManager: fileManager)
+    private func makeSUT() -> (SavingPlanLoader, DataStoreSpy) {
+        let fileManager = DataStoreSpy()
+        let sut = SavingPlanLoader(dataStore: fileManager)
         return (sut, fileManager)
     }
     
@@ -126,7 +126,7 @@ class SavingPlanLoaderTests: XCTestCase {
     
 }
 
-private class FileManagerSpy: FileManageable {
+private class DataStoreSpy: DataStore {
     private var stubbedData: Data?
     
     func stub(data: Data?, for url: URL)  {
