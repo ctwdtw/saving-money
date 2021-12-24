@@ -16,7 +16,7 @@ protocol DataStore {
 
 class SavingPlanLoader {
     enum Error: Swift.Error {
-        case dataNotFound
+        case emptySavingPlan
         case invalidData
         case saveFailure
     }
@@ -41,7 +41,7 @@ class SavingPlanLoader {
         
     func load() throws -> SavingPlan {
         guard let data = dataStore.readData(at: planURL) else {
-            throw Error.dataNotFound
+            throw Error.emptySavingPlan
         }
         
         do {
@@ -69,12 +69,12 @@ class SavingPlanLoaderTests: XCTestCase {
         XCTAssertEqual(store.messages, [.readData(url: sut.planURL)])
     }
     
-    func test_load_throwsDataNotFoundErrorOnNilData() {
+    func test_load_throwsEmptySavingPlanErrorOnNilData() {
         let (sut, store) = makeSUT()
         store.stub(data: nil, for: sut.planURL)
 
         XCTAssertThrowsError(try sut.load()) { error in
-            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.dataNotFound as NSError?)
+            XCTAssertEqual(error as NSError?, SavingPlanLoader.Error.emptySavingPlan as NSError?)
         }
     }
     
