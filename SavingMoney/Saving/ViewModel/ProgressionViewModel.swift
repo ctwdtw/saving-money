@@ -15,8 +15,11 @@ class ProgressionViewModel {
         }
     }
     
-    init(model: SavingPlan) {
+    private let savingPlanCache: SavingPlanCache
+    
+    init(model: SavingPlan, savingPlanCache: SavingPlanCache) {
         self.model = model
+        self.savingPlanCache = savingPlanCache
     }
     
     //MARK: - progression
@@ -46,5 +49,9 @@ class ProgressionViewModel {
     
     func checkProgression(_ weekNumber: Int, isChecked: Bool) {
         model.progressions[weekNumber] = isChecked
+    }
+    
+    func cacheSavingPlan() {
+        try? savingPlanCache.save(model)
     }
 }

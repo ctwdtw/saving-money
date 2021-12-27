@@ -11,7 +11,7 @@ import SavingMoney
 class SavingMoneyViewControllerTests: XCTestCase {
     func test_viewDidLoad_displayPlanName() {
         let plan = SavingPlan(name: "Awesome Saving Plan", initialAmount: 1)
-        let sut = makeSUT(model: plan)
+        let (sut, _) = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.planName, "Awesome Saving Plan")
@@ -19,7 +19,7 @@ class SavingMoneyViewControllerTests: XCTestCase {
     
     func test_viewDidLoad_renderSavingPlan() {
         let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
-        let sut = makeSUT(model: plan)
+        let (sut, _) = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
         assertThat(sut, renders: plan)
@@ -27,7 +27,7 @@ class SavingMoneyViewControllerTests: XCTestCase {
     
     func test_renderSavingProgression_onPressCheckBox() {
         let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
-        let sut = makeSUT(model: plan)
+        let (sut, _) = makeSUT(model: plan)
         
         sut.loadViewIfNeeded()
         assertThat(sut, renderProgressionText: "$0/1,378", progressionCountText: "0/52")
@@ -52,11 +52,21 @@ class SavingMoneyViewControllerTests: XCTestCase {
         let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
         
         var callCount = 0
-        let sut = makeSUT(model: plan, onNext: { callCount += 1 })
+        let (sut, _) = makeSUT(model: plan, onNext: { callCount += 1 })
         sut.loadViewIfNeeded()
         
         sut.simulatePressReStart()
         XCTAssertEqual(callCount, 1)
+    }
+    
+    func test_requestSave_onWillKillApp() {
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
+        let (sut, savingPlanCache) = makeSUT(model: plan)
+        sut.loadViewIfNeeded()
+        
+        sut.simulateWillTerminateAppNotification()
+        
+        XCTAssertEqual(savingPlanCache.saveCallCount, 1)
     }
     
     private func assertThat(_ sut: SavingViewController, renderProgressionText progressionText: String, progressionCountText: String, file: StaticString = #filePath, line: UInt = #line) {
@@ -146,8 +156,17 @@ class SavingMoneyViewControllerTests: XCTestCase {
         return "\(initialAmount * week)"
     }
     
-    func makeSUT(model: SavingPlan, onNext: @escaping () -> Void = { }, file: StaticString = #filePath, line: UInt = #line) -> SavingViewController {
-        return SavingUIComposer.compose(model: model, onNext: onNext)
+    private func makeSUT(model: SavingPlan, onNext: @escaping () -> Void = { }, file: StaticString = #filePath, line: UInt = #line) -> (SavingViewController, SpySavingPlanCache) {
+        let savingPlanCache = SpySavingPlanCache()
+        let sut = SavingUIComposer.compose(model: model, savingPlanCache: savingPlanCache, onNext: onNext)
+        return (sut, savingPlanCache)
+    }
+}
+
+private class SpySavingPlanCache: SavingPlanCache {
+    var saveCallCount: Int = 0
+    func save(_ savingPlan: SavingPlan) throws {
+        saveCallCount += 1
     }
 }
 
@@ -198,6 +217,10 @@ extension SavingViewController {
         loadViewIfNeeded()
         guard let action = titleBarController.restartBarBtnItem.action else { return }
         UIApplication.shared.sendAction(action, to: titleBarController.restartBarBtnItem.target, from: nil, for: nil)
+    }
+    
+    func simulateWillTerminateAppNotification() {
+        NotificationCenter.default.post(name: UIApplication.willTerminateNotification, object: nil)
     }
 }
 

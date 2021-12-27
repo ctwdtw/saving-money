@@ -74,13 +74,13 @@ class AppCoordinatorTests: XCTestCase {
         loaderStub.stub(result)
         let sut = AppCoordinator(
             router: routerSpy,
-            savingPlanLoader: loaderStub
+            savingPlanService: loaderStub
         )
         return (sut, routerSpy)
     }
 }
 
-private class SavingPlanLoaderStub: SavingPlanLoader {
+private class SavingPlanLoaderStub: SavingPlanService {
     private var stubbedResult: Result<SavingPlan, Error> = .failure(LocalSavingPlanLoader.Error.emptySavingPlan)
     
     func stub(_ result: Result<SavingPlan, Error>) {
@@ -89,6 +89,10 @@ private class SavingPlanLoaderStub: SavingPlanLoader {
     
     func load() throws -> SavingPlan {
         try stubbedResult.get()
+    }
+    
+    func save(_ savingPlan: SavingPlan) throws {
+        
     }
 }
 

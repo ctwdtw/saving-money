@@ -25,6 +25,13 @@ public class ProgressionController: NSObject {
         viewModel.onProgressionCountTextChanged = { [unowned self] text in
             self.progressionCountLabel.text = text
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willTerminateApp), name: UIApplication.willTerminateNotification, object: nil)
+        
+    }
+    
+    @objc private func willTerminateApp() {
+        viewModel.cacheSavingPlan()
     }
     
 }

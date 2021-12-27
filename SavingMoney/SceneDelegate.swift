@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         FileManager.default
     }()
     
-    private lazy var savingPlanLoader: SavingPlanLoader = {
+    private lazy var savingPlanService: SavingPlanService = {
         LocalSavingPlanLoader(dataStore: dataStore)
     }()
     
@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navc = UINavigationController()
         return AppCoordinator(
             router: navc,
-            savingPlanLoader: savingPlanLoader
+            savingPlanService: savingPlanService
         )
     }()
     
@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        //savingPlanLoader = SuccessSavingPlanLoader() // for testing purpose
+        //savingPlanService = SuccessSavingPlanLoader() // for testing purpose
         configureRootViewController()
     }
     
@@ -77,8 +77,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 //MARK: - for testing purpose
-class SuccessSavingPlanLoader: SavingPlanLoader {
+class SuccessSavingPlanLoader: SavingPlanLoader, SavingPlanCache {
     func load() throws -> SavingPlan {
         return SavingPlan(name: "好好存錢", startDate: Date(), initialAmount: 10)
+    }
+    
+    func save(_ savingPlan: SavingPlan) throws {
+        
     }
 }

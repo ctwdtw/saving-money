@@ -17,11 +17,11 @@ class AppCoordinator: Coordinator {
     
     private var savingPlan = SavingPlan(name: "", initialAmount: 0)
     
-    private var savingPlanLoader: SavingPlanLoader
+    private var savingPlanService: SavingPlanService
     
-    init(router: UINavigationController, savingPlanLoader: SavingPlanLoader) {
+    init(router: UINavigationController, savingPlanService: SavingPlanService) {
         self.navc = router
-        self.savingPlanLoader = savingPlanLoader
+        self.savingPlanService = savingPlanService
     }
     
     private lazy var writeDownPlanViewModel: WriteDownPlanViewModel =
@@ -35,9 +35,10 @@ class AppCoordinator: Coordinator {
     func start() {
         var vc: UIViewController!
         do {
-            savingPlan = try savingPlanLoader.load()
+            savingPlan = try savingPlanService.load()
             vc = SavingUIComposer.compose(
                 model: savingPlan,
+                savingPlanCache: savingPlanService,
                 onNext: { [unowned self] in
                     writeDownPlanViewModel.reset()
                     let vc = WriteDownPlanUIComposer.compose(viewModel: writeDownPlanViewModel)
@@ -71,7 +72,9 @@ class AppCoordinator: Coordinator {
     
     private func pushToSavingScene() {
         let vc = SavingUIComposer
-            .compose(model: savingPlan, onNext: { [unowned self] in
+            .compose(model: savingPlan,
+                     savingPlanCache: savingPlanService,
+                     onNext: { [unowned self] in
                 backToWriteDownPlanScene()
             })
         
