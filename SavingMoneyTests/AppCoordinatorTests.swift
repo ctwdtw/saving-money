@@ -81,18 +81,14 @@ class AppCoordinatorTests: XCTestCase {
 }
 
 private class SavingPlanLoaderStub: SavingPlanLoader {
-    func load() throws -> SavingPlan {
-        try stubbedResult.get()
-    }
-    
-    func save(_ savingPlan: SavingPlan) throws {
-        
-    }
-    
     private var stubbedResult: Result<SavingPlan, Error> = .failure(LocalSavingPlanLoader.Error.emptySavingPlan)
     
     func stub(_ result: Result<SavingPlan, Error>) {
         stubbedResult = result
+    }
+    
+    func load() throws -> SavingPlan {
+        try stubbedResult.get()
     }
 }
 

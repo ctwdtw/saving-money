@@ -8,5 +8,4 @@
 import Foundation
 public protocol SavingPlanLoader {
     func load() throws -> SavingPlan
-    func save(_ savingPlan: SavingPlan) throws
 }

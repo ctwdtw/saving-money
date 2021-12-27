@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class LocalSavingPlanLoader: SavingPlanLoader {
+public class LocalSavingPlanLoader: SavingPlanLoader, SavingPlanCache {
     public enum Error: Swift.Error {
         case emptySavingPlan
         case invalidData
@@ -53,10 +53,10 @@ public class LocalSavingPlanLoader: SavingPlanLoader {
             let codablePlan = CodablePlan(name: savingPlan.name, startDate: savingPlan.startDate, initialAmount: savingPlan.initialAmount)
             let data = try JSONEncoder().encode(codablePlan)
             try dataStore.writeData(data, at: planURL)
-            
+
         } catch {
             throw Error.saveFailure
-            
+
         }
     }
 }

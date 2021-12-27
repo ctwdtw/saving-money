@@ -81,8 +81,4 @@ class SuccessSavingPlanLoader: SavingPlanLoader {
     func load() throws -> SavingPlan {
         return SavingPlan(name: "好好存錢", startDate: Date(), initialAmount: 10)
     }
-    
-    func save(_ savingPlan: SavingPlan) throws {
-        
-    }
 }
