@@ -91,7 +91,8 @@ extension XCTestCase {
 
 extension WriteDownPlanViewController {
     var planName: String? {
-        planTextField.text
+        loadViewIfNeeded()
+        return planTextField.text
     }
     
     var placeHolderPlanName: String? {

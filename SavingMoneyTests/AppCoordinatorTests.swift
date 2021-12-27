@@ -9,7 +9,7 @@ import XCTest
 @testable import SavingMoney
 
 class AppCoordinatorTests: XCTestCase {
-    func test_routing() {
+    func test_routingStartWithWriteDownPlan_onEmptyPlan() {
         let (sut, router) = makeSUT()
         
         sut.start()
@@ -25,6 +25,20 @@ class AppCoordinatorTests: XCTestCase {
         saving?.simulatePressReStart()
         assertPushedTop(is: WriteDownPlanViewController.self, on: router)
         XCTAssertNilOrEmptyString(writeDownPlan?.planName, "should have no plan name when pop to write down plan scene")
+    }
+    
+    func test_routingStartWithSaving_onNonEmptyPlan() {
+        let plan = SavingPlan(name: "My Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
+        let (sut, router) = makeSUT(stub: .success(plan))
+        
+        sut.start()
+        let saving = assertPushedTop(is: SavingViewController.self, on: router)
+        XCTAssertTrue(router.navigationBar.isHidden, "should not show router's navigation bar when start from saving page.")
+        
+        saving?.simulatePressReStart()
+        let writeDownPlan = assertPushedTop(is: WriteDownPlanViewController.self, on: router)
+        XCTAssertNilOrEmptyString(writeDownPlan?.planName, "should have no plan name when pop to write down plan scene")
+        XCTAssertFalse(router.navigationBar.isHidden, "show show router's navigation bar when start from write down plan page.")
     }
     
     @discardableResult
@@ -54,12 +68,34 @@ class AppCoordinatorTests: XCTestCase {
         return top
     }
     
-    private func makeSUT() -> (AppCoordinator, RouterSpy) {
+    private func makeSUT(stub result: Result<SavingPlan, Error> = .failure(LocalSavingPlanLoader.Error.emptySavingPlan)) -> (AppCoordinator, RouterSpy) {
         let routerSpy = RouterSpy()
-        let sut = AppCoordinator(router: routerSpy)
+        let loaderStub = SavingPlanLoaderStub()
+        loaderStub.stub(result)
+        let sut = AppCoordinator(
+            router: routerSpy,
+            savingPlanLoader: loaderStub
+        )
         return (sut, routerSpy)
     }
 }
+
+private class SavingPlanLoaderStub: SavingPlanLoader {
+    func load() throws -> SavingPlan {
+        try stubbedResult.get()
+    }
+    
+    func save(_ savingPlan: SavingPlan) throws {
+        
+    }
+    
+    private var stubbedResult: Result<SavingPlan, Error> = .failure(LocalSavingPlanLoader.Error.emptySavingPlan)
+    
+    func stub(_ result: Result<SavingPlan, Error>) {
+        stubbedResult = result
+    }
+}
+
 
 private class RouterSpy: UINavigationController {
     var pushedViewControllers: [UIViewController] = []

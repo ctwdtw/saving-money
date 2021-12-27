@@ -11,9 +11,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
+    private lazy var dataStore: DataStore = {
+        FileManager.default
+    }()
+    
+    private lazy var savingPlanLoader: SavingPlanLoader = {
+        LocalSavingPlanLoader(dataStore: dataStore)
+    }()
+    
     private lazy var coordinator: Coordinator = {
         let navc = UINavigationController()
-        return AppCoordinator(router: navc)
+        return AppCoordinator(
+            router: navc,
+            savingPlanLoader: savingPlanLoader
+        )
     }()
     
     convenience init(coordinator: Coordinator) {
@@ -22,11 +33,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
+        //savingPlanLoader = SuccessSavingPlanLoader() // for testing purpose
         configureRootViewController()
     }
     
@@ -67,3 +76,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+//MARK: - for testing purpose
+class SuccessSavingPlanLoader: SavingPlanLoader {
+    func load() throws -> SavingPlan {
+        return SavingPlan(name: "好好存錢", startDate: Date(), initialAmount: 10)
+    }
+    
+    func save(_ savingPlan: SavingPlan) throws {
+        
+    }
+}

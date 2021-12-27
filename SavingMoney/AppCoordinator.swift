@@ -15,11 +15,14 @@ class AppCoordinator: Coordinator {
     
     private let navc: UINavigationController
     
-    init(router: UINavigationController) {
-        self.navc = router
-    }
-    
     private var savingPlan = SavingPlan(name: "", initialAmount: 0)
+    
+    private var savingPlanLoader: SavingPlanLoader
+    
+    init(router: UINavigationController, savingPlanLoader: SavingPlanLoader) {
+        self.navc = router
+        self.savingPlanLoader = savingPlanLoader
+    }
     
     private lazy var writeDownPlanViewModel: WriteDownPlanViewModel =
     WriteDownPlanViewModel(
@@ -30,9 +33,29 @@ class AppCoordinator: Coordinator {
     )
     
     func start() {
-        let vc = WriteDownPlanUIComposer
-            .compose(viewModel: writeDownPlanViewModel)
-
+        var vc: UIViewController!
+        do {
+            savingPlan = try savingPlanLoader.load()
+            vc = SavingUIComposer.compose(
+                model: savingPlan,
+                onNext: { [unowned self] in
+                    writeDownPlanViewModel.reset()
+                    let vc = WriteDownPlanUIComposer.compose(viewModel: writeDownPlanViewModel)
+                    
+                    
+                    navc.navigationBar.isHidden = false
+                    navc.setViewControllers([vc], animated: false)
+                    
+                }
+            )
+            navc.navigationBar.isHidden = true
+            
+        } catch {
+            vc = WriteDownPlanUIComposer
+                .compose(viewModel: writeDownPlanViewModel)
+            
+        }
+        
         navc.setViewControllers([vc], animated: false)
     }
     
