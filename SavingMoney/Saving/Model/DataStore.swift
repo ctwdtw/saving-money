@@ -9,4 +9,5 @@ import Foundation
 public protocol DataStore {
     func readData(at url: URL) -> Data?
     func writeData(_ data: Data, at url: URL) throws
+    func removeData(at url: URL) throws
 }

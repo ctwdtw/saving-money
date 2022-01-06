@@ -61,6 +61,7 @@ public class LocalSavingPlanLoader: SavingPlanLoader, SavingPlanCache {
     }
     
     public func delete() {
+        try! dataStore.removeData(at: planURL)
         
     }
 }

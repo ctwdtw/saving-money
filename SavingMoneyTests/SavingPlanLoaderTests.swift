@@ -68,6 +68,13 @@ class SavingPlanLoaderTests: XCTestCase {
         }
     }
     
+    func test_delete_messageStore() {
+        let (sut, store) = makeSUT()
+        
+        sut.delete()
+        XCTAssertEqual(store.messages, [.removeData(url: sut.planURL)])
+    }
+    
     private struct TestPlan: Encodable {
         let name: String
         let startDate: Date
@@ -102,6 +109,7 @@ private class DataStoreSpy: DataStore {
     enum Message: Equatable {
         case readData(url: URL)
         case writeData(Data, url: URL)
+        case removeData(url: URL)
     }
     
     private(set) var messages: [Message] = []
@@ -123,6 +131,10 @@ private class DataStoreSpy: DataStore {
         if let error = stubbedError {
             throw error
         }
+    }
+    
+    func removeData(at url: URL) throws {
+        messages.append(.removeData(url: url))
     }
     
 }

@@ -14,4 +14,8 @@ extension FileManager: DataStore {
     public func writeData(_ data: Data, at url: URL) throws {
         try data.write(to: url)
     }
+    
+    public func removeData(at url: URL) throws {
+        try removeItem(at: url)
+    }
 }
