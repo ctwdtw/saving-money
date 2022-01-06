@@ -91,7 +91,12 @@ private class SavingPlanLoaderStub: SavingPlanService {
         try stubbedResult.get()
     }
     
+    #warning("think about how to remove these unused funcion")
     func save(_ savingPlan: SavingPlan) throws {
+        
+    }
+    
+    func delete() {
         
     }
 }

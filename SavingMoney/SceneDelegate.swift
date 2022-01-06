@@ -85,4 +85,8 @@ class SuccessSavingPlanLoader: SavingPlanLoader, SavingPlanCache {
     func save(_ savingPlan: SavingPlan) throws {
         
     }
+    
+    func delete() {
+        
+    }
 }

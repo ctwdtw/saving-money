@@ -59,4 +59,8 @@ public class LocalSavingPlanLoader: SavingPlanLoader, SavingPlanCache {
 
         }
     }
+    
+    public func delete() {
+        
+    }
 }

@@ -8,6 +8,7 @@
 import Foundation
 public protocol SavingPlanCache {
     func save(_ savingPlan: SavingPlan) throws
+    func delete()
 }
 
 public typealias SavingPlanService = SavingPlanCache & SavingPlanLoader

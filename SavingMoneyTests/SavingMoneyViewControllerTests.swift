@@ -59,6 +59,17 @@ class SavingMoneyViewControllerTests: XCTestCase {
         XCTAssertEqual(callCount, 1)
     }
     
+    func test_restartAction_requestDeleteSavingPlan() {
+        let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
+        
+        
+        let (sut, savingPlanCache) = makeSUT(model: plan)
+        sut.loadViewIfNeeded()
+        
+        sut.simulatePressReStart()
+        XCTAssertEqual(savingPlanCache.deleteCallCount, 1)
+    }
+    
     func test_requestSave_onWillKillApp() {
         let plan = SavingPlan(name: "Awesome Saving Plan", startDate: Date.fixedDate, initialAmount: 1)
         let (sut, savingPlanCache) = makeSUT(model: plan)
@@ -167,6 +178,11 @@ private class SpySavingPlanCache: SavingPlanCache {
     var saveCallCount: Int = 0
     func save(_ savingPlan: SavingPlan) throws {
         saveCallCount += 1
+    }
+    
+    var deleteCallCount: Int = 0
+    func delete() {
+        deleteCallCount += 1
     }
 }
 

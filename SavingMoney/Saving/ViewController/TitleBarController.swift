@@ -17,6 +17,7 @@ public class TitleBarController: NSObject {
     var viewModel: TitleBarViewModel!
     
     @IBAction func restartPlanBarBtnPressed(_ sender: Any) {
+        viewModel.deleteCache()
         onNext?()
     }
     

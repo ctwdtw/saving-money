@@ -13,7 +13,14 @@ class TitleBarViewModel {
         return planName
     }
     
-    init(planName: String) {
+    private let savingPlanCache: SavingPlanCache
+    
+    init(planName: String, savingPlanCache: SavingPlanCache) {
         self.planName = planName
+        self.savingPlanCache = savingPlanCache
+    }
+    
+    func deleteCache() {
+        savingPlanCache.delete()
     }
 }

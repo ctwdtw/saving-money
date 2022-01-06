@@ -35,7 +35,11 @@ public class SavingUIComposer {
         })
         
         vc.progressionController.viewModel = vm
-        vc.titleBarController.viewModel = TitleBarViewModel(planName: model.name)
+        vc.titleBarController.viewModel = TitleBarViewModel(
+            planName: model.name,
+            savingPlanCache: savingPlanCache
+        )
+        
         vc.titleBarController.onNext = onNext
         
         return vc
