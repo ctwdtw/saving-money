@@ -12,6 +12,7 @@ public class LocalSavingPlanLoader: SavingPlanLoader, SavingPlanCache {
         case emptySavingPlan
         case invalidData
         case saveFailure
+        case deleteFailure
     }
     
     private var dataStore: DataStore
@@ -60,8 +61,14 @@ public class LocalSavingPlanLoader: SavingPlanLoader, SavingPlanCache {
         }
     }
     
-    public func delete() {
-        try! dataStore.removeData(at: planURL)
+    public func delete() throws {
+        do {
+            try dataStore.removeData(at: planURL)
+            
+        } catch {
+            throw Error.deleteFailure
+        }
         
     }
+    
 }

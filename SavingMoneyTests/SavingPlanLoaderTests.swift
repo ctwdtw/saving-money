@@ -71,8 +71,17 @@ class SavingPlanLoaderTests: XCTestCase {
     func test_delete_messageStore() {
         let (sut, store) = makeSUT()
         
-        sut.delete()
+        try? sut.delete()
         XCTAssertEqual(store.messages, [.removeData(url: sut.planURL)])
+    }
+    
+    func test_delete_deliverDeleteFailureErrorOnDeleteFailure() {
+        let (sut, store) = makeSUT()
+        store.stub(error: anyNSError())
+        
+        XCTAssertThrowsError(try sut.delete()) { error in
+            XCTAssertEqual(error as NSError?, LocalSavingPlanLoader.Error.deleteFailure as NSError?)
+        }
     }
     
     private struct TestPlan: Encodable {
@@ -135,6 +144,10 @@ private class DataStoreSpy: DataStore {
     
     func removeData(at url: URL) throws {
         messages.append(.removeData(url: url))
+        
+        if let error = stubbedError {
+            throw error
+        }
     }
     
 }

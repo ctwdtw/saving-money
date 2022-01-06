@@ -21,6 +21,6 @@ class TitleBarViewModel {
     }
     
     func deleteCache() {
-        savingPlanCache.delete()
+        try? savingPlanCache.delete()
     }
 }
